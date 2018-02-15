@@ -1,0 +1,19 @@
+{
+{% for redshift, settings in redshift.iteritems() %}
+    "{{redshift}}": {
+      "Description": "{{redshift}} Redshift Cluster",
+      "Value": { "Ref": "{{redshift}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RS-{{redshift}}" }}
+      },
+    "{{redshift}}EndPoint": {
+      "Description": "{{redshift}} Endpoint",
+      "Value": { "Fn::GetAtt" : [ "{{redshift}}", "Endpoint.Address" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RS-{{redshift}}-EndPoint" }}
+      },
+    "{{redshift}}Port": {
+      "Description": "{{redshift}} Port",
+      "Value": { "Fn::GetAtt" : [ "{{redshift}}", "Endpoint.Port" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RS-{{redshift}}-Port" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

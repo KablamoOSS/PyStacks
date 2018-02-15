@@ -1,0 +1,15 @@
+{
+    {% for elb, settings in elb.iteritems() %}
+    "{{elb}}": {
+      "Description": "{{elb}} Object",
+      "Value": { "Ref": "{{elb}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ELB-{{elb}}" }}
+      },
+    "{{elb}}DNSName": {
+      "Description": "{{elb}} DNS Name",
+      "Value": { "Fn::GetAtt" : [ "{{elb}}", "DNSName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ELB-{{elb}}-DNSName" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

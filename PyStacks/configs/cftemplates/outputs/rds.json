@@ -1,0 +1,19 @@
+{
+{% for rds, settings in rds.iteritems() %}
+    "{{rds}}": {
+      "Description": "{{rds}} RDS",
+      "Value": { "Ref": "{{rds}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rds}}" }}
+      },
+    "{{rds}}EndPoint": {
+      "Description": "{{rds}} Endpoint",
+      "Value": { "Fn::GetAtt" : [ "{{rds}}", "Endpoint.Address" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rds}}-EndPoint" }}
+      },
+    "{{rds}}Port": {
+      "Description": "{{rds}} Port",
+      "Value": { "Fn::GetAtt" : [ "{{rds}}", "Endpoint.Port" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rds}}-Port" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

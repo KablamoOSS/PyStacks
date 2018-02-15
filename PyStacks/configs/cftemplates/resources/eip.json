@@ -1,0 +1,12 @@
+{
+{% for eip in eip %}
+	"{{eip|replace("-", "")|replace(".", "")}}EIP": {
+	   "Type" : "AWS::EC2::EIP",
+	   "Properties" : {
+	      "InstanceId" : {"Ref" : "{{eip|replace("-", "")|replace(".", "")}}"},
+	      "Domain" : "vpc"
+	   }
+	}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

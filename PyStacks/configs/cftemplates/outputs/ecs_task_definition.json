@@ -1,0 +1,10 @@
+{
+    {% for taskdef, settings in ecs_task_definition.iteritems() %}
+    "{{taskdef}}": {
+      "Description": "{{taskdef}} Object",
+      "Value": { "Ref": "{{taskdef}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ecs-task-definition-{{taskdef}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

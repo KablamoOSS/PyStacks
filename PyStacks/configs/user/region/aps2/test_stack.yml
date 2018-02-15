@@ -1,0 +1,111 @@
+description: "Stack for Example API and everything it needs"
+region: "ap-southeast-2"
+stackname: "ExampleStacks-Example-API-Integration"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+mappings: {}
+resources:
+  lambda:
+    LoginLambda:
+      code:
+        s3bucket: example.lambda.functions
+        key: exampleapi/login.zip
+      description: Login function for example application
+      environment:
+        example: insert environment var value
+      functionName: LoginLambdaFunction
+      handler: handler.Login
+      memorySize: 256
+      role: arn:aws:iam::012345678901:role/namespace/rolename
+      runtime: python2.7
+      timeout: 30
+      permission: ExampleAPI
+      vpcConfig:
+        securityGroups:
+          - SquidSecurity
+        subnetIds:
+          - Internal1
+          - Internal2
+          - Internal3
+    LogoutLambda:
+      code: 
+        s3bucket: example.lambda.functions
+        key: Exampleapi/login-service.zip
+      description: Logout function for sap oauth integration
+      environment:
+        appEnvironment: development
+        sapAuthEndpoint: https://auth-preprod.energy.com.au
+        sapGatewayEndpoint: https://10.215.9.130
+        sapGatewayHostOverride: onlinesapgw-preprod.energy.com.au
+        sapClientID: S_INTPG1400D
+        sapPassword: 1234
+      functionName: LogoutLambdaFunction
+      handler: handler.Logout
+      memorySize: 256
+      role: arn:aws:iam::686755470412:role/ODDevExample/IAM/InstanceRoles/ExampleStacks-IAM-Roles-LambdaRole-V0NRORYI9D9S
+      runtime: python2.7
+      timeout: 30
+      permission: ExampleAPI
+      vpcConfig:
+        securityGroups:
+          - SquidSecurity
+        subnetIds:
+          - Internal1
+          - Internal2
+          - Internal3
+
+  lambda_permissions:
+    LoginLambdaExampleAPI:
+      lambdaname: LoginLambda
+      apigateway: ExampleAPI
+    LogoutLambdaExampleAPI:
+      lambdaname: LogoutLambda
+      apigateway: ExampleAPI
+
+  apigateway:
+    ExampleAPI:
+      description: Example API
+      name: ExampleAPI
+      resources:
+        v1Resource:
+          pathPart: v1
+        loginResource:
+          parent: v1Resource
+          pathPart: login
+        logoutResource:
+          parent: v1Resource
+          pathPart: logout
+      methods:
+        loginMethod:
+          authorizationType: NONE
+          httpMethod: ANY
+          resource: loginResource
+          dependsOn: [LoginLambda, loginResource]
+          integration:
+            integrationHttpMethod: POST
+            type: AWS_PROXY
+            lambda: LoginLambda
+        logoutMethod:
+          authorizationType: NONE
+          httpMethod: ANY
+          resource: logoutResource
+          dependsOn: [LogoutLambda, logoutResource]
+          integration:
+            integrationHttpMethod: POST
+            type: AWS_PROXY
+            lambda: LogoutLambda
+      deployments:
+        ExampleAPIDeployment:
+          dependsOn: [loginMethod]
+      stages:
+        ExampleAPIStage:
+          stageName: LATEST
+          description: latest stage
+          deployment: ExampleAPIDeployment
+          variables:
+            env: dev
+          methodSettings:
+            - 
+              resourcePath: /v1/login
+              httpMethod: GET

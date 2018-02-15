@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+
+import os
+import argparse
+import docker
+import boto3
+import getpass
+
+# Pystacks Binary
+#
+# Add this file to your $PATH and you can run pystacks anywhere
+# You will either need to pull down pystacks:latest
+# or build pystacks:latest from the pystacks repo
+#
+# Then just run pystacks --profle={profile_name}
+# pystacks assumes there is a folder in your cwd called config
+
+
+# If you are using a development version of pystacks, you should build it with the tag pystacks:latest
+# To dev this script create a symbolic link to add it to your path
+
+# Arguments
+parser = argparse.ArgumentParser()
+
+# Profile
+parser.add_argument(
+    "-p", "--profile",
+    help="Use a profile defined in ~/.aws/credentials"
+)
+
+# No profile
+parser.add_argument(
+    "-mfa", "--mfa",
+    help="AWS mfa arn"
+)
+
+parser.add_argument(
+    "-r", "--role",
+    help="AWS role arn"
+)
+
+
+# TODO: not sure if we can tell boto about a diff creds file
+# parser.add_argument(
+#   "-c", "--credentials_file",
+#   default="~/.aws/credentials",
+#   help="Path to your credentials file. Defaults to: ~/.aws/credentials"
+# )
+
+parser.add_argument(
+    "-t", "--tag",
+    default='latest',
+    help="Pystacks tag to use for the docker container"
+)
+
+parser.add_argument(
+    "--pull",
+    default=False,
+    action='store_true',
+    help="Pull a new version of the pystacks image"
+)
+# TODO: add docker connection args as options
+
+args, unknownargs = parser.parse_known_args()
+
+AWS_ACCESS_KEY_ID = None
+AWS_SECRET_ACCESS_KEY = None
+AWS_SESSION_TOKEN = None
+
+
+#--[ Docker ]-----------------------------------------------------------------------------------------------------------
+
+docker_image = 'pystacks:%s' % args.tag
+docker_client = docker.from_env()
+
+# See if we have a copy of the docker file locally
+images = docker_client.images.list()
+print('Using %s' % docker_image)
+
+if args.pull:
+    print('Pulling %s' % docker_image)
+    docker_client.images.pull(docker_image)
+
+# pystacks_image = next(
+#     (image for image in images if image.tags[0] == docker_image), None)
+
+if docker_image == None:
+    print('Can\'t find %s locally, either pull it down or build it with that tag' % docker_image)
+
+#--[ Assume Role ]------------------------------------------------------------------------------------------------------
+
+credentials = None
+
+if args.profile:  # Use the profile from ~/.aws/credentials
+    session = boto3.Session(
+        profile_name=args.profile,
+    )
+
+    credentials = session.get_credentials()
+
+    AWS_ACCESS_KEY_ID = credentials.access_key
+    AWS_SECRET_ACCESS_KEY = credentials.secret_key
+    AWS_SESSION_TOKEN = credentials.token
+
+else:  # no profile
+    if args.role and args.mfa:  # Use the role with MFA
+        # ask for mfa token
+        token = getpass.getpass("Enter your MFA token: ")
+
+        sts_client = boto3.client('sts')
+
+        session = sts_client.assume_role(
+            RoleArn=args.role,
+            RoleSessionName='Pystacks',
+            SerialNumber=args.mfa,
+            TokenCode=token
+        )
+
+        AWS_ACCESS_KEY_ID = session['Credentials']['AccessKeyId']
+        AWS_SECRET_ACCESS_KEY = session['Credentials']['SecretAccessKey']
+        AWS_SESSION_TOKEN = session['Credentials']['SessionToken']
+
+    else:  # no mfa
+        if args.role:  # Just use the role
+
+            sts_client = boto3.client('sts')
+            session = sts_client.assume_role(
+                RoleArn=args.role,
+                RoleSessionName='Pystacks',
+                SerialNumber=args.mfa,
+                TokenCode=token
+            )
+
+            AWS_ACCESS_KEY_ID = session['Credentials']['AccessKeyId']
+            AWS_SECRET_ACCESS_KEY = session['Credentials']['SecretAccessKey']
+            AWS_SESSION_TOKEN = session['Credentials']['SessionToken']
+
+        else:  # No profile, no role, no mfa -- Fail
+                exit('Exiting: you need to set a profile with: --profile, or provide --role and/or --mfa')
+
+#--[ Run Pystacks ]-----------------------------------------------------------------------------------------------------
+
+# This is the actual command that will be send to PyStacks
+docker_command = ' '.join(unknownargs)
+
+# TODO: cwd could be a flag
+cwd = '%s' % os.getcwd()
+
+print('Mounting %s' % cwd)
+
+# We mount the current directory into PyStacks
+volumes = {
+    cwd: {'bind': '/opt/app/configs/user', 'mode': 'rw'},
+}
+
+environment = {
+    'AWS_ACCESS_KEY_ID': AWS_ACCESS_KEY_ID,
+    'AWS_SECRET_ACCESS_KEY': AWS_SECRET_ACCESS_KEY,
+    'AWS_SESSION_TOKEN': AWS_SESSION_TOKEN,
+}
+
+print('Running PyStacks: %s' % docker_command)
+
+
+# Run
+container = docker_client.containers.run(
+    image=docker_image,
+    read_only=True,
+    command=docker_command,
+    volumes=volumes,
+    environment=environment,
+    detach=True,
+    stdout=True,
+    stderr=True,
+    log_config=dict(type='json-file')
+)
+# client = docker.APIClient(base_url='unix://var/run/docker.sock')
+
+for log in container.logs(
+    stream=True,
+    stdout=True,
+    stderr=True
+):
+    print(str(log,'utf-8').rstrip('\n'))

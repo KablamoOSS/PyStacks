@@ -1,0 +1,128 @@
+{# Not included in Spec ####
+
+ RamDiskid, PlacementGroupName, NetworkInterfaces, Kernelid, DisableApiTermination, Affinity, AdditionalInfo# SsmAssociations, 
+ Tenancy
+#}
+{
+  {% for ec2, settings in ec2.iteritems() %}
+  "{{ec2|replace("-", "")|replace(".", "")}}": {
+    "Type" : "AWS::EC2::Instance",
+    "Properties" : {
+    {% if settings["blockdevice"] %}
+      "BlockDeviceMappings" : [
+      {% for name, size in settings["blockdevice"].iteritems() %}
+        {
+        "DeviceName" : "{{name}}",
+        "Ebs" : { "VolumeSize" : "{{size}}", "VolumeType": "gp2"}
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+    {% endif %}
+    {% if settings["ebsoptimized"] %}
+      "EbsOptimized" : "{{settings["ebsoptimized"]|lower}}",
+    {% endif %}
+    {% if settings["instanceprofile"] %}
+      "IamInstanceProfile" : "{{settings["instanceprofile"]}}",
+    {% endif %}
+      "ImageId" : { "Fn::FindInMap" : [ "AMIRegionMap", { "Ref" : "AWS::Region" }, "64"]},
+      "InstanceInitiatedShutdownBehavior" : "stop",
+      "InstanceType" : "{{settings["instancetype"]}}",
+    {% if settings["keyname"] %}
+      "KeyName" : "{{settings["keyname"]}}",
+    {% endif %}
+      "Monitoring" : "true",
+    {% if settings["privateip"] %}
+      "PrivateIpAddress" : "{{settings["privateip"]}}",
+    {% endif %}
+      "SecurityGroupIds" : [{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{settings["securitygroupid"]}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}],
+      "SourceDestCheck" : "{{settings["sourcedestcheck"]|lower}}",
+      "SubnetId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{settings["subnetid"]}}", {"VPCStack":  {"Ref": "VPCStack"}}] }},
+      {% if settings["userdata"] %}
+      "UserData" : { "Fn::Base64": { "Fn::Join": ["",[
+      {% for userdata in settings["userdata"] %}
+        "{{userdata}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]]}},
+      {% else %}
+      {% if settings["refuserdata"] %}
+      "UserData" : { "Fn::Base64": { "Ref": "{{settings["refuserdata"]}}"} },
+      {% endif %}
+      {% endif %}
+      "Tags" : [
+      {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    {% if settings["tags"] and settings["reftags"] %},{% endif %}
+      {% if settings["reftags"] %}
+        {% for k, v in settings["reftags"].iteritems() %}
+          {"Key": "{{ k }}", "Value": {"Ref": "{{v}}"}}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
+      ]
+    }
+  }
+{% if settings["volumes"] %},
+  {% for volume in settings["volumes"] %}
+  "{{ec2|replace("-", "")|replace(".", "")}}{{volume|replace("-", "")|replace("/", "")}}Volume" : {
+    "Type" : "AWS::EC2::Volume",
+    "Properties" : {
+      "Size" : "{{volume["size"]}}",
+    {% if volume["autoenableio"] %}
+      "AutoEnableIO" : {{volume["autoenableio"]}},
+    {% endif %}
+    {% if settings["keyname"] %}
+      "Encrypted" : true,
+      "KmsKeyId" : "{{settings["keyname"]}}",
+    {% endif %}
+    {% if volume["snapshotid"] %}
+      "SnapshotId" : "{{volume["snapshotid"]}}"
+    {% endif %}
+    {% if volume["volumetype"] %}
+      "VolumeType" : "{{volume["volumetype"]}}",
+    {% else %}
+      "VolumeType" : "gp2",
+    {% endif %}
+      "AvailabilityZone" : { "Fn::GetAtt" : [ "{{ec2|replace("-", "")|replace(".", "")}}", "AvailabilityZone" ] },
+      "Tags" : [ 
+        {
+        "Key" : "Name",
+        "Value" : "{{ec2|replace("-", "")|replace(".", "")}}{{volume|replace("-", "")|replace("/", "")}}"
+        } 
+      ]
+    }
+  },
+  "{{ec2|replace("-", "")|replace(".", "")}}{{volume|replace("-", "")|replace("/", "")}}Mount" : {
+     "Type" : "AWS::EC2::VolumeAttachment",
+     "Properties" : {
+        "InstanceId" : { "Ref" : "{{ec2|replace("-", "")|replace(".", "")}}" },
+        "VolumeId"  : { "Ref" : "{{ec2|replace("-", "")|replace(".", "")}}{{volume|replace("-", "")|replace("/", "")}}" },
+        "Device" : "{{volume}}"
+     }
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+{% endif %}
+  {% if settings["zoneid"] %},
+  "{{ec2|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{ec2}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{ec2}}.{{settings["zonesuffix"]}}",
+        "Type" : "A",
+        "ResourceRecords" : [
+         {% if settings["privateip"] %}
+            "{{settings["privateip"]}}"
+         {% else %}
+            { "Fn::GetAtt" : [ "{{ec2}}", "PrivateIp" ] }
+         {% endif %}
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{ec2}}.{{settings["zonesuffix"]}}"
+        }
+      ]
+    }
+  }{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,93 @@
+{#
+    SubnetMappings, TargetGroupAttributes not implemented
+#}
+
+{
+{% for nlb, settings in nlb.iteritems() %}
+	"{{nlb}}": {
+        "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "Properties": {
+            "Name": "{{nlb}}",
+            {% if settings["scheme"] %}
+            "Scheme": "{{settings["scheme"]}}",
+            {% else %}
+            "Scheme": "internal",
+            {% endif %}
+            "Subnets": [
+                {% for subnet in settings["subnets"] %}
+                { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+            ],
+            {% if settings["tags"] %}
+            "Tags" : [      
+            {% for k, v in settings["tags"].iteritems() %}
+            {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],{% endif %}
+            "Type": "network"
+        }
+    }
+
+    {% for listener, listenersettings in settings["listeners"].iteritems() %}
+    ,"{{listener}}NlbListener": {
+        "Type" : "AWS::ElasticLoadBalancingV2::Listener",
+        "Properties" : {
+            "DefaultActions": [
+                {
+                "TargetGroupArn": {"Ref": "{{listenersettings["targetgroup"]}}NlbTg"},
+                "Type": "forward"
+                }
+            ],
+            "LoadBalancerArn": {"Ref": "{{nlb}}"},
+            "Port": {{listenersettings["port"]}},
+            "Protocol": "TCP"
+        },
+        "DependsOn" : [
+            "{{nlb}}",
+            "{{listenersettings["targetgroup"]}}NlbTg"
+        ]
+    }
+    {% endfor %}
+
+    {% for targetgroup, tgsettings in settings["targetgroups"].iteritems() %}
+    ,"{{targetgroup}}NlbTg": {
+        "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+        "Properties": {
+            "Name": "{{targetgroup}}",
+            "Port": {{tgsettings["port"]}},
+            "Protocol": "{{tgsettings["protocol"]}}",
+            "HealthCheckProtocol": "{{tgsettings["healthcheckprotocol"]}}",
+            {% if tgsettings["healthcheckprotocol"] == "HTTP" or tgsettings["healthcheckprotocol"] == "HTTPS" %}
+            "Matcher": {
+                "HttpCode": {{tgsettings["httpcode"]}}
+            },
+            "HealthCheckPath": "{{tgsettings["path"]}}",
+            {% endif %}
+            "HealthCheckIntervalSeconds": {{tgsettings["interval"]}},
+            "HealthCheckTimeoutSeconds": {{tgsettings["timeout"]}},
+            "HealthyThresholdCount" : {{tgsettings["healthythreshold"]}},
+            "UnhealthyThresholdCount" : {{tgsettings["unhealthythreshold"]}},
+            "Targets": [
+                {% for target in tgsettings["targets"] %}{
+                    {% if target["refid"] %}
+                    "Id": {"Ref": "{{target["refid"]}}"},
+                    {% else %}
+                    "Id": "{{target["id"]}}",
+                    {% endif %}
+                    "Port": {{target["port"]}}
+                }{% if not loop.last %},{% endif %}{% endfor %}
+            ],
+            "TargetType": "{{tgsettings["targettype"]}}",
+            {% if tgsettings["tags"] %}
+            "Tags" : [      
+            {% for k, v in tgsettings["tags"].iteritems() %}
+            {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],{% endif %}
+            "VpcId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-VPCid", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+        }
+    }
+    {% endfor %}
+{% if not loop.last %},{% endif %}{% endfor %}
+}

@@ -1,0 +1,96 @@
+{
+{% for asg, settings in asg.iteritems() %}
+  "{{asg}}": {
+    "Type" : "AWS::AutoScaling::AutoScalingGroup",
+    "Properties" : {
+      {% if settings["az"] %}
+      "AvailabilityZones" : [
+        {% for az in settings["az"] %}
+        "{{az}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      {% if settings["cooldown"] %}
+      "Cooldown" : "{{settings["cooldown"]}}",
+      {% endif %}
+      {% if settings["desired_capacity"] %}
+      "DesiredCapacity" : "{{settings["desired_capacity"]}}",
+      {% endif %}
+      {% if settings["hc_grace_period"] %}
+      "HealthCheckGracePeriod" : {{settings["hc_grace_period"]}},
+      {% endif %}
+      {% if settings["health_check_type"] %}
+      "HealthCheckType" : "{{settings["health_check_type"]}}",
+      {% endif %}
+      {% if settings["instanceid"] %}
+      "InstanceId" : "{{settings["instanceid"]}}",
+      {% else %}
+      "LaunchConfigurationName" : {"Ref": "{{settings["launch_configuration"]}}" },
+      {% endif %}
+      "MaxSize" : "{{settings["max_size"]}}",
+      {% if settings["metrics"] %}
+      "MetricsCollection" : [
+      {% for metric in settings["metrics"] %}
+        {
+          "Granularity" : "{{metric["granularity"]}}",
+          "Metrics" : [
+          {% for obj in metric["metric_list"] %}
+            "{{obj}}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+          ]
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      {% endif %}
+      "MinSize" : "{{settings["min_size"]}}",
+      {% if settings["notifications"] %}
+      "NotificationConfigurations" : [
+      {% for notice in settings["notifications"] %}
+        {
+          "NotificationTypes" : [
+          {% for type in notice["types"] %}
+            "{{type}}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+          ],
+          "TopicARN" : "{{notice["topic_arn"]}}"
+        }{% if not loop.last %},{% endif %}
+       {% endfor %}
+      ],
+      {% endif %}
+      {% if settings["placement_group"] %}
+      "PlacementGroup" : "{{settings["placement_group"]}}",
+      {% endif %}
+      {% if settings["loadbalancers"] %}
+      "LoadBalancerNames" : [
+        {% for elb in settings["loadbalancers"] %}
+        {"Ref": "{{elb}}"}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% elif settings["target_groups"] %}
+      "TargetGroupARNs" : [
+        {% for target in settings["target_groups"] %}
+        {"Ref": "{{target}}"}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% else %}
+      {% endif %}
+      {% if settings["termination_policies"] %}
+      "TerminationPolicies" : [      
+        {% for termination in settings["termination_policies"] %}
+        "{{termination}}"{% if not loop.last %},{% endif %}
+        {% endfor %}],
+      {% endif %}
+      "VPCZoneIdentifier" : [ 
+        {% for subnet in settings["subnets"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      "Tags" : [
+        {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}", "PropagateAtLaunch": "{{settings["propagateatlaunch"]}}"}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

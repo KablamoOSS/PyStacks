@@ -1,0 +1,25 @@
+{
+{% for stepfunction, settings in stepfunctions.iteritems() %}
+"{{stepfunction}}": {
+  "Type": "AWS::StepFunctions::StateMachine",
+ 	"Properties": {
+ 		{% if settings["statemachinename"] %}
+  	"StateMachineName": "{{settings["statemachinename"]}}",
+  	{% endif %}
+    "DefinitionString": { "Fn::Join": [
+    	"",
+     	[
+      {% for string in settings["definitionstring"] %}
+        "{{string}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]
+    ]},
+    {% if 'Fn::' in settings["rolearn"] %}
+    "RoleArn": { {{settings["rolearn"]}} }
+    {% else %}
+    "RoleArn": "{{settings["rolearn"]}}"
+    {% endif %}
+	}
+}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,25 @@
+{
+{% for eni, settings in network_interface.iteritems() %}
+	"{{eni}}": {
+		"Type" : "AWS::EC2::NetworkInterface",
+		"Properties" : {
+			"Description" : "{{settings["description"]}}",
+			"PrivateIpAddress" : "{{settings["private_ip"]}}",
+			"SourceDestCheck" : "{{settings["source_dest_check"]}}",
+			"GroupSet" : [
+				{% for sg in settings["security_groups"] %}
+				{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{sg}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+				{% endfor %}
+				],
+				"SubnetId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{settings["subnet"]}}", {"VPCStack":  {"Ref": "VPCStack"}}] }},
+            {% if settings["tags"] %}
+            "Tags" : [      
+	            {% for k, v in settings["tags"].iteritems() %}
+	            {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+	            {% endfor %}
+            ],
+            {% endif %}
+		}
+	}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

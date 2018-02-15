@@ -1,0 +1,40 @@
+{
+  {% for repo, settings in codecommit_repo.iteritems() %}
+  "{{repo}}": {
+    "Type" : "AWS::CodeCommit::Repository",
+    "Properties" : {
+      {% if settings["description"] %}
+      "RepositoryDescription" : "{{settings["description"]}}",
+      {% endif %}
+      "RepositoryName" : "{{settings["name"]}}",
+      {% if settings["triggers"] %}
+      "Triggers" : [ 
+        {% for trigger in settings["triggers"].iteritems() %}
+        {
+          {% if trigger["branches"] %}
+          "Branches" : [ 
+            {% for branch in trigger["branches"] %}
+            "{{branch}}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          {% endif %}
+          {% if trigger["customdata"] %}
+          "CustomData" : "{{trigger["customdata"]}}",
+          {% endif %}
+          "DestinationArn" : "{{trigger["destinationarn"]}}",
+          {% if trigger["events"] %}
+          "Events" : [
+            {% for event in trigger["events"] %}
+            "{{event}}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          {% endif %}
+          "Name" : "{{trigger["name"]}}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+      {% endif %}
+    }
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

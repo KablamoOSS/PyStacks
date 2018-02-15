@@ -1,0 +1,39 @@
+{
+{% for firehose, settings in kinesis_firehose.iteritems() %}
+  "{{firehose}}": {
+    "Type": "AWS::KinesisFirehose::DeliveryStream",
+    "Properties": {
+      {% if settings["type"]=="elasticsearch" %}
+      {% elif settings["type"]=="s3" %}
+      S3DestinationConfiguration: {
+        {# "BucketARN" : { "Fn::ImportValue" : {"Fn::Sub" : ["${S3Stack}-S3-{{settings["bucketarn"]}}-ARN", {"S3Stack":  {"Ref": "S3Stack"}}] }}, #}
+        "BucketARN" : "{{settings["bucketarn"]}}",
+        "BufferingHints" : {
+          "IntervalInSeconds" : 60,
+          "SizeInMBs" : 5
+        },
+        {% if settings["loggingoptions"] %}
+        "CloudWatchLoggingOptions" : {
+          "Enabled" : true,
+          "LogGroupName" : "{{settings["loggingoptions"]["loggroup"]}}",
+          "LogStreamName" : "{{settings["loggingoptions"]["streamgroup"]}}"
+        },
+        {% endif %}
+        "CompressionFormat" : "{{settings["compression"]}}",
+        {% if settings["encryption"] %}
+        "EncryptionConfiguration" : {
+          "KMSEncryptionConfig" : {
+            {# "AWSKMSKeyARN" : { "Fn::ImportValue" : {"Fn::Sub" : ["${KMSStack}-KMS-{{settings["encryption"]["kmskey"]}}-ARN", {"KMSStack":  {"Ref": "KMSStack"}}] }}, #}
+            "AWSKMSKeyARN" : "{{settings["encryption"]["kmskey"]}}",
+          }
+        },
+        {% endif %}
+        "Prefix" : "{{settings["prefix"]}}",
+        {# "RoleARN" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RolesStack}-Role-{{settings["rolearn"]}}-ARN", {"RolesStack":  {"Ref": "RolesStack"}}] }}, #}
+        "RoleARN" : "{{settings["rolearn"]}}"
+      }
+      {% endif %}
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

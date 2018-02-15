@@ -1,0 +1,122 @@
+{#
+#
+#   Aspects not implemented:
+#       "CharacterSetName", DBInstanceClass, DBInstanceIdentifier, DBName, LicenseModel   
+#       SourceDBInstanceIdentifier, OptionGroupName DBParameterGroupName
+#}
+{
+{% for rds, settings in rds.iteritems() %}
+"{{rds}}":{
+  "Type" : "AWS::RDS::DBInstance",
+  {% if settings["deletionpolicy"] %}
+  "DeletionPolicy" : "{{settings["deletionpolicy"]}}",
+  {% endif %}
+  "Properties" :
+  {
+    "AllowMajorVersionUpgrade" : "{{settings["allowmajorupgrade"]|lower}}",
+    "AutoMinorVersionUpgrade" : "{{settings["allowminorupgrade"]|lower}}",
+    "MultiAZ" : "{{settings["multiaz"]|lower}}",
+    {% if settings["az"] %}
+    "AvailabilityZone": { "Fn::Join": [ "", [ { "Ref" : "AWS::Region" }, "{{settings["az"]}}" ] ] },
+    {% endif %}
+    {% if settings["backupretention"] is defined %}
+    "BackupRetentionPeriod" : "{{settings["backupretention"]}}",
+    {% endif %}
+    "CopyTagsToSnapshot" : "true",
+    {% if not settings['dbcluster'] %}
+    {% if not settings['databasename'] %}
+    "DBInstanceIdentifier" : "{{rds}}",
+    {% else %}
+    "DBInstanceIdentifier" : "{{settings["databasename"]}}",
+    {% endif %}
+    {% endif %}
+    "DBInstanceClass" : "{{settings["instanceclass"]}}",
+    {% if settings['dbcluster'] %}
+    "DBClusterIdentifier" : { "Ref": "{{settings["dbcluster"]}}"},
+    {% else %}
+    "AllocatedStorage" : "{{settings["allocatedstorage"]}}",
+    {% endif %}
+    {% if settings['domain'] %}
+    "Domain" : "{{settings["domain"]}}",
+    "DomainIAMRoleName" : "{{settings["domainiamrole"]}}",
+    {% endif %}
+    {% if settings['dbname'] %}
+    "DBName" : "{{settings["dbname"]}}",
+    {% endif %}
+    {% if settings['paramgroup'] %}
+    "DBParameterGroupName" : "{{settings["paramgroup"]}}",
+    {% endif %}
+    "DBSubnetGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RDSSubnetStack}-RDS-{{settings["rdssubnetgroup"]}}-Subnet", {"RDSSubnetStack":  {"Ref": "RDSSubnetStack"}}] }},
+    "Engine" : "{{settings["engine"]}}",
+    "EngineVersion" : "{{settings["engineversion"]}}",
+    {% if settings["iops"] %}
+    "Iops" : "{{settings["iops"]}}",
+    {% endif %}
+    {% if settings["kmskeyid"] %}
+    "KmsKeyId" : "{{settings["kmskeyid"]}}",
+    {% endif %}
+    {% if settings["licensemodel"] %}
+    "LicenseModel" : "{{settings["licensemodel"]}}",
+    {% endif %}
+    {% if settings["DBSnapshotIdentifier"] %}
+        "DBSnapshotIdentifier" : "{{settings["DBSnapshotIdentifier"]}}",
+    {% else %}
+    {% if not settings['dbcluster'] %}
+        {% if settings["masterusername"] %}
+    "MasterUsername" : "{{settings["masterusername"]}}",
+        {% endif %}
+    "MasterUserPassword" : {"Ref": "DBPassword"},
+    {% endif %}
+    {% endif %}
+    {% if settings["monitorarn"] %}
+    "MonitoringInterval" : "{{settings["monitorinterval"]}}",
+    "MonitoringRoleArn" : "{{settings["monitorarn"]}}",
+    {% endif %}
+    {% if settings["optiongroup"] %}
+    "OptionGroupName" : "{{settings["optiongroup"]}}",
+    {% endif %}
+    {% if not settings['dbcluster'] %}
+    "Port" : "{{settings["port"]}}",
+    "PreferredBackupWindow" : "{{settings["backupwindow"]}}",
+    "PreferredMaintenanceWindow" : "{{settings["maintenancewindow"]}}",
+    {% endif %}
+    "PubliclyAccessible" : "false",
+    "StorageEncrypted" : "{{settings["storageencryption"]|lower}}"
+    {% if settings["storagetype"] %}
+    ,"StorageType" : "{{settings["storagetype"]}}"
+    {% endif %}
+    {% if settings["timezone"] %}
+    ,"Timezone" : "{{settings["timezone"]}}"
+    {% endif %}
+    {% if not settings['dbcluster'] %}
+    ,"VPCSecurityGroups" : [ 
+    {% for secgroup in settings["secgroups"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{secgroup}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+    {% endfor %} 
+    ]{% endif %}{% if settings["tags"] %},
+    "Tags" : [      
+{% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]{% endif %}}
+  }{% if settings["zoneid"] %},
+  "{{rds|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{rds}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{settings["zoneprefix"]}}.{{settings["zonesuffix"]}}",
+        "Type" : "CNAME",
+        "ResourceRecords" : [
+            { "Fn::GetAtt" : [ "{{rds}}", "Endpoint.Address" ] }
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{rds}}.{{settings["zonesuffix"]}}"
+        }
+      ]
+    }
+  }{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,15 @@
+{
+    {% for cfn, settings in cloudfront.iteritems() %}
+    "{{cfn}}": {
+      "Description": "{{cfn}} Object",
+      "Value": { "Ref": "{{cfn}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-CFN-{{cfn}}" }}
+      },
+    "{{cfn}}DomainName": {
+      "Description": "{{cfn}} DNS",
+      "Value": { "Fn::GetAtt" : [ "{{cfn}}", "DomainName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-CFN-{{cfn}}-DomainName" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

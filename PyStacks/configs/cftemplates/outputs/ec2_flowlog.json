@@ -1,0 +1,9 @@
+{
+    {% for ec2_flowlog, settings in ec2_flowlog.iteritems() %}
+    "{{ec2_flowlog}}": {
+      "Description": "{{ec2_flowlog}} Object",
+      "Value": { "Ref": "{{ec2_flowlog}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Flowlog-{{ec2_flowlog}}" }}
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+}

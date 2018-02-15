@@ -1,0 +1,21 @@
+{
+      {% for dmssubnet, settings in dms_subnetgroup.iteritems() %}
+      "{{dmssubnet}}": {
+      "Type" : "AWS::DMS::ReplicationSubnetGroup",
+      "Properties" : {
+            "ReplicationSubnetGroupIdentifier": "{{dmssubnet}}",
+            "ReplicationSubnetGroupDescription": "{{settings["description"]}}",
+            "SubnetIds" : [
+                  {% for subnet in settings["subnets"] %} 
+                  { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+                  {% endfor %}
+            ],
+            "Tags" : [      
+                  {% for k, v in settings["tags"].iteritems() %}
+                  {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+                  {% endfor %}
+            ]
+      }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+} 

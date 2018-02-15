@@ -1,0 +1,9 @@
+{
+{% for cloudtrail, settings in cloudtrail.iteritems() %}
+    "{{cloudtrail}}": {
+        "Description": "{{cloudtrail}} Object",
+        "Value": { "Ref": "{{cloudtrail}}"},
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-CloudTrail-{{cloudtrail}}" }}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

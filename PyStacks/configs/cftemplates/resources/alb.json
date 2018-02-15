@@ -1,0 +1,120 @@
+{#
+    SubnetMappings, TargetGroupAttributes not implemented
+#}
+
+{
+{% for alb, settings in alb.iteritems() %}
+    "{{alb}}": {
+        "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "Properties": {
+            {% if settings["name"] %}
+            "Name": "{{settings["name"]}}",
+            {% else %}
+            "Name": "{{alb}}",
+            {% endif %}
+            {% if settings["scheme"] %}
+            "Scheme": "{{settings["scheme"]}}",
+            {% else %}
+            "Scheme": "internal",
+            {% endif %}
+            "SecurityGroups": [
+            {% for sg in settings["security_groups"] %}
+            { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{sg}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],
+            "Subnets": [
+                {% for subnet in settings["subnets"] %}
+                { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+            ],
+            {% if settings["tags"] %}
+            "Tags" : [      
+            {% for k, v in settings["tags"].iteritems() %}
+            {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],{% endif %}
+            "Type": "application"
+        }
+    }
+
+
+    {% for listener, listenersettings in settings["listeners"].iteritems() %}
+    ,"{{listener}}": {
+        "Type" : "AWS::ElasticLoadBalancingV2::Listener",
+        "Properties" : {
+            "DefaultActions": [
+                {
+                "TargetGroupArn": {"Ref": "{{listenersettings["targetgroup"]}}"},
+                "Type": "forward"
+                }
+            ],
+            "LoadBalancerArn": {"Ref": "{{alb}}"},
+            "Port": {{listenersettings["port"]}},
+            {% if listenersettings["cert_arns"]%}
+            "Certificates": [
+            {% for cert in listenersettings["cert_arns"] %}
+               { "CertificateArn": "{{cert}}"{% if not loop.last %},{% endif %} }
+            {% endfor %}
+            ],
+            {% endif %}
+            "Protocol": "{{listenersettings["protocol"]}}"
+        },
+        "DependsOn" : [
+            "{{alb}}",
+            "{{listenersettings["targetgroup"]}}"
+        ]
+    }
+    {% endfor %}
+
+    {% for targetgroup, tgsettings in settings["targetgroups"].iteritems() %}
+    ,"{{targetgroup}}": {
+        "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+        "Properties": {
+            {% if tgsettings["name"] %}
+            "Name": "{{tgsettings["name"]}}",
+            {% else %}
+            "Name": "{{targetgroup}}",
+            {% endif %}
+            "Port": {{tgsettings["port"]}},
+            "Protocol": "{{tgsettings["protocol"]}}",
+            "HealthCheckProtocol": "{{tgsettings["health_check_protocol"]}}",
+            {% if tgsettings["health_check_protocol"] == "HTTP" or tgsettings["health_check_protocol"] == "HTTPS" %}
+            "Matcher": {
+                "HttpCode": {{tgsettings["http_code"]}}
+            },
+            "HealthCheckPath": "{{tgsettings["health_check_path"]}}",
+            {% endif %}
+            "HealthCheckIntervalSeconds": {{tgsettings["interval"]}},
+            "HealthCheckTimeoutSeconds": {{tgsettings["timeout"]}},
+            "HealthyThresholdCount" : {{tgsettings["healthythreshold"]}},
+            "UnhealthyThresholdCount" : {{tgsettings["unhealthythreshold"]}},
+            {% if tgsettings["targets"] %}
+            "Targets": [
+                {% for target in tgsettings["targets"] %}{
+                    {% if target["refid"] %}
+                    "Id": {"Ref": "{{target["refid"]}}"},
+                    {% else %}
+                    "Id": "{{target["id"]}}",
+                    {% endif %}
+                    "Port": {{target["port"]}}
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ],
+            {% endif %}
+            "TargetType": "{{tgsettings["target_type"]}}",
+            {% if tgsettings["tags"] %}
+            "Tags" : [      
+            {% for k, v in tgsettings["tags"].iteritems() %}
+            {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],{% endif %}
+            "VpcId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-VPCid", {"VPCStack":  {"Ref": "VPCStack"}}] }},
+        },
+        "DependsOn" : [
+            "{{alb}}"
+        ]
+    }
+    {% endfor %}
+{% if not loop.last %},{% endif %}{% endfor %}
+}

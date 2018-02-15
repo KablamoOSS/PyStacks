@@ -1,0 +1,74 @@
+{
+{% for es, settings in elasticsearch.iteritems() %}
+  "{{es}}": {
+    "Type": "AWS::Elasticsearch::Domain",
+    "Properties": {
+      "ElasticsearchClusterConfig": {
+        "DedicatedMasterEnabled": "{{settings["dedicatedmaster"]|lower}}",
+      {% if settings["dedicatedmaster"] == true %}
+        "DedicatedMasterType": "{{settings["mastertype"]}}",
+        "DedicatedMasterCount": "{{settings["mastercount"]}}",
+      {% endif %}
+        "InstanceCount": "{{settings["instancecount"]}}",
+        "ZoneAwarenessEnabled": "true",
+        "InstanceType": "{{settings["instancetype"]}}"
+      },
+    {% if settings["ebsoptions"] %}
+      "EBSOptions": {
+        "EBSEnabled": "true",
+        "Iops": {{settings["ebsoptions"]["iops"]}},
+        "VolumeSize": {{settings["ebsoptions"]["size"]}},
+        "VolumeType": "{{settings["ebsoptions"]["type"]}}"
+      },
+    {% else %}
+      "EBSOptions": {
+        "EBSEnabled": "true",
+        "Iops": 0,
+        "VolumeSize": 20,
+        "VolumeType": "gp2"
+      },
+    {% endif %}
+      "ElasticsearchVersion": "{{settings["version"]}}",
+    {% if settings["snapshotoptions"] %}
+      "SnapshotOptions": {
+        {% for k, v in settings["snapshotoptions"].iteritems() %}
+          "{{k}}": "{{v}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      },
+    {% endif %}
+    {% if settings["advancedoptions"] %}
+      "AdvancedOptions": {
+        {% for k, v in settings["advancedoptions"].iteritems() %}
+          "{{k}}" : "{{v}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      },
+    {% endif %}
+      "AccessPolicies": {
+        "Version": "2012-10-17",
+        "Statement": [ {{settings["policy"]}} ]
+      },
+      "DomainName": "{{es}}"
+    }
+  }
+  {% if settings["zoneid"] %},
+  "{{es|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{es}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{es}}.es.{{settings["zonesuffix"]}}",
+        "Type" : "CNAME",
+        "ResourceRecords" : [
+            { "Fn::GetAtt" : [ "{{es}}", "DomainEndpoint" ] }
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{es}}.es.{{settings["zonesuffix"]}}"
+        }
+      ]
+    }
+  }{% endif %}
+  {% if not loop.last %},{% endif %}
+{% endfor %}
+}

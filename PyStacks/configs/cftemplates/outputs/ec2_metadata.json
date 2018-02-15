@@ -1,0 +1,32 @@
+{
+    {% for ec2, settings in ec2.iteritems() %}
+    "{{ec2|replace("-", "")|replace(".", "")}}": {
+      "Description": "{{ec2}} Object",
+      "Value": { "Ref": "{{ec2}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Instance-{{ec2}}" }}
+      },
+   	{% if settings["eip"] %}
+    "{{ec2|replace("-", "")|replace(".", "")}}PublicIP": {
+      "Description": "{{ec2}} Public IP",
+      "Value": { "Fn::GetAtt" : [ "{{ec2}}", "PublicIp" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Instance-{{ec2}}-PublicIp" }}
+      },
+    "{{ec2|replace("-", "")|replace(".", "")}}PublicDnsName": {
+      "Description": "{{ec2}} Public DNS",
+      "Value": { "Fn::GetAtt" : [ "{{ec2}}", "PublicDnsName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Instance-{{ec2}}-PublicDnsName" }}
+      },
+   	{% endif %}
+    "{{ec2|replace("-", "")|replace(".", "")}}PrivateIP": {
+      "Description": "{{ec2}} Private IP",
+      "Value": { "Fn::GetAtt" : [ "{{ec2}}", "PrivateIp" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Instance-{{ec2}}-PrivateIp" }}
+      },
+    "{{ec2|replace("-", "")|replace(".", "")}}PrivateDnsName": {
+      "Description": "{{ec2}} Private DNS",
+      "Value": { "Fn::GetAtt" : [ "{{ec2}}", "PrivateDnsName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Instance-{{ec2}}-PrivateDns" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

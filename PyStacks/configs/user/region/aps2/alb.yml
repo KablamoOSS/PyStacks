@@ -1,0 +1,19 @@
+description: "Ecs Stack Sample"
+region: "ap-southeast-2"
+stackname: ExampleStacks-ECS
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+mappings: {}
+resources:
+  alb:
+    name:
+    scheme:
+    securitygroups: ["secgroup1", "secgroup2"]
+    subnets: ["Internal1", "Internal2"]
+    listeners:
+      listener1: {port: }
+    tags:
+    targetgroup:
+      hccode:
+      hcpath:

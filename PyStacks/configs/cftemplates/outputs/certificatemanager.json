@@ -1,0 +1,10 @@
+{
+{% for cert, settings in certificatemanager.iteritems() %}
+  "{{cert}}": {
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ACM-{{cert}}" }},
+    "Value": { "Ref": "{{cert}}" },
+    "Description": "{{cert}} ACM Certificate"
+  }
+  {% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,30 @@
+{
+{% for asg_action, settings in asg_scheduledaction.iteritems() %}
+  "{{asg_action}}": {
+    "Type" : "AWS::AutoScaling::ScheduledAction",
+    "Properties" : {
+      {% if settings["desiredcapacity"] is not none %}
+      "DesiredCapacity" : {{settings["desiredcapacity"]}},
+      {% endif %}
+      {% if settings["endtime"] %}
+      "EndTime" : "{{settings["endtime"]}}",
+      {% endif %}
+      {% if settings["maxsize"] is not none %}
+      "MaxSize" : {{settings["maxsize"]}},
+      {% endif %}
+      {% if settings["minsize"] is not none %}
+      "MinSize" : {{settings["minsize"]}},
+      {% endif %}
+      {% if settings["recurrence"] %}
+      "Recurrence" : "{{settings["recurrence"]}}",
+      {% endif %}
+      {% if settings["starttime"] %}
+      "StartTime" : "{{settings["starttime"]}}",
+      {% endif %}
+      "AutoScalingGroupName" : { 
+        "Ref" : "{{settings["autoscalinggroupname"]}}"
+      }
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

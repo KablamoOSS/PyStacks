@@ -1,0 +1,15 @@
+{
+    {% for alb, settings in alb.iteritems() %}
+    "{{alb}}": {
+      "Description": "{{alb}} Object",
+      "Value": { "Ref": "{{alb}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-alb-{{alb}}" }}
+      },
+    "{{alb}}dns": {
+      "Description": "{{alb}} Object",
+      "Value": { "Fn::GetAtt" : [ "{{alb}}", "DNSName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-alb-{{alb}}-DNSName" }}  	
+    }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

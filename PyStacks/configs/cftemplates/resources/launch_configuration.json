@@ -1,0 +1,38 @@
+{
+{% for lc, settings in launch_configuration.iteritems() %}
+  "{{lc}}": {
+    "Type": "AWS::AutoScaling::LaunchConfiguration",
+    "Properties": { 
+      "AssociatePublicIpAddress" : "{{settings["public_ip"]}}",
+      "EbsOptimized" : "{{settings["ebs_optimised"]}}",
+      {% if settings["instance_profile"] %}
+      "IamInstanceProfile" : "{{settings['instance_profile']}}",
+      {% endif %}
+      "ImageId" : "{{settings["image_id"]}}",
+      "InstanceType" : "{{settings["instance_type"]}}",
+      "SecurityGroups" : [
+      {% for sg in settings["security_groups"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{sg}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      {% if settings["blockdevice"] %}
+      "BlockDeviceMappings" : [
+      {% for name, size in settings["blockdevice"].iteritems() %}
+        {
+        "DeviceName" : "{{name}}",
+        "Ebs" : { "VolumeSize" : "{{size}}", "VolumeType": "gp2"}
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      {% endif %}
+      "KeyName" : "{{settings["key_name"]}}",
+      "UserData" : { "Fn::Base64": { "Fn::Join": ["",[
+      {% for userdata in settings["user_data"] %}
+        "{{userdata}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]]}},
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}
+

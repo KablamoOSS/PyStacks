@@ -1,0 +1,10 @@
+{
+{% for event, settings in events.iteritems() %}
+"{{event}}": {
+"Description": "{{event}} Object",
+"Value": { "Ref": "{{event}}"},
+"Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Event-{{event}}" }}
+}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

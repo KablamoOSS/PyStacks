@@ -1,0 +1,11 @@
+{% for param, settings in params.iteritems() %}
+"{{param}}": {
+    "Description": "{{settings["description"]}}",
+    "Type": "{{settings["type"]}}",
+    {% if settings["noecho"] %}
+    "NoEcho": "true",
+    {% endif %}
+    "Default": {{settings["value"]}}
+}{% if loop.index != loop.length %},{% endif %}
+{% endfor %}
+

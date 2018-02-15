@@ -1,0 +1,30 @@
+{
+  {% for zone, settings in route53_zone.iteritems() %}
+  "{{zone}}": {
+    "Type" : "AWS::Route53::HostedZone",
+    "Properties" : {
+      "HostedZoneConfig": {
+        "Comment": "{{settings["comment"]}}"
+      },
+      {% if settings["hostedzone"] %}
+      "HostedZoneTags" : [
+        {% for k, v in settings["hostedzone"].iteritems() %}
+          {"Key": "{{k}}", "Value": "{{v}}"}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ],
+      {% endif %}
+      {% if settings["vpcs"] %}
+      "VPCs" : [
+        {% for k, v in settings["vpcs"].iteritems() %}
+        {"VPCId": "{{k}}", "VPCRegion": "{{v}}"}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "Name" : "{{settings["name"]}}"
+    }
+  }
+  {% if not loop.last %},{% endif %}
+  {% endfor %}
+}

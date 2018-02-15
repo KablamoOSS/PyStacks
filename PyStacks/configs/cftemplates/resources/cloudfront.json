@@ -1,0 +1,156 @@
+{# 
+
+  Only valid options for OriginProtocolPolicy: http-only | match-viewer | https-only
+  Only valid options for OriginSslProtocols: SSLv3 | TLSv1 | TLSv1.1 | TLSv1.2
+  Only valid options for AllowedMethods:["HEAD", "GET"], ["GET", "HEAD", "OPTIONS"], or ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+  Only valid options for CachedMethods: ["HEAD", "GET"] or ["GET", "HEAD", "OPTIONS"]
+  Only valid options for ViewerProtocolPolicy: allow-all, redirect-to-https, https-only https://docs.aws.amazon.com/AmazonCloudFront/latest/APIReference/API_CacheBehavior.html
+  Only valid options for PriceClass: PriceClass_100 | PriceClass_200 | PriceClass_All
+#}
+
+{
+{% for cfn, settings in cloudfront.iteritems() %}
+"{{cfn}}": {
+  "Type" : "AWS::CloudFront::Distribution",
+  "Properties" : {
+  "DistributionConfig": {
+    "Aliases" : [
+    {% for alias in settings["aliases"] %}
+      "{{alias}}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    "CacheBehaviors" : [ 
+    {% for cache in settings["cachebehaviors"] %}{
+      "AllowedMethods": [
+      {% for method in cache["allowedmethods"] %}
+        "{{method}}"{% if not loop.last %},{% endif %}
+      {% endfor %}],
+      "CachedMethods": [
+      {% for method in cache["cachedmethods"] %}
+        "{{method}}"{% if not loop.last %},{% endif %}
+      {% endfor %}],
+      "Compress" : "{{cache["compress"]|lower}}",
+      "DefaultTTL" : "{{cache["defaultttl"]}}",
+      "ForwardedValues" : {
+        {% if cache["cookies"] == "all" %}
+        "Cookies": { "Forward" : "all" },
+        {% endif %}
+        "Headers" : [
+        {% for header in cache["headers"] %}
+          "{{header}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+        ],
+        "QueryString" : "{{cache["querystring"]}}",
+	{% if cache["querystringkeys"] %}
+        "QueryStringCacheKeys" : [
+        {% for keys in cache["querystringkeys"] %}
+          "{{keys}}"{% if not loop.last %},{% endif %}
+        {% endfor %}]
+	{% endif %}
+      },
+      "MaxTTL": "{{cache["maxttl"]}}",
+      "MinTTL": "{{cache["minttl"]}}",
+      "PathPattern": "{{cache["pathpattern"]}}",
+      "TargetOriginId": "{{cache["targetoriginid"]}}",
+      "ViewerProtocolPolicy": "{{cache["viewerprotocolpolicy"]}}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    "Comment" : "{{settings["comment"]}}",
+    {% if settings["customerrorresponses"] %}
+    "CustomErrorResponses" : [
+    {% for errors in settings["customerrorresponses"] %}
+      {
+      "ErrorCachingMinTTL" : "{{errors["errorcachingminttl"]}}",
+      "ErrorCode" : "{{errors["errorcode"]}}"
+        {% if errors["responsepagepath"] %}
+          ,"ResponseCode" : "{{errors["responsecode"]}}",
+          "ResponsePagePath" : "{{errors["responsepagepath"]}}"
+        {% endif %}
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    {% endif %}
+    "DefaultCacheBehavior": {
+      "AllowedMethods": [
+      {% for method in settings["defaultbehaviors"]["allowedmethods"] %}
+        "{{method}}"{% if not loop.last %},{% endif %}
+      {% endfor %}],
+      "CachedMethods": [
+      {% for method in settings["defaultbehaviors"]["cachedmethods"] %}
+        "{{method}}"{% if not loop.last %},{% endif %}
+      {% endfor %}],
+      "Compress" : "{{settings["defaultbehaviors"]["compress"]|lower}}",
+      "DefaultTTL" : "{{settings["defaultbehaviors"]["defaultttl"]}}",
+      "ForwardedValues" : {
+        {% if settings["defaultbehaviors"]["cookies"] == "all" %}
+        "Cookies": { "Forward" : "all" },
+        {% endif %}
+        "Headers" : [
+        {% for header in settings["defaultbehaviors"]["headers"] %}
+          "{{header}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+        ],
+        "QueryString" : "{{settings["defaultbehaviors"]["querystring"]}}",
+	{% if settings["defaultbehaviors"]["querystringkeys"] %}
+        "QueryStringCacheKeys" : [
+        {% for keys in settings["defaultbehaviors"]["querystringkeys"] %}
+          "{{keys}}"{% if not loop.last %},{% endif %}
+        {% endfor %}]
+	{% endif %}
+      },
+      "MaxTTL": "{{settings["defaultbehaviors"]["maxttl"]}}",
+      "MinTTL": "{{settings["defaultbehaviors"]["minttl"]}}",
+      "TargetOriginId": "{{settings["defaultbehaviors"]["targetoriginid"]}}",
+      "ViewerProtocolPolicy": "{{settings["defaultbehaviors"]["viewerprotocolpolicy"]}}"
+    },
+    {% if settings["defaultrootobject"] %}
+    "DefaultRootObject" : "{{settings["defaultrootobject"]}}",
+    {% endif %}
+    "Enabled" : "{{settings["enabled"]|lower}}",
+    "HttpVersion" : "{{settings["httpversion"]}}",
+    {% if settings["logging"] %}
+    "Logging": {
+      "IncludeCookies" : "{{settings["logging"]["includecookies"]|lower}}",
+      "Bucket" : "{{settings["logging"]["bucket"]}}",
+      "Prefix": "{{settings["logging"]["prefix"]}}"
+    },
+    {% endif %}
+    {% if settings["priceclass"] %}
+    "PriceClass" : "{{settings["priceclass"]}}",
+    {% endif %}
+    {% if settings["viewercertificate"] %}
+    "ViewerCertificate": {
+      "AcmCertificateArn": "{{settings["viewercertificate"]}}",
+      "SslSupportMethod": "sni-only"
+    },
+    {% endif %}
+    {% if settings["webaclid"] %}
+    "WebACLId" : "{{settings["webaclid"]}}",
+    {% endif %}
+    "Origins" : [
+    {% for origin in settings["origins"] %}{
+      "DomainName" : "{{origin["domain"]}}",
+      "Id" : "{{origin["id"]}}",
+      {% if origin["originpath"] %}"OriginPath": "{{origin["originpath"]}}",{% endif %}
+      {% if origin["origincustomheaders"] %}
+      "OriginCustomHeaders": [
+        {% for k, v in origin["origincustomheaders"].iteritems() %}{
+        "HeaderName": "{{ k }}","HeaderValue": "{{ v }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "CustomOriginConfig": {
+        "HTTPPort": "{{origin["http"]}}",
+        "HTTPSPort": "{{origin["https"]}}",
+        "OriginProtocolPolicy" : "{{origin["protocolpolicy"]}}"
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}]
+    } 
+  }
+}{% if not loop.last %},{% endif %}
+{% endfor %}
+}
+

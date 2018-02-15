@@ -1,0 +1,11 @@
+{
+{% for loggroup, settings in logs_group.iteritems() %}
+  "{{loggroup}}": {
+    "Type": "AWS::Logs::LogGroup",
+    "Properties": {
+      "LogGroupName": "{{settings["name"]}}",
+      "RetentionInDays": {{settings["retention"]}}
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

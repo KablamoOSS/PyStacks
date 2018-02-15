@@ -1,0 +1,9 @@
+{
+{% for elasticachesubnet, settings in elasticachesubnet.iteritems() %}
+    "{{elasticachesubnet}}": {
+      "Description": "{{elasticachesubnet}} ElastiCache ParamsGroup",
+      "Value": { "Ref": "{{elasticachesubnet}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ElastiCache-{{elasticachesubnet}}-Subnet" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,2745 @@
+SPDXVersion: SPDX-2.1
+DataLicense: CC0-1.0
+DocumentNamespace: http://spdx.org/spdxdocs/pystacks-bfdca77169f84eaf063066dac443a24c86e19037
+DocumentName: pystacks
+SPDXID: SPDXRef-DOCUMENT
+Creator: Tool: licensechecker 1.2.0
+Created: 2018-02-15T04:45:46Z
+LicenseListVersion: 3.0
+
+PackageName: pystacks
+SPDXID: SPDXRef-Package
+PackageDownloadLocation: NONE
+FilesAnalyzed: true
+PackageVerificationCode: af2d4465c888482dd2b82d9a330c3cf9a8b42c55
+PackageLicenseDeclared: MIT
+PackageLicenseConcluded: MIT
+PackageLicenseInfoFromFiles: NONE
+PackageCopyrightText: NOASSERTION
+
+FileName: ./.gitignore
+SPDXID: SPDXRef-78a660a413585389afd32bcad518dd4a289d4b37
+FileChecksum: SHA1: 776f6d1722880ea46e0ab8e60ca4c3d6c5e14bb6
+FileChecksum: SHA256: 6412a3bef691f159bcb2cbee63380ce55a3d566d96f44df279f8203962cbcada
+FileChecksum: MD5: c83d904c800a56ee0f32e47fae9c1d2e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./Dockerfile
+SPDXID: SPDXRef-9c090fe56218d04f16b479d4acd2fc76c2a0c120
+FileChecksum: SHA1: 51b9d33a6e27bcf1977a1a364dce9035bff7f7f7
+FileChecksum: SHA256: 12440e8fcbbc17fc00154b802465aaa94fb9f79161dffd116c8c0e026d9d6758
+FileChecksum: MD5: e0c2688aebb00d48172bd99c1d5e356d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./Dockerfile.Python3.test
+SPDXID: SPDXRef-17f0f0bba06c3db8014b870080828ffeaa0c4684
+FileChecksum: SHA1: a2ede0bc03c1bdbfc0bf6ac2431350f63efa3e4f
+FileChecksum: SHA256: 5dc628a764545703f724d33e141f786faf195722bb57d5afe472872765febf0e
+FileChecksum: MD5: 60f50787c0880c46e4bfcc4687bf48f2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./Dockerfile.check
+SPDXID: SPDXRef-e9c27bbfb94ae6dbfd020afcda3ff48b8a3f5703
+FileChecksum: SHA1: 3af785d205c20615d8851dddf7dbc482e8eaa752
+FileChecksum: SHA256: 53d4ea6243bf22fbc149deb9d29e60f94023ff2bbe37f4861abac6d57aeeafc5
+FileChecksum: MD5: fabdff766c003c411a3ca9dbb9759baf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./Dockerfile.coverage
+SPDXID: SPDXRef-d083941ce5bb6a1307d5b58aaef6c2ad4077d7f4
+FileChecksum: SHA1: 06f99372ca2d59523046d7d8fbc47cfbf408c124
+FileChecksum: SHA256: f2d9f4b9e9de402e61d7a103c4d0160c49d4cdc7501ef50333a993ebe99a2168
+FileChecksum: MD5: 2ecfe42c9688f147af2bceafb429ee4a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./Dockerfile.test
+SPDXID: SPDXRef-2be02b70e7824bd7fa17128be52946be3c992e6c
+FileChecksum: SHA1: 66a3b891d6f0f708ad0c5eb41517396afa0b11c2
+FileChecksum: SHA256: 6c0553d1bdf54e4af827995bb4d80d1253c40e6ecc3e86ea0dca74e284929b8c
+FileChecksum: MD5: 8a944c46387749ff9b73b54a36f1bfc1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./LICENSE
+SPDXID: SPDXRef-daf83b5f7a0686df000652f5d1ed319d17b942eb
+FileChecksum: SHA1: 781aa280e3eeba5b1dac26e5891c04c281a00b80
+FileChecksum: SHA256: b971e1813929cf11187b85799bf490a985caf32af06319d6cc512f8ec5483023
+FileChecksum: MD5: dce8c5efd8f3e453d4d64372f1d13ec8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./README.md
+SPDXID: SPDXRef-4254d49114abeeea0320ba657af96b73a970ba06
+FileChecksum: SHA1: 293f1079ff0a2eee09e2d158ff6c969d27d4221a
+FileChecksum: SHA256: bf082127c8764f299a2308dc0c45d2700877a4fb5499f9db616e1febb0719e46
+FileChecksum: MD5: d3e9989e9b663e5eb5d6b307551a9767
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./bitbucket-pipelines.yml
+SPDXID: SPDXRef-ba369dd54662c46934dcc2c71621d42a4b5cd2fe
+FileChecksum: SHA1: 261c63de3e01fad0a62a7834d96c842ea527fbe5
+FileChecksum: SHA256: 4af09fa64cc4bbc81d1a3066d853f0047c8dec4e3f9d612a0cf4074adfadb525
+FileChecksum: MD5: 832bbfd575c584fd496ebe6f70aade6c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./build_local.sh
+SPDXID: SPDXRef-a99f2a259e29e7682ca07100ab025bbb80d5fe28
+FileChecksum: SHA1: df96d5f3631941ef93c33d0916504fe366ad3402
+FileChecksum: SHA256: 98ddea33c7db65f99d2c1b621ebeb4d86fab01f513ee162a4fa20daa3c5fe14e
+FileChecksum: MD5: 27c226735379678138ffdce242c8ac9c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./commit_check.sh
+SPDXID: SPDXRef-d36b064b0ed13690efc7216ec9611ff1c59f4676
+FileChecksum: SHA1: 9b947db196a9641a0ef7ed1b8e3193b367354d0e
+FileChecksum: SHA256: 57fa072d7fe6c58c3353cf5194c05a7753a48a479a3a6511511cba6469663dc0
+FileChecksum: MD5: a6a1389a50c8f9f3652d2b8b3b625965
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./contributors.txt
+SPDXID: SPDXRef-d829174db2ec7017a15700f93f11f1d7bbcd4df2
+FileChecksum: SHA1: de79e70072ebbfc6e0ee3b7fea61e2f7fc2b439e
+FileChecksum: SHA256: 2f4787a4a4791ed22b707f5d0c90cfa4d7567b016f258c333c54ac5fd031e26e
+FileChecksum: MD5: 1325b8cfc82f13bd74afe8638fb5a958
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./makefile
+SPDXID: SPDXRef-2ef766262407291a0fa907994336ad1983b95aa1
+FileChecksum: SHA1: feed69d1e88844623bf0662b0db6ea084920f63f
+FileChecksum: SHA256: c30b84935ddd4b684877bca71ea322fb092b5dbfd4868099ef1bb8354b763e9d
+FileChecksum: MD5: 308c2a19fc1f8e3d57dddf1f3cccabb4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./requirements.txt
+SPDXID: SPDXRef-d1563239eedfcbc2889e85db55c89b21f552889a
+FileChecksum: SHA1: 2415007cba397a8bb67a2cc892f830f98f3bcfb9
+FileChecksum: SHA256: 8dad299a623e089d9cd9cf6ffefa6897f2d6773922393e7f60479088e3fa0cc6
+FileChecksum: MD5: f1b000857698e1e38dec3f7ed041ebc1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./requirements_test.txt
+SPDXID: SPDXRef-a04909e20a738bddb853a9ce7960c1acc5f63205
+FileChecksum: SHA1: b882539b689867c033e690d4c70517a373985aae
+FileChecksum: SHA256: c4d9365df45ec4c22b91109668222990aa24be2adcbf3b56531e031a6402476b
+FileChecksum: MD5: 25c6e5bd4368bc72607263d2e790f873
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/__init__.py
+SPDXID: SPDXRef-e21687ccadf84a725cdbe32b796411176e6e9abf
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+FileChecksum: SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+FileChecksum: MD5: d41d8cd98f00b204e9800998ecf8427e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/__init__.pyc
+SPDXID: SPDXRef-e6e463b42f4b4a36ef20e8c46615a2cc3fcb9155
+FileChecksum: SHA1: aa899f3eb86b101e48262a1124d833b6e5e22654
+FileChecksum: SHA256: 9049fe28a4bfba010df48455a1550fcf5ac76e09b299a4da8ec82776b94a3f84
+FileChecksum: MD5: 8e3e6107aa99c8de106cc9069a1e288c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/contributors.txt
+SPDXID: SPDXRef-df2ad384c99d24efe7672d5d045947cd71febc31
+FileChecksum: SHA1: de79e70072ebbfc6e0ee3b7fea61e2f7fc2b439e
+FileChecksum: SHA256: 2f4787a4a4791ed22b707f5d0c90cfa4d7567b016f258c333c54ac5fd031e26e
+FileChecksum: MD5: 1325b8cfc82f13bd74afe8638fb5a958
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/setup.py
+SPDXID: SPDXRef-11db576c6a1e07b902da64556f2ad02f7a026ea9
+FileChecksum: SHA1: c94268fb92b43c265c7cbce994aca91abd6e909a
+FileChecksum: SHA256: 96c26e31062f7a440183c63a004c9843170d3b3bc075f717ddc08e34b6cb4fe7
+FileChecksum: MD5: b3cbc6ce0fb6dd23f72ef258b86148aa
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/__init__.py
+SPDXID: SPDXRef-f79488b818cbe1d0383d42d1bab4bfaf276f23e9
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+FileChecksum: SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+FileChecksum: MD5: d41d8cd98f00b204e9800998ecf8427e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/__init__.pyc
+SPDXID: SPDXRef-29e5be1d0e7e787e385d3836a19926a99a908386
+FileChecksum: SHA1: 3948e84d56e3aebbbdaa2c1e611b09a6578b794e
+FileChecksum: SHA256: 186a6a0e11ec34279bf5d661094acc7390daf8d50bd46006bb285e98245580ca
+FileChecksum: MD5: 4b9fb715c730536f1cef65396bcf7b97
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/acm.py
+SPDXID: SPDXRef-5ef6b5703a102f9b7142fe115b4a5c81586212e0
+FileChecksum: SHA1: 73d22d3c679d1b94feca314038f7aabbd005be55
+FileChecksum: SHA256: 43bdebc9a094a77a3a5896a208ebb3c8897c564f4fbc4ffe9f27eb2d2dcc78e6
+FileChecksum: MD5: 61912ef782dc5afec2116a18ff6a1494
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/acmtasks.py
+SPDXID: SPDXRef-ca410d7dd64111af23fe6bcba3dc5b68b8209402
+FileChecksum: SHA1: 50fc106358bc4c7c1bec349083d189a5b863917b
+FileChecksum: SHA256: f8cde6b32501496c4511ea62da179b8acec4dfd2238242aaeb1d30edecc0a4f6
+FileChecksum: MD5: 9899cc045a1032faf50582bac760dbc7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/apigateway.py
+SPDXID: SPDXRef-dd7909b753b1d3d7090a8b69360f57ba081ded19
+FileChecksum: SHA1: bdba3fda8a770b908f579cc245a05a7f2373a09a
+FileChecksum: SHA256: 5f49a3de6477b60f487c72eaf2678b5de3e67e98871ce73070ba7e0a74c5380f
+FileChecksum: MD5: 298577cc987c82394196a7e3294547e6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/apitasks.py
+SPDXID: SPDXRef-3861763a79674a3a6449af230ce57b4d6d965194
+FileChecksum: SHA1: fd4ee6e531a418a2f611557eabcc9cc0dc59fce3
+FileChecksum: SHA256: abfbbd68295192c3d7dff5c70f5b12761dc9b9b70d90bef1ed37dd0c02da0257
+FileChecksum: MD5: 71d3d2a55a31c0d5ef5799ba65ab473d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/auth.py
+SPDXID: SPDXRef-49dab669a66826d19cad33abcfb85ef14fb1f917
+FileChecksum: SHA1: 6aa731bd4d94169e09ea615a1f1c064061abb8c7
+FileChecksum: SHA256: f7f1864bef56d2879cb1b50015d2b570c26d3d792f2256718370a6f463867ce7
+FileChecksum: MD5: 38af47ce6bd51d3f5d7b1cd7d570c73a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/auth.pyc
+SPDXID: SPDXRef-399edaa1679ed99565186a51f80e2ff316242996
+FileChecksum: SHA1: 4a5e029bb96ac1fa8bf88c465f6985f2da7da148
+FileChecksum: SHA256: 0e12243b6cefdc982e4b32122b4ff01e82a0a10fa0c50ab58504a3751f1c71c3
+FileChecksum: MD5: 2938e0f7db93aee76db0e78e24723e83
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/autoscaling.py
+SPDXID: SPDXRef-cc1a29e627689c5cef1483ad324dc49e648676af
+FileChecksum: SHA1: 51d32162c675de06a0b0d0d4d97dd390b8a16d40
+FileChecksum: SHA256: c2485fe0ff7652d8ac9009e035388131f759fb6162d2aeaf5170e7501930f4ec
+FileChecksum: MD5: f3103359712e7c5ba0fd3a4935f6f2d2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/awsinputs.py
+SPDXID: SPDXRef-222074278b5c327e0512391c2006fe93d649772d
+FileChecksum: SHA1: 6f02e1443d7ec13a5cc30fb31ab9418b8ee6ac50
+FileChecksum: SHA256: 7e2be93feb0675487f01eefe721e6ec3a7caebcc4ec8b8385503ccb348c68e16
+FileChecksum: MD5: eeb95d4837197bf2a1428afe8bb83b9e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/awsinputs.pyc
+SPDXID: SPDXRef-e6955c83bdb0236c454abac57f5e436739c3a348
+FileChecksum: SHA1: 9b1c8161ce0af7941e4a05c85db5ed3c4c98153b
+FileChecksum: SHA256: 94ab5571822d8f4e3d42d620e1598f9b34ab763b64e56925068fbc08dce96ae0
+FileChecksum: MD5: 50052e9df927d3b17067c0eedbfbab27
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/beanstalk.py
+SPDXID: SPDXRef-7e0ba77f9aae46ebb6d93fcb2eb879ae8b090217
+FileChecksum: SHA1: 674cb1dc2606d6845dcf9bce3d4d7c431cab6cc0
+FileChecksum: SHA256: 0afc5b5375cf25b16ec7cff3ccf95000a792e115391e6c7ff63ef088d6d5f376
+FileChecksum: MD5: 6a4572786f318a1617c5b22812f70666
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/beanstalktasks.py
+SPDXID: SPDXRef-c8cd6bcb1ddbed111000104e0495cd02d070e46a
+FileChecksum: SHA1: ff9b6112987a2ee581a59778546577e4195a45e4
+FileChecksum: SHA256: 6c70fb65381b5d2525e8b05acc8a3a3db1457bea2a32d64e610202930988b8c2
+FileChecksum: MD5: d610a3ef60e485993cceee3e18262b45
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/cloudformation.py
+SPDXID: SPDXRef-eb33d774fa6247aea907e5429452ff99d3def45e
+FileChecksum: SHA1: 99f0d7637c4b2f6127d157609f06903fc84d2b1f
+FileChecksum: SHA256: d0e88f8800b3de901f493baf66a41dcd32eb5629695e30c384e63bbea7a26405
+FileChecksum: MD5: df0c8ff6270d9916fe8b3723acaed2ef
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/cloudformation.pyc
+SPDXID: SPDXRef-bec36da819383ea8ea0ba377d3880f182cdd6d50
+FileChecksum: SHA1: 666e1f275bd0c888fdb21d90f81814994c322a06
+FileChecksum: SHA256: fe7f7011103675bb40134f49d499de89cc792d45384dad7b809b5767507d0752
+FileChecksum: MD5: 0ba6027bdcf6ff602952541000ba4a2b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/cloudformation_helpers.py
+SPDXID: SPDXRef-5c7c0604166cc6648d8a0a07107fe0c2da287c17
+FileChecksum: SHA1: ed84b1e34003c516b2e265521a8940460add55ed
+FileChecksum: SHA256: c6cefa050f238f768e9a32c05fe9bbf51e64fac85f906a3ee1fa2380788376e8
+FileChecksum: MD5: dc50fb0d0d6eb6a59f3909a442491a0e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/cloudformation_helpers.pyc
+SPDXID: SPDXRef-3a37a1cb4e9dfb5e3a6b701a8784b199d03d0977
+FileChecksum: SHA1: 180080246fb292726642958c5a4eed4f7fefb6ac
+FileChecksum: SHA256: 0fe3b39a3df6879af2fb87697109ddef631b863367f727f67e2e76c8a23c0272
+FileChecksum: MD5: 9ed5115b2770f0709dfde2f6e2aad185
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/cloudformationtasks.py
+SPDXID: SPDXRef-866d391ccf3bca4e87e0706ea9c1642505b7b437
+FileChecksum: SHA1: 4ae0f617fe2b716f0aaf70281d2678297b403c69
+FileChecksum: SHA256: 223a2f84d8149f4add4ca6cbd96f0d77fbd61f6fd0bd81331b271cb397b1706d
+FileChecksum: MD5: 7935a81a1e428a213be841fa8a335d67
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/configs.py
+SPDXID: SPDXRef-ea251ce181676bf85da4296a56a073492112aef4
+FileChecksum: SHA1: b54d9e0b227ff594041caa3f6d313ad272021a73
+FileChecksum: SHA256: b1aef2ca8ec1be17c4d48ddbb72efae98ecb2bd8efd7ed6ae4f61c0cb1347604
+FileChecksum: MD5: d5c2c24078ae327797063c4e8545ff66
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/configs.pyc
+SPDXID: SPDXRef-01a3273eb006c14d4710ad71fae6b1e50a3c2bf8
+FileChecksum: SHA1: c8143f53f06953973cd26ca4fdb9d3f6ff9d5907
+FileChecksum: SHA256: b85661ac06250b9869a0865bf62512dd83553008076cc9283c5ee946427d5867
+FileChecksum: MD5: c5f8b26a4efb1e43fad037d815a9200a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/configtasks.py
+SPDXID: SPDXRef-b125108396c9e37022db282498881ad843ffec59
+FileChecksum: SHA1: 2a1dd916bc64b64f1e05d5bd5cdb79d2be167900
+FileChecksum: SHA256: 1444433ae091df4856675b969b2e3956c782ae81f4cc173a742e200e3a3b9665
+FileChecksum: MD5: 192f5168f2990d7687fda015fe2b115a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/database.py
+SPDXID: SPDXRef-f39cf7c34d3b8e01fdc54455e54a9b17df89e767
+FileChecksum: SHA1: 0c77a461bc775978cd57cdd038c55ff11fb3e69e
+FileChecksum: SHA256: 0ee70541c50831e74b627078b9fe880c87a1b760326f92d191f96ccddfd8a161
+FileChecksum: MD5: 5bac22d8791c8c1b93fa4c8d22da8fbb
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ec2.py
+SPDXID: SPDXRef-b3b6372e9ed5f12b04aaa823ae56644cf2d70c10
+FileChecksum: SHA1: 04bebfe1418bbecb171220e09d5c77e73bc62e71
+FileChecksum: SHA256: 75c9f396f7adc2b6527fc649efdc1f576059f81c0af21225bc451de0659fbf8b
+FileChecksum: MD5: 8b3901b790b16d89b42b65fff899a3ff
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ec2.pyc
+SPDXID: SPDXRef-9bd6543b99ad3a1880e6beb86571e114174237c8
+FileChecksum: SHA1: 7c53f26ce357748337f65dcdd49884e833041971
+FileChecksum: SHA256: 759fea5de4b7e10d307eba72cc19479b8e408696040e37913f63892a3a1522d1
+FileChecksum: MD5: 299d77adfc4bcb4fb99082ec125714c6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ec2tasks.py
+SPDXID: SPDXRef-854b6e7899fe24ed435a00c80c298286142c71f9
+FileChecksum: SHA1: eec0029b044cbce21b0f68af02425eb091803529
+FileChecksum: SHA256: 1c5ac8c89b31cf3f68e5617544a32ca23c29038ac8b1a0fb1c513138f2bafcb8
+FileChecksum: MD5: c2e20bb4849c2f642c4a49d9c8311df8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ec2tasks.pyc
+SPDXID: SPDXRef-c714401406a2e7dc4caa7e1f275927ff56c4e10a
+FileChecksum: SHA1: 0ac5d963cfc77db60f8099af6a3887869b488e11
+FileChecksum: SHA256: 15d5cd894bbb01466db539315a20f93f691438e9c88bbdc860d5ffea84db7069
+FileChecksum: MD5: de038dd12c242e261932860991418b76
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ecs.py
+SPDXID: SPDXRef-ffa579ec0e0553313518839d91f8ce635148b56a
+FileChecksum: SHA1: 6bd548142e48752e307e4677c8ba6719e6b711e8
+FileChecksum: SHA256: c8e75b18aeea822cc89f2d2440d6ac6039344ed1b7b30a35e01fb382aa307b07
+FileChecksum: MD5: 0806a0a0440def74b00245aa1f1a9ac8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/ecs.pyc
+SPDXID: SPDXRef-12e199eadfdda585d4df6bcded06ec831425ffb7
+FileChecksum: SHA1: ac3b146e8c6343a5befdf9b25e8a3978755011a6
+FileChecksum: SHA256: 6c134233f1aa1729cd04374baf1edad09f845fa9a3bf55267dd88212ce921e60
+FileChecksum: MD5: 4a1b6210911ded13563d1c90b6f71d5d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/greengrass.py
+SPDXID: SPDXRef-4502fe11e21fb7981db9747aa0064b046d6c0624
+FileChecksum: SHA1: a5f00de1fcad07dd3c2df2f5645e545617531ee1
+FileChecksum: SHA256: 7f416e6a9f96037e802ef313dab1cdbd8e58409e698e8c453eb4500dd05be11a
+FileChecksum: MD5: a2f87f7fd3953ca7d5e3228d7b5da5b8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/greengrass.pyc
+SPDXID: SPDXRef-1a2f7706fd6116f3b60bf44319f540393deff76c
+FileChecksum: SHA1: ebf28a7e8f2c634c70768e515b9b5f1c6bd92b90
+FileChecksum: SHA256: 5835c02062cd64186d8c634c613801e0328cce5fbe98c9668af0a49fee8edc79
+FileChecksum: MD5: 6356c3bd8d1be71c6e613e180726d2f4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/greengrasstasks.py
+SPDXID: SPDXRef-7e2f7aa00374bcae650138a8c447f23fee8ee2e9
+FileChecksum: SHA1: a69b1e985d3d10e13f957845a0977184f637fc49
+FileChecksum: SHA256: eeddf84d5bbc653247c473567b635997690a94b66cd209ade714980a3b266aa2
+FileChecksum: MD5: ed58fdc4f1d50ab1c633dc701853451c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/iam.py
+SPDXID: SPDXRef-706e9eee2d5d524775223b0e46e52a5cedfe9e5c
+FileChecksum: SHA1: 0d22cf6a116031c0b78b1877793d46335d169404
+FileChecksum: SHA256: e38b7d28aa8c3440bd6be9e5179f5629eca1b11f72144f0d9a6cfb24a11f20a2
+FileChecksum: MD5: 4c2c9b3b9069278a834d29a94af4ca21
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/iot.py
+SPDXID: SPDXRef-bc9bf7c6a1c068c5b1c0d96efc61db9b7f90815f
+FileChecksum: SHA1: a89bfc8e5800e13654ba3a8b00fd0a4da8291114
+FileChecksum: SHA256: 07b200565dba92150e4f18565e983636424e74b15d16a365ace7ab4f26778047
+FileChecksum: MD5: f5fb0f0bce395d5b18caba44b7d93b88
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/kms.py
+SPDXID: SPDXRef-f1e9ebfcd6ae1c30a7dfc6f29735f01bfa887661
+FileChecksum: SHA1: 10fd4737d07e051823d4c58638e1084c743a5289
+FileChecksum: SHA256: 36879875ad66beb23185e28c76f931e23bd2585b4853c4b7d3863849e7727d76
+FileChecksum: MD5: 0bccf01a68944d6e0410e231348f9983
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/kmstasks.py
+SPDXID: SPDXRef-87297369c60dffcb6ebd3b1d0bf85be4ae5e584d
+FileChecksum: SHA1: db6a37ea604bca2dcf5c82d519c2d1290775e585
+FileChecksum: SHA256: 54c6f7c5e4606af6d0d1aca4b395b1fc6ba0ccc76fd6e5ee35c6369db3894235
+FileChecksum: MD5: e7ec7633333e0dfef14338e389e99e60
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/lambdaapi.py
+SPDXID: SPDXRef-15efec6d24c35af75a75c4ae6ac227978e8163d0
+FileChecksum: SHA1: 7734545b3229df25a41b10af2294e0876fcb8c8f
+FileChecksum: SHA256: caa8eb528246a3b97a0c112a89c725168812f224419356d8124789a57735e73c
+FileChecksum: MD5: ecdffb990d9c1b725c724fe7b3866275
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/lambdatasks.py
+SPDXID: SPDXRef-ac00308c17de36fe727dbdf8d210cb9cbed63f7b
+FileChecksum: SHA1: 62452884a7af72f1b90ea9b8ae211917dcfb55ee
+FileChecksum: SHA256: 1c744c0d9754f200569ed6a12df4bafa2ff6e4d1cf7bd8bd36634153f486118a
+FileChecksum: MD5: 45369561802497707ab67f9edd4461f9
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/logger.py
+SPDXID: SPDXRef-b148c29bf519e036f5a6f833841b68a21c77cb7e
+FileChecksum: SHA1: 46fc8e70ae095bf52a354236b4745d9a6736f7ff
+FileChecksum: SHA256: d0431787664f41bb5b86a8558052335f718ecd3122bb73a75b1f70f0cd983208
+FileChecksum: MD5: 70a321e54596174b0706718cea74fa96
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/organizations.py
+SPDXID: SPDXRef-2e1ca5f9627d4a17a1903e3ce95295806d9c3a1f
+FileChecksum: SHA1: f086a052843a5a8b1d3eeb8f85feac0c2e8e9fb2
+FileChecksum: SHA256: 328a95f889d54552f38f92bc66e7930169412d0d340967e48053bc57b97ca8d3
+FileChecksum: MD5: f76fbb7de7ac27ed1348a06295078115
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/organizations.pyc
+SPDXID: SPDXRef-23a6571d2bb143c5c9141ba91cb51df4d28d9206
+FileChecksum: SHA1: 74b93dfb9e37978847a2aa4b1a77b9d1448609c7
+FileChecksum: SHA256: 9aabf786b4ad89880963dc08942fb146511f3a97cb3cc1fc2705c51c050976fe
+FileChecksum: MD5: 8aa2aadd397311affff6e56ae4f929f6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/organizationstasks.py
+SPDXID: SPDXRef-1fa6c3c7b009bd2d9be495110e61f14e6aea296a
+FileChecksum: SHA1: 63e1b994ae3a3163b16951a6ee56668573f31eba
+FileChecksum: SHA256: 9c196bff34f5e230008bef5bd746d88fc542700538356d94bce082d637bd82d6
+FileChecksum: MD5: 421b5753ce3af6a92b5237c2561a24ec
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/organizationstasks.pyc
+SPDXID: SPDXRef-c8dddad531150f0e52a187713fefc7838f1d7c2d
+FileChecksum: SHA1: b67b1661cb2fa15c1d72105fd2e75cc554abd81e
+FileChecksum: SHA256: 4f160061b30aeb824dbb716380ee41f6d9235187bbff47106104c4f00206d78f
+FileChecksum: MD5: 758236c7ee6ae5f20cbe31dfc066bd70
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/output.py
+SPDXID: SPDXRef-565e617dec0ab63d07075d82d55113f12eb29f33
+FileChecksum: SHA1: 6c0e27cdc74be172aa86b94a5ea1ee1944a04523
+FileChecksum: SHA256: d2405a4c4f6a675defe55211a50cd5218b4509620e78793813318552dce8802d
+FileChecksum: MD5: d5162dd4cca28954d569bf3444da2bb3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/output.pyc
+SPDXID: SPDXRef-77c1ab98b521eed9dfe054c7241e075241d055fc
+FileChecksum: SHA1: 7efe686c9661d586701092c4faf0dc04a1c5575e
+FileChecksum: SHA256: 6b01ac70147d3787dba533d1f43cfe41ee8b8461b2237f171dcad031b8dbc310
+FileChecksum: MD5: 36335ed29639f10c426447712e90f197
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/recordsets.py
+SPDXID: SPDXRef-a220809e77add56998ddef28975ce38bd3af6563
+FileChecksum: SHA1: a7f3a0be006b092ae156796217dd04f74d66a171
+FileChecksum: SHA256: 29870fe3863f3489d596bcae58b9b8ebaba08c2302d144bff1dbf7694e112670
+FileChecksum: MD5: bf4d58828bb90f58b66be46812d74c67
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/rekognition.py
+SPDXID: SPDXRef-6d6243d4b63081bce13d4de2918ca613adfc3c80
+FileChecksum: SHA1: c18da4963c34774be88297b3a41025556e38e3f2
+FileChecksum: SHA256: 65c9d574b3ee7ae3f066bb4dbfd2b51c349cab33ce269c11ca9fa0bc8ed2f57d
+FileChecksum: MD5: 3cc0da2abb569770bc323879424a53f7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/rekognitiontasks.py
+SPDXID: SPDXRef-1fe2d9afca8c77275a88971e4925448bc6a85979
+FileChecksum: SHA1: 8b3bb8abde83a0b0e9df11a3a7eeb746bd9f8342
+FileChecksum: SHA256: 5f9f2342206846c5504b4f97d976e8f0160c74745ff9f46f7604e96518f468ef
+FileChecksum: MD5: fb4dfa60d3862618478570e37bae5de7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/route53.py
+SPDXID: SPDXRef-9abbbd4dcc872482517f6d6d95afbbb39cf40cf2
+FileChecksum: SHA1: 4ad925226f810031a709f69cd02ee71cee0c7b33
+FileChecksum: SHA256: 7ac6af3828872c6b85a8a2bf434da5bec051efc13e38a987b6bcbdb1c04f2237
+FileChecksum: MD5: 00fb8f725d6823198b3151569b75bf8a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/route53.pyc
+SPDXID: SPDXRef-678c24340974b77866948fb4970968c1e3e4ad34
+FileChecksum: SHA1: 3133183898791cd8135539a7fd2d55c596a09e28
+FileChecksum: SHA256: b1bd152ec2671fd1331fe8db86be77b0289f7bb33a0105012ee506861a923dac
+FileChecksum: MD5: 2f0bfd01498d3a24dfb4c607b68e41bd
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/route53tasks.py
+SPDXID: SPDXRef-f28363dc047e01a0a0e7053b0fa79241876d7d20
+FileChecksum: SHA1: fbb8d2caa9c239396a36050c8797aab853dd34a7
+FileChecksum: SHA256: f348729846a9fffeadeaa69015b5e91aa0a7830563e8689fb3e4e7fb86af5bd4
+FileChecksum: MD5: a94b92f08aa577695c3e7e991970bb9e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/route53tasks.pyc
+SPDXID: SPDXRef-1c11d04f80e182ef1ab810dd9b26c2745b8e06a7
+FileChecksum: SHA1: d0af607743992b43168903005ba50da2d4307e37
+FileChecksum: SHA256: cdee07ef85f42970a081c9ce1093e0fc4e3a428943328c5685a7f4682a08ede4
+FileChecksum: MD5: 197ca24f65b0162fa98ec9545df8d65c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/s3.py
+SPDXID: SPDXRef-35f5eb138ef77628b846a8b73657a7fe94b9e74f
+FileChecksum: SHA1: 7ee1826e073376014f7139aebbabf25a57ba55b5
+FileChecksum: SHA256: 44b8d7f1a943d8098a7b59fcadf92669f9f82a2e6691320dbe306ad0307c6a69
+FileChecksum: MD5: b7f37c3d3bf068daf14b9b4efc558577
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/s3tasks.py
+SPDXID: SPDXRef-1c743c6c9945c51f61d9999abc71e6cde48c4284
+FileChecksum: SHA1: 403fdf3ec86aef274c4a4559916360044c229ac2
+FileChecksum: SHA256: 5e2eb3e6d4d2c24d88f681bb092e3c386358951349044e95e055a316dcf13fc0
+FileChecksum: MD5: a8de56700c478e7e440b50fd7d58c989
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/serverless_tasks.py
+SPDXID: SPDXRef-64c98534bb0d8e57a19862ddec5d6848864585e2
+FileChecksum: SHA1: 6f9fa610e22e7f865ee2ed0353da6096af496cf4
+FileChecksum: SHA256: 287cfdea7f54cc5f78a5982a4cb52c0c3455c27919911b1a0a174fd0fdd4b7e6
+FileChecksum: MD5: 0087513dcc012b23cfc7b4b1e415f712
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/tasks.py
+SPDXID: SPDXRef-50b00e230787e98e8aa192a1dd5588038d30fa3b
+FileChecksum: SHA1: 862ab3832dd59ad1ac051f24832e79c6c28ef5cc
+FileChecksum: SHA256: 12fc750f6c597095022b3013a869a13c87766ff8771b46c0e94ddb714ab6253e
+FileChecksum: MD5: 51404fae70d99d569aa0d2f91df8a921
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/template.py
+SPDXID: SPDXRef-bb0d9d28765758a4eeb5f50de29d2305d62ae343
+FileChecksum: SHA1: 5c991efbbd581dd5b2e93da396e6e838258666b4
+FileChecksum: SHA256: 121b00706fcb82671c20e6c0692e96181a358bf0886d61674c6391337258e61e
+FileChecksum: MD5: e0116518c9d5d14e94909f4b3dcb1c1c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/template.pyc
+SPDXID: SPDXRef-a5d13621b8b24208593319d9a94ef11f1588c10b
+FileChecksum: SHA1: 3ff7aba30b5a564675c982b8b92fa33d0a25fde2
+FileChecksum: SHA256: 89df6fb5f714fb428a08a185dbe31d37ef0818d94a57ad9f41306c3661f96902
+FileChecksum: MD5: c109edfc4d4768a3adad70bf0802bb04
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/test.py
+SPDXID: SPDXRef-db8c4f1a02aaed82edfa35e6361b0c9afbad9cc1
+FileChecksum: SHA1: 140246ffc3ea60927848f3ac9bc2a852c92c12a7
+FileChecksum: SHA256: e25e878635a3f0cc392e0497a6eb8dbd934732fc3da58cac52ea98b157c7051e
+FileChecksum: MD5: 07828362af6b907bbb8649ebc954c965
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/verification.py
+SPDXID: SPDXRef-84e8af5c3e0a3e9cc8664f272e793b38939abf39
+FileChecksum: SHA1: 55f0c0fb3d7128116f3435fb184c5e2460c83be6
+FileChecksum: SHA256: edd8b550af79002ce782efdfd723c38f866984fa919d5c94980db81523ebab13
+FileChecksum: MD5: 7b9a1a0422093e42e2f68f7682169e13
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/zonefile.py
+SPDXID: SPDXRef-338145b43ee048d7f504a2e2b57f8b376287a259
+FileChecksum: SHA1: 852d7b72857b6ae45392d5494a7b52a715431a04
+FileChecksum: SHA256: 69b4dd7bd0760ed319467935bccdab98ced2aefcdc8ccf23f7a22c9d2932ec6d
+FileChecksum: MD5: 75f2e39ddf0816d15cbf5b572345f048
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/PyStacks/zonefile.pyc
+SPDXID: SPDXRef-49826f776929099c05fb8116d24c11bdb94f3330
+FileChecksum: SHA1: c4962e5c8da34e4f3cc957e261c18e0e959398f9
+FileChecksum: SHA256: 726e9be2b54d06e08d1c7b96cce856dd08fb941688225f01fd9645948889aeb3
+FileChecksum: MD5: f5af40107fe8eea6a6a13b58e77649e1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/bin/get_pystacks_location.py
+SPDXID: SPDXRef-32fba88200c0420e77fc44e45cfe433fc83f5aa3
+FileChecksum: SHA1: 8541e2f6f43ea993a2206b5bb871a1994dcc24c5
+FileChecksum: SHA256: 78e0705993a3bcdb31a87e8e196ffeb86b7d8f083e9a2e55082d5fa75aca615f
+FileChecksum: MD5: de9bbe426e8bf11c9d0058e475c8db9b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/bin/pystacks
+SPDXID: SPDXRef-9b05de4c7af06408a2705d4cd7abd1728276aecf
+FileChecksum: SHA1: c43ac97939925fd62582a3c29b6e2742d3088a4c
+FileChecksum: SHA256: 323704044e02dfdaed6d19e5cb24f485d1dc5a6fa3ab62ede5ec0f486cbd5efa
+FileChecksum: MD5: 505af22894df9d0bb9a2650b95e4d386
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/mappings/mappings.json
+SPDXID: SPDXRef-b35496412cd28890332772c28ceea95e8e396c36
+FileChecksum: SHA1: 30612feaf1c7291f567113563331fc5642e4bc43
+FileChecksum: SHA256: 04b25e99c6df3a51d2aaea94fb8eb6863abc413a58b4f64f3454caa228e192cc
+FileChecksum: MD5: 872f96a0afdf4740e178cdd19c26d5a2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/alb.json
+SPDXID: SPDXRef-8b58be2a1fc164a4771f9a892e39569e9cfe0dfd
+FileChecksum: SHA1: 49119e01a347454ca24374b493e08bc84a949b8c
+FileChecksum: SHA256: 243babcb96ffca4879ed3bfd0941b01ae9cc4fec57ed46e259d694d9e92b8f43
+FileChecksum: MD5: 4d54422ec7a57dac13d86654a3b228d1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/apigateway.json
+SPDXID: SPDXRef-73a6e27232c7851c37f138245c1f130a723324e6
+FileChecksum: SHA1: 3ca6510aaf9014188eb9b55f4f396bab2dea50f9
+FileChecksum: SHA256: 9597e931030bf2ef824f52d164a0da13721ed296c6d5d561783167fd112e11bc
+FileChecksum: MD5: 7645a02483ffc581ae3a88e66fe8f08f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/asg.json
+SPDXID: SPDXRef-4f87538441c04f9bd1130d024979c1308e1852a3
+FileChecksum: SHA1: 91d769179937430094b7ac08db290cb227e51969
+FileChecksum: SHA256: 322a3883a307c3453ce22ffefb506ea53aa4895b663c121cc029a5aecc3d04d6
+FileChecksum: MD5: 5c07b886de132777820e4288caae871d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/asg_policy.json
+SPDXID: SPDXRef-eadd092740606c0cc31736fc90be9e77bc8cdbb4
+FileChecksum: SHA1: 851e9cbe1292348933c931bdd72781525f6240ff
+FileChecksum: SHA256: 3637660fae3d76d0ab4bbaf71ca14c63fc5c45c6b9361d97e615097f132c9641
+FileChecksum: MD5: 959f0746bab619eb87a8d7b7c5fe7e4c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/asg_scheduledaction.json
+SPDXID: SPDXRef-f738cb2f8bc52d8867017485bc7167c969c988aa
+FileChecksum: SHA1: f81afc0c600aecefdddc05f996f289ba0f7cb770
+FileChecksum: SHA256: d806b97f4f3aebbdea1620c2478922952d8eb28723056dd138330af1c0679482
+FileChecksum: MD5: 06417f325f962a56d9d53131119ba76d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/athena_namedquery.json
+SPDXID: SPDXRef-163bd836666149bd09a5330a7bee2cea3adb6d7c
+FileChecksum: SHA1: e9a07db7d1a0aded8e4f88ed0cdb321b9d418378
+FileChecksum: SHA256: 0402348a39d1d837ad3028c387f904171a85a15f9f0a80242fca1ca756e1154f
+FileChecksum: MD5: f5cc2b57584e5eba864223b45be5400b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/certificatemanager.json
+SPDXID: SPDXRef-fb949d8c6b85be98e0e671ec5b483419bc95446a
+FileChecksum: SHA1: 58993d99473e8fdd00301892524e7679c47a4110
+FileChecksum: SHA256: 53d11c466d6929f9cc30f947fe186651bbfb472b5e40a9f896bddea21e3d3ed7
+FileChecksum: MD5: 86b794f3c3fe8250167e3a13ff9fd589
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/cloudfront.json
+SPDXID: SPDXRef-0f437b7ebc15a2e0b8fc8674414147c4d01d6dcd
+FileChecksum: SHA1: ae8b9e53555213418aac489325d19853f04f891e
+FileChecksum: SHA256: 19d6ebf0927161674a1e3ec2b64b7935456f47d0fc5dd1e33bdfb82569c3d90d
+FileChecksum: MD5: 0f9846bc17461ca54c7e50f8394175db
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/cloudtrail.json
+SPDXID: SPDXRef-9adca5aa9e0d4c798eedb70b9e5a33f1a67b9c1e
+FileChecksum: SHA1: adf893a9fc2f1de1bac2255f69b9fe2289cd5b3f
+FileChecksum: SHA256: 8d2f448913945dd4ad3de91d7cbb0511ffee313744a06c3d07ac39754e1411e7
+FileChecksum: MD5: e1fd3afc35cc1a8b610c9cae545d5b2d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/cloudwatch.json
+SPDXID: SPDXRef-dbf9cefaba156122c000eff98f19bfe937839c40
+FileChecksum: SHA1: 06c156af7af945c54aac7b6ba520aeb55fa1e50e
+FileChecksum: SHA256: db05c2c4f0c83527026b7c2ddd0744f1f4fb62ca7a001fcd04678d75e481a4d2
+FileChecksum: MD5: cbf76cb8b35507c9b42e64b1ed4662da
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/codecommit_repo.json
+SPDXID: SPDXRef-6ef6681569a5157422b43384b754315c8032d984
+FileChecksum: SHA1: 332fce04e3a8f355c7de6361831c1524a1f41ddf
+FileChecksum: SHA256: 07b13b5791231520628dc6cacc4a778807820fce51aeb05ddb1de4e2052caed3
+FileChecksum: MD5: c49f3b9dd1213445e9c71745eea6f8f6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/config_rule.json
+SPDXID: SPDXRef-ea309dd5517b80c8da14f16372093c8478568dc5
+FileChecksum: SHA1: 2657d31ad811c89ba77c2a6d56f45bb1f2317dbe
+FileChecksum: SHA256: 5dc604889b58939c4cc902f38de50367f32baac0b293269fe1d2973b54a61ff7
+FileChecksum: MD5: f7628da3b4394f5a3eee054a3b13079a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/dms_instance.json
+SPDXID: SPDXRef-f5d9b634f858d34f8d9a61a562ada66ea0a59db1
+FileChecksum: SHA1: c3545f3d3246ec6fa750e867db4e29f9a2939475
+FileChecksum: SHA256: d6d8f6235fd24ee7543874593e512d7dd6aeee92d7c75a1eb565f4113291100e
+FileChecksum: MD5: ac33541714aa0fe7ed0b557c0f3a6029
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/dms_subnetgroup.json
+SPDXID: SPDXRef-314bab6b56b08a76785f9c7e250fe7581f73cdaa
+FileChecksum: SHA1: 083a5d1ef319b3de9519615b12b978a2a385e427
+FileChecksum: SHA256: ce540ad4f4da64a27139e01de886755a3098ec54d50b7274ed1156f8422dd97e
+FileChecksum: MD5: 903bcd14a7e12577b1368f894b12b9cd
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/dynamodb_tables.json
+SPDXID: SPDXRef-24b21eb55b9abc13cc06287798cb00fcdf26c735
+FileChecksum: SHA1: 6ed54514f913d8b6bdb175295b548a28ade06987
+FileChecksum: SHA256: 77cd474cabbd0cf44fb0c56eaa316b88d6c792a35c6e6d4aea3d9592fb7dca29
+FileChecksum: MD5: 238324e216c39dfe626264604bd26422
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ebs_volume.json
+SPDXID: SPDXRef-649d14db42dde5d3e0cee0d630ca8619b9fee278
+FileChecksum: SHA1: 2711822d8389d775fac04f7ec4dc6837b6518566
+FileChecksum: SHA256: 4e32fb046df38a936cf871341213700babf2cb3ff21b39a156475666193435c8
+FileChecksum: MD5: 40afae16bb014bb8a4a978eb1747cfd0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ec2.json
+SPDXID: SPDXRef-62d24198674ce7662ad91648870cabddc8b72a97
+FileChecksum: SHA1: 968c8b43271154ce7fdf1a7c6cd35d4fd5363159
+FileChecksum: SHA256: 96a7cb0ed2fdab6d32698631e0fb2474d0fed3a1386db40cd5a34a201c194429
+FileChecksum: MD5: 199d0af9e1d4dd5fe078cb3bc89a271f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ec2_flowlog.json
+SPDXID: SPDXRef-a9214fbae27c73b33b2b43b9d5c3f9f06b2294c2
+FileChecksum: SHA1: 4f9c819a578f8695ae5a3757bfa78fe501fd9894
+FileChecksum: SHA256: b9e6bd373c1d711589dca94113bfa951238c56f2a77e49c6427b8214b3e9a905
+FileChecksum: MD5: 792a6115c6e845377a206330db5fcbcf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ec2_flowlogs.json
+SPDXID: SPDXRef-d90d94ce918c748ba82c0496365b89ef663c00e4
+FileChecksum: SHA1: 1ba1c5e04cc4f1c743e38492678e2507654a949f
+FileChecksum: SHA256: 9e59755cb9b6f0bf392f7953f5cd43feda8883aa8905a6b83091166d9203eae7
+FileChecksum: MD5: f269d6057d81b00e721b7cb593b06d0b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ec2_metadata.json
+SPDXID: SPDXRef-c1d4a8418f50105b9b14c023be569fbf4df1730d
+FileChecksum: SHA1: 968c8b43271154ce7fdf1a7c6cd35d4fd5363159
+FileChecksum: SHA256: 96a7cb0ed2fdab6d32698631e0fb2474d0fed3a1386db40cd5a34a201c194429
+FileChecksum: MD5: 199d0af9e1d4dd5fe078cb3bc89a271f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ecr.json
+SPDXID: SPDXRef-2143e9039f2d2964fc3dfaacfbbed17873e8baf8
+FileChecksum: SHA1: 4db027a6cdf5a452550f5204ddc8ca62fa27dfd8
+FileChecksum: SHA256: 898979d67fcd812d1bb092dd9a546ee5be01b6b3247a61f0a20bedb9173e6cf3
+FileChecksum: MD5: 9e46b6c67b4c3a0ff8e92e84c564b5da
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ecs.json
+SPDXID: SPDXRef-24f214080a880d34b420c29e63ca30c339163e94
+FileChecksum: SHA1: 06ef501a8c4643d77cf1de6511ec7ee14a176187
+FileChecksum: SHA256: 87868ea80fcd583a0a24fba33a26bbcdd78cd16a18c952cf28afd76ad10468b3
+FileChecksum: MD5: 19357868953a18d2ff1f30c2dbfdd620
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ecs_service.json
+SPDXID: SPDXRef-dbf6125822e9b94127c2997eb2ddd45a98c9b40e
+FileChecksum: SHA1: e99a3ab2ed7904effa80bcf4e4bda89b8b132680
+FileChecksum: SHA256: 169d82c6ff4a79b0ece615a8e1d729beac6c23b956a67c3485e60dee290e8d73
+FileChecksum: MD5: 5c1a1a385281ea86f9c8d527d5abf727
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/ecs_task_definition.json
+SPDXID: SPDXRef-19b45533b0aa9e83ce291854fcbb3a818439647b
+FileChecksum: SHA1: 464412ad796239d38863a1cd515324ee00a5f01d
+FileChecksum: SHA256: 3ebc39cc160caa5684fc0f5b00279a675d74620178e95f2e1bf4f1d36b3ec35d
+FileChecksum: MD5: ecadcd56a22f50abde441f6ecb858f32
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/efs.json
+SPDXID: SPDXRef-149ce588084577230417371c90f4dd54694626b4
+FileChecksum: SHA1: 054a754d4892aad577be779550c09425838c9a51
+FileChecksum: SHA256: c467e331d178b8308c8c0b48f21617993485d32eb1635f8df6d0ce00cfc67548
+FileChecksum: MD5: 8dc2c320cc9e1741ea773f81ade6653b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/efs_filesystem.json
+SPDXID: SPDXRef-e8647568e1fa993eece2fce924e0bdda1b2a6097
+FileChecksum: SHA1: dad21de011838bd26b3a9de8133cc6577f08f96c
+FileChecksum: SHA256: f11c4aac1228db6d459bd44a9c11116dc192536efcb3776eeda9b07be0a6bbb9
+FileChecksum: MD5: 31d5adfe52a6299dd09b98fc583e57e8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/efs_mounttarget.json
+SPDXID: SPDXRef-f3b5b8e50dbee5720a32c43f7a2d597cd4ebbb88
+FileChecksum: SHA1: 72b289767118c0aed70ffbf6949dd93c2cf7195a
+FileChecksum: SHA256: 1a86cf2df3aeac907a7976743ece07c72b7e75f2e5afb7c32e55d47b2c6a2a49
+FileChecksum: MD5: 074e1cd87129d06e075b476b92c582bb
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/efsmount.json
+SPDXID: SPDXRef-17ce40b39d0cd418917ce14f10c74fc4034a4af1
+FileChecksum: SHA1: a6d4db9db9b2ca17ec5220f60666f88b391bc969
+FileChecksum: SHA256: 6af9fa9a15d246d275b46ac8c7d2916fc50b38a736fa6a9841fea951be4a2ef6
+FileChecksum: MD5: 4f82827486e98bafeb95e85025634d54
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/eip.json
+SPDXID: SPDXRef-b4a279b57468b77ea90b61d6b4efd3f5e03ecccc
+FileChecksum: SHA1: 2bbf07b0157ba3459bf6dff8918f84701a1b6ecc
+FileChecksum: SHA256: 654e0e36cc618d93e93381725d76adf407ebdcead6deef029ef4f20a26b899b9
+FileChecksum: MD5: 1d0f21d5779347a201743e19f0e281ee
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/elasticache.json
+SPDXID: SPDXRef-c1d2b50512eef40b57440a5b04dfadd9ebbe7f43
+FileChecksum: SHA1: ee2312bf35f0b8a3bb2b5cdc0646c61c530cde86
+FileChecksum: SHA256: bdf44e66342219552710e6e4c5034a80ba5315e4931d0cbdf1cb072632f2bb83
+FileChecksum: MD5: 40759b722c572092d09f3b6cd8303cac
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/elasticachesubnet.json
+SPDXID: SPDXRef-cb64efa4f9496d35fd9fd6e106933bfc296511dd
+FileChecksum: SHA1: 756d8f47051a7568464a2725f4e0d87492247c65
+FileChecksum: SHA256: 4c3178f57c8dbdccefe8f8de3c0e79582f13b169aa9f5e2d3af786988ac02a89
+FileChecksum: MD5: 534fcc0894ed6c751393377fa6926b24
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/elasticsearch.json
+SPDXID: SPDXRef-a1beba9f88b6eb88d1dd1b20b5f09a5e9e57b686
+FileChecksum: SHA1: d7f2bd275fa5430692ae74ce3dfe47f2e8899988
+FileChecksum: SHA256: 9063fe5f9fb7934976cccb628b5f0dcfb5241b3341cb10cc803c569cb0bfe494
+FileChecksum: MD5: 746604409402241dddb5de79fd841cf1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/elb.json
+SPDXID: SPDXRef-593c8980161488929654dd4e988464a614ce2947
+FileChecksum: SHA1: 1aecaf80beadd5f6c73956da5b6cc0b1ba9e9d64
+FileChecksum: SHA256: 97ac09fe5e18dd22a57e7c2fdcbb57b69b815bf87146f89f649524f9f5727826
+FileChecksum: MD5: c1008553e8c09f54d4e6e75c9076966d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/events.json
+SPDXID: SPDXRef-66afd20990e95df3c11a32cd22ec97ebdd25d22d
+FileChecksum: SHA1: 88324a09b336fb59fad9ba795cca1dd7a64a2a6e
+FileChecksum: SHA256: 4f86c082bfd088999521c4a3863fcb980da0b8409b73cfcd9897444af38a0ee4
+FileChecksum: MD5: a138d70f6fa1b9bdefd08592be64857c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/iam_policies.json
+SPDXID: SPDXRef-e33ed8dc07448674e7361755ca26e6d4eaa94cfa
+FileChecksum: SHA1: bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f
+FileChecksum: SHA256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+FileChecksum: MD5: 99914b932bd37a50b983c5e7c90ae93b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/iam_roles.json
+SPDXID: SPDXRef-ed7db0dfd0b69f696ee4fa375930d6815d925c90
+FileChecksum: SHA1: 5ebe6339fba8b9e1b56c9d60767795f69a7f7a66
+FileChecksum: SHA256: f6c928438111e49e3b8de23a4242c0d595cb9a15c34f963fea149010bd2c3ca2
+FileChecksum: MD5: 6155ce245df0191c616255af9ae4db15
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/iam_users.json
+SPDXID: SPDXRef-ba2e96cecbf8d86665f696fa64eccd41a750cf3d
+FileChecksum: SHA1: 6ddac5d219eb8b6f849384e33c1d7b5de86c68c5
+FileChecksum: SHA256: 5fa9d3ab1cf1c6e36e71b31465b8cbb85d4add25bb5272c45c297b5e33e4ea38
+FileChecksum: MD5: ffb2b8d94bfe2a1498437c8c75404059
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/kinesis_firehose.json
+SPDXID: SPDXRef-d28771b935039bb8e511d278caf0cfa01a7e0e02
+FileChecksum: SHA1: f16d06f33e7e161f4daebe034f271e9c47b31245
+FileChecksum: SHA256: a471cc36d32b7bede82edbd1801e7dc1cb80def40fec85b078e50bf7d5b24325
+FileChecksum: MD5: 2ac28239c4da8ce65cb6829a0215106b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/kinesis_stream.json
+SPDXID: SPDXRef-848a6f49dd3ea2718467fe2b6568e366769c0b62
+FileChecksum: SHA1: 422731fd656055859f6642db69538bc157cea42e
+FileChecksum: SHA256: 3d680954527533414adde072c4ef658022b039938f2e26bd2096cecb51386796
+FileChecksum: MD5: 6987c4b90c38e1a131b1e53106c58204
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/kms.json
+SPDXID: SPDXRef-8622dbaea45ef90f515c9782541a8519074e836c
+FileChecksum: SHA1: c206d111574b7a4e863612722989e3ed0828308c
+FileChecksum: SHA256: a453d1764bbad46de0f5bf01b608ae9de2264de54ca999816a34e86cfe06b2bf
+FileChecksum: MD5: a141ba97c2bf4af57a220dbf3149b085
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/lambda.json
+SPDXID: SPDXRef-5547190e9f36ab21952f8261801917bee21183ff
+FileChecksum: SHA1: 1bf9c4f5d65a960d116b388bdc3f12439776141d
+FileChecksum: SHA256: 29ec00d0ff3abcb3113e45beff21ca917586fdb98d8d5438f91f79b05d5899f4
+FileChecksum: MD5: 11e3a9d9c59c48edc13861c46b773329
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/lambda_events.json
+SPDXID: SPDXRef-c3f9344574483163a3204c7cab6683ed55dee7c3
+FileChecksum: SHA1: bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f
+FileChecksum: SHA256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+FileChecksum: MD5: 99914b932bd37a50b983c5e7c90ae93b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/lambda_permissions.json
+SPDXID: SPDXRef-7a05c24ea0faac8c7ddeb3a9cefaf48671427f39
+FileChecksum: SHA1: bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f
+FileChecksum: SHA256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+FileChecksum: MD5: 99914b932bd37a50b983c5e7c90ae93b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/launch_configuration.json
+SPDXID: SPDXRef-e122c3930e82f586d5dbb61c850f8578ea41285e
+FileChecksum: SHA1: 4d966c4bf0f993d4b56d10294416911c1d638af3
+FileChecksum: SHA256: a5d905d75935f94b9dc4e60b22591aea99a773a35493d918ec39baabceb148de
+FileChecksum: MD5: c3e38e51b0001a1814995ddc6116e596
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/logs_group.json
+SPDXID: SPDXRef-2e7eb009fb134b80028eb84a186393bb2fff049b
+FileChecksum: SHA1: d8f2b82669d0122e3ca978e161a2a3e588056e39
+FileChecksum: SHA256: d0be7b7bc5b188789c9d6483a71c18b88b34dd21619eebcaffbc49b95095540a
+FileChecksum: MD5: 98acc53f51ff09f84a98deac6574c5e4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/microsoftad.json
+SPDXID: SPDXRef-ad151a079151426af42ba904e21ce30163bc299b
+FileChecksum: SHA1: 6793e0e2519e483988f31212d287f69f4d258515
+FileChecksum: SHA256: 7b542cae42aee3bb8b3711a62c1866215158ac428f1dd4a122fe575a92a5faa4
+FileChecksum: MD5: be9c8bd64e4aed7e83655996a91c03c0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/network_interface.json
+SPDXID: SPDXRef-25be0903fb2b078e88992af0bb3a088c2bb80094
+FileChecksum: SHA1: 9637b16b91ae405e8e303c20df4000efe924800f
+FileChecksum: SHA256: b6427dc752ac94ec57aa1980e4112fb0bd965129530d33f9ea5ee971686bcee1
+FileChecksum: MD5: 977df498235e07fc90346d89b87fa6bf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/nlb.json
+SPDXID: SPDXRef-58969b044b7a7d57f41b0fdd59a9eee40591978c
+FileChecksum: SHA1: 6d67210f776516360ab4d69bade04d1ecdf5f515
+FileChecksum: SHA256: 571a9c1764933aac066853879c5867f038f670677246a5e5839237c0d4b066c0
+FileChecksum: MD5: 2b62f2a78f5b625fbdfd00b562e30bb2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rds.json
+SPDXID: SPDXRef-99c42718d25c933e6ee7f6f65e5306d23b7191ff
+FileChecksum: SHA1: 74d9d92afb596cca3c0cebb2615b0fee667d8e5a
+FileChecksum: SHA256: f7d724eb60bb7f1928f84286b73ca2180e6b68b749279d0874209fbb03453d16
+FileChecksum: MD5: 9060366d25028aa7abd2c5fa1f1f2351
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rdscluster.json
+SPDXID: SPDXRef-4515f3907a696c67ee79b4aecfd1293a21dfcca4
+FileChecksum: SHA1: 6284c527cd3529e24f599bf656edd1dfc9cf79d3
+FileChecksum: SHA256: c8ec2572dfa26e6c09da12043bd770d6965e1ea2eb4977611395d1003695a889
+FileChecksum: MD5: a8487b3af6e6d26f28ea1a53297e7fa7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rdsclusterparamsgroup.json
+SPDXID: SPDXRef-5a016aff79b707b8fe13060a012bfec6ccd976c4
+FileChecksum: SHA1: fc3345a336d83239ad2db7580d4b210fd60253bd
+FileChecksum: SHA256: 47ff66fe0f884e203f6bd13dd84a2801d497081dac1df1c28c0229a850a06c18
+FileChecksum: MD5: fbdc75938494ed763dd90b52f4ddc899
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rdsoptiongroup.json
+SPDXID: SPDXRef-8e122169bf67ec210909a66a1a8ce7207566dbd0
+FileChecksum: SHA1: 4c556df31813903b3e33754062c3699b4191bf91
+FileChecksum: SHA256: d7a9a4c21a6c3461d2afc658c7181a1e8e0495e34e4057e1a7f0e9efedf2949f
+FileChecksum: MD5: 06c47bfc9efa6bab5e3147baff2cf271
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rdsparamsgroup.json
+SPDXID: SPDXRef-cb1ebc2bb82a0b405028a2b3b6b7c5f20b4bf9c0
+FileChecksum: SHA1: 9a39ff9298aac0078f3551af205031f3a9e52abd
+FileChecksum: SHA256: a41c2b13c973bfd736c38d89dc45ab3fb3d2d28469aed4358f5c018c2ed7c702
+FileChecksum: MD5: 767b5f5c12f4558068476a26bcee6c61
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/rdssubnet.json
+SPDXID: SPDXRef-ebdb2ad74939b518cbd8c26e9626c868601f0b1b
+FileChecksum: SHA1: d9a1095d26e1da6f5bb61f77286da3a4376d2cf1
+FileChecksum: SHA256: 30752e7dd7d71fb6b1ef62c170699746458add7c87a14839b765651a796d1429
+FileChecksum: MD5: f804090fd523ff8e73322678b14048e3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/redshift.json
+SPDXID: SPDXRef-83473377b4dfcdba05336db5539a4e95acfbf78a
+FileChecksum: SHA1: 641263e6ef2f9e1b1acccf0d3340639cd5444163
+FileChecksum: SHA256: c60a11207a3a30962aa126eb92567e83d683fd6307cd99b10e82a73188f600f8
+FileChecksum: MD5: 0fe77f31e552154bfa90492e5d38b248
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/redshift_paramsgroup.json
+SPDXID: SPDXRef-9756b7241f476942d0e21d6a9dd906ed242dcdb0
+FileChecksum: SHA1: 62dfc269999571f9546b31a41a365ede74abb81c
+FileChecksum: SHA256: f6318b367a88208ee0babff9fd35b99a5fba3f801dbeb9d03f763f19d4c4085d
+FileChecksum: MD5: e865f3c128e4003c3fca6f614fd8ea4e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/redshift_subnetgroup.json
+SPDXID: SPDXRef-b3a7017b274522282dd62b278902a1e5adfb4770
+FileChecksum: SHA1: db4660303bf2052c0a5e1e98f8da9f7100fa1e88
+FileChecksum: SHA256: eee66f94e3ef8466a479fd2f18781244edfe0c0b9fbf5738391a9f5f2fb3395a
+FileChecksum: MD5: a3af7eb1bd5bcf9e6bbe88dfb9652092
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/route53_record.json
+SPDXID: SPDXRef-c5a7ef58f87365e990346b05e7cd24d91edea1ad
+FileChecksum: SHA1: 1b14d7bce898992e536bd2fc14e384cd47c45433
+FileChecksum: SHA256: 7647b6f7f8e84f7d5c2986388fed1fe1b0d9b5523f6b2e545d207bd3a552b2bd
+FileChecksum: MD5: b6ea8fee7912d5e9e93b8e5d812ca8af
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/route53_zone.json
+SPDXID: SPDXRef-25d7f76d4083af9494ce6dd067af334f0d1d9054
+FileChecksum: SHA1: 202f6507ef6792a56f4857582350380fcc791e17
+FileChecksum: SHA256: 0a0b9a3582b5e3b1580a518fa9c6a062bddad83295334326aa1484e3737204ad
+FileChecksum: MD5: 891de63760ecd1da954c4d85dd22a761
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/s3.json
+SPDXID: SPDXRef-09f3d97b28ba230ebd2336d737360afc7818ba19
+FileChecksum: SHA1: 9ca9052aa0776ded2e3add3c72b66e06ed5f6c57
+FileChecksum: SHA256: 14a67d1cec30824beed081ffc5d0ad9503d28ba602d0fb1e1b01e1ef3e488d7c
+FileChecksum: MD5: 806c2d6d72625ac2757e7345ef2ee33c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/s3_policies.json
+SPDXID: SPDXRef-edf9f05a6a83aab910d0051d8ab7d08b514580b3
+FileChecksum: SHA1: bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f
+FileChecksum: SHA256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+FileChecksum: MD5: 99914b932bd37a50b983c5e7c90ae93b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/securitygroups.json
+SPDXID: SPDXRef-f4a39d625a7376f8ed9eaf304afefd126a3dbc98
+FileChecksum: SHA1: 8a38cfd805b880a75306508e936a462718a4e310
+FileChecksum: SHA256: 1f86648be0d6caff718d8c16158b9200caa509b628eb248204d8c0d17b50aa8b
+FileChecksum: MD5: c1ad7262cfab7b531d6cec78e09ca6ea
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/sns.json
+SPDXID: SPDXRef-2559e032717fd98d39bc5ea3a33af1c76321ab6b
+FileChecksum: SHA1: 83a1cb3b09f7cd6e5486d8e63616a7b573b47966
+FileChecksum: SHA256: 17310f4387af1d77227f2135dd82eb036da532b8a445deb54724c06280eda71f
+FileChecksum: MD5: 2a737fdd1f32e1c555abae63d8d27e22
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/snstopic.json
+SPDXID: SPDXRef-34505c43e22d0e341953e9f42c555ad1f980cf06
+FileChecksum: SHA1: bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f
+FileChecksum: SHA256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+FileChecksum: MD5: 99914b932bd37a50b983c5e7c90ae93b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/sqs.json
+SPDXID: SPDXRef-90860822172d03a9191085496fe27e6322838de4
+FileChecksum: SHA1: 62518c981203382bbf056f66afaec9db4d7070b9
+FileChecksum: SHA256: 4f78554430fefde0cce852760ba335559bdfd3d3c4001afe59f3c065f080f9e1
+FileChecksum: MD5: 6a91f9235c120284208ee175b0c56cbf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/stepfunctions.json
+SPDXID: SPDXRef-8f41da4ba93d483b38ed40a8019dd6e367e23ce2
+FileChecksum: SHA1: 47242d038eeb75cb2ff6a041df3e5152250786a1
+FileChecksum: SHA256: 4b6947ffaeb8400c82e0d954f43ee9b432ec32d06db67edb51447d7d9ef34f26
+FileChecksum: MD5: 5bc56de94483cc300f3263a83c834edb
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/stepfunctoins_activity.json
+SPDXID: SPDXRef-100dbaf105df395b08e85c9f1f73d9155b239ca5
+FileChecksum: SHA1: cc1dedb92cb7c6359689696327b3d55114ec8282
+FileChecksum: SHA256: 991ff4486f690e1af0c6b14811fc007f16b19b565f897da43e28c6a7685f39ae
+FileChecksum: MD5: 1f77aa838c3b75248ceb530f8e89d889
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/outputs/vpc.json
+SPDXID: SPDXRef-25f09ce70d3781f0826e31ea1243b29a2a111653
+FileChecksum: SHA1: 3edddb23b1b72ea9cd3c50bc3c9e3439d6857fbf
+FileChecksum: SHA256: 210761c96147f63dfa1e094af5965e84ad4ef71b8c188b21777431c5e9bbc461
+FileChecksum: MD5: 7f35c32e6e1163547d944158f3130fa3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/params/params.json
+SPDXID: SPDXRef-94c0415798b661ab723602061ad1db7d447e07f0
+FileChecksum: SHA1: f28e395c73737bc35c9a941c47597c437e8dff4e
+FileChecksum: SHA256: 51b0c3a1b4ab244e9f0cb64fa2688237431e40eea24375a93a8a6d6641e315e7
+FileChecksum: MD5: c3b964de5712534468347541bdac66a2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/alb.json
+SPDXID: SPDXRef-ac49086f2b8dee57704163af29d2a07d1c1890dc
+FileChecksum: SHA1: 7ae0b2aa20c0d0ff7c7720a429601a47df992c7e
+FileChecksum: SHA256: c67c355a8cc1981beec68168768f25b5406761221d89be71ad2172bccf05b362
+FileChecksum: MD5: 87b0b06414890f7536ae45dac4954525
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/apigateway.json
+SPDXID: SPDXRef-e8a3290b66ae11f2b6f030c76766069cfcf0f74d
+FileChecksum: SHA1: fc004b85b1f2bc143cef4c691ca3488984884ac5
+FileChecksum: SHA256: 1e6102df7be3d98e8fdaffde6bbd8e3993ed2510cf7f187cd7e7b316c4064ccb
+FileChecksum: MD5: 17b023744464a341930bb2a85104c243
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/asg.json
+SPDXID: SPDXRef-eaadc45ad69eab2f4d3aad2f38e79b416a19b6be
+FileChecksum: SHA1: be90864b1a1589fc7d1af961d336c7d2af184ee1
+FileChecksum: SHA256: 82ef5a2514de547cc481e56b209b08e077e5ba44d4002ba78353b3d770fabc07
+FileChecksum: MD5: 188ab7d075d2987e56967df1505ded65
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/asg_policy.json
+SPDXID: SPDXRef-71d21381c0f3331be1d1208ab60c00516d0a6462
+FileChecksum: SHA1: 20d05f33103e6f8a8dfcbf68d16dc708a397274d
+FileChecksum: SHA256: 7473be22393ca3f5aa5bd8e6301af827edb21c13050495b5ce806a52656c0a71
+FileChecksum: MD5: be35c490f07f6ddee6507ce4839434bf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/asg_scheduledaction.json
+SPDXID: SPDXRef-d3b02966d05ea696f9596f2d60fe943b18331941
+FileChecksum: SHA1: f3bef2bddcfcf94bacbea548a39645f8fe25af46
+FileChecksum: SHA256: 87f7102225a6ae8b68e0192b72ff3d8cdd97a563209b8ef5fbdda135a7ab7395
+FileChecksum: MD5: 876ca54c7dd907a7b6378aa73283cc0c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/athena_namedquery.json
+SPDXID: SPDXRef-0a80a6b030cb7eeda5d207195d75eed95fce0d90
+FileChecksum: SHA1: e821f8baf246335ea805bebd2cc693d144ef49a9
+FileChecksum: SHA256: d55ba3b0c5b2cd19e16ea34b372f64656e1326c6ef7088fc6aea0f9f6e38c7fe
+FileChecksum: MD5: f0a7d3b814c5f2a32146e6b5bdf8fcb7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/certificatemanager.json
+SPDXID: SPDXRef-3548fdaf3872604e99ff6252ec03b8eafd9bd4de
+FileChecksum: SHA1: 0423fae5153771287e5a7d733fdc5d025031db32
+FileChecksum: SHA256: db09858abcba2f5309b796aac382b8ac80381fc9de54c7b82184345d31d95872
+FileChecksum: MD5: 343215658ed3bd207a4da40f3393f4c0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/cloudfront.json
+SPDXID: SPDXRef-9b41127af7805c83bf251ece0664dae80596423d
+FileChecksum: SHA1: 906318a89b0bf03cf0231817340494ca0c420dc3
+FileChecksum: SHA256: 7e9fc814c9311ac307a4c5d6d6c643fc993d28d967a62870e9798b7bc5695b7e
+FileChecksum: MD5: 02c0104bc3725c7a4a998b73ef482d75
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/cloudtrail.json
+SPDXID: SPDXRef-85c59257d605dc884f90fe47c8c9e46657928d25
+FileChecksum: SHA1: aed8bfa3d6b9ba05a2c00c0092aeaef72a681797
+FileChecksum: SHA256: 817381bb01ab8f2bf482bce1f173f21eb26701033f3c729a70ef0cd102b4ab5a
+FileChecksum: MD5: 4e4dc71a90f97298c6e802056e02eef0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/cloudwatch.json
+SPDXID: SPDXRef-2f668ba8e96429c153e6ac806a5d4fe371e7e90b
+FileChecksum: SHA1: 332aaee61b7cea220688965cd6869de82bf666ed
+FileChecksum: SHA256: 8ae676f83cbb6d475c828c0d09b554c4e3c66885f063364f122897dbbbc3c752
+FileChecksum: MD5: 936a9e07e7178e5636d2be501991015b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/codecommit_repo.json
+SPDXID: SPDXRef-64cacfa94e9e50cd113502b957a07c4e38ae6fcf
+FileChecksum: SHA1: 8bfbc64298debb835bad751d9b86f5552ba6b69c
+FileChecksum: SHA256: ee532c0afa6ff6dd09ca24a1ff91f161085f3558c30b26b6404b552b85e00e52
+FileChecksum: MD5: 9c805e58f7ee2716cf6dbdb28f87e0a9
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/config_rule.json
+SPDXID: SPDXRef-ff25bcbea8deb68fcd555f3de06438e27cfd714b
+FileChecksum: SHA1: 6873a0bba2956d8477dc02fb8a0e8e836300c94f
+FileChecksum: SHA256: d35c311c219fd2fd4d27c60af33666c8fcc1ca0e5defc87b2abeb1127410a815
+FileChecksum: MD5: d2f66ba9f6c06ef738ed06d848ecce61
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/dms_instance.json
+SPDXID: SPDXRef-d5ecad96ea5338a8b793d3e1048e3cb1d0b59de0
+FileChecksum: SHA1: 8224fa409bd07156af0bce7fba4d2c323e33bf9c
+FileChecksum: SHA256: c9cc7a374f11213bdc2709c8d4ccc096774078187c036f21135a3d7ba9780320
+FileChecksum: MD5: e89e3ef13aaaa84eb105ccd5ee94d2a6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/dms_subnetgroup.json
+SPDXID: SPDXRef-d9f02a716975c42f00ca139dc05e696fbba2ccaa
+FileChecksum: SHA1: 5edbb015259e1c02d0eb511ed92b7b4994215d9e
+FileChecksum: SHA256: 1b83150ebabe9bf5d44d3b0353961cce277b4a96e60c8fb1e12042eb83becec4
+FileChecksum: MD5: 4e96f8c2a4016db9f612b850ff0aad3a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/dynamodb.json
+SPDXID: SPDXRef-22e29e557abb247b3a58b693b610f0debc784da4
+FileChecksum: SHA1: 1a76c9fd2538a04d79d9edcb67e4333347b3ad5b
+FileChecksum: SHA256: f9b51159c6b5ab25d77d3eed5fd0f6981f8a200137f3eb86049ec826d8b2bac5
+FileChecksum: MD5: 648c48cec4547671943251fc902e5c82
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/dynamodb_tables.json
+SPDXID: SPDXRef-fb435f15f388fad7f77521289acc5cbdb744d620
+FileChecksum: SHA1: 93fa832d9e0d7b6c5747e93a1c41a7f5dafafb09
+FileChecksum: SHA256: b07dd8e2841627f262c6a11921f316750f6559297d42327624179e7785389136
+FileChecksum: MD5: d4a6a57d41b07f47808e06f02a274abe
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ebs_volume.json
+SPDXID: SPDXRef-652326eb2ebfbd918345e259227eaabc8bdcd043
+FileChecksum: SHA1: bf7967ab74993d97fc5e598075a5d91356ae2cb7
+FileChecksum: SHA256: ac0f09e04c56aa0934504bac1c46c8ae82bf0a2930b23e779e77dcd252e7b5d3
+FileChecksum: MD5: 4d752a073aed2176de6954f1d0a5da3d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ec2.json
+SPDXID: SPDXRef-36165e358d5ce54aff62f4a88101dedf9f42a868
+FileChecksum: SHA1: 15f57173acf20670d61a0eb58f6b7647734863b0
+FileChecksum: SHA256: 80cb1ee073f42aa30545b78f3263591599c6976aa224210b223682885c6f9dbd
+FileChecksum: MD5: fed99cddaf7c851d987c9ae966f0d628
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ec2_flowlog.json
+SPDXID: SPDXRef-5a4fd1020aa923f3bddb04f619df979113b20a22
+FileChecksum: SHA1: f8a6c9ef63c33eea4a67d6af44309c93dfcfc648
+FileChecksum: SHA256: 155979be712f79f17be2a23596b154df505f366e032d8194050169daf55c23ff
+FileChecksum: MD5: 8cfa1c59b4405a05a21144d8a254217b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ec2_metadata.json
+SPDXID: SPDXRef-94d4c52728561d87494c1e1ce75dec3823ce7049
+FileChecksum: SHA1: b1729b836171b9bc0a1b22d7fbb0ddbe9a39a446
+FileChecksum: SHA256: 4525fb7865eb3846e9544c406f6b36774126277ab7bc50067fe12f8707788da2
+FileChecksum: MD5: 3fa790923d39642a001f136d9d137095
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ecr.json
+SPDXID: SPDXRef-c5d649eb98e9840d975e8de4010a57b4a262667e
+FileChecksum: SHA1: fd26be0dba5d4229672c4484c742eba41643cb50
+FileChecksum: SHA256: ec6285b83cdf86308a3e4123f7b53170207b230f98b0ae95fb1dad089e021e56
+FileChecksum: MD5: c0c77d46268dfa1d7d9946d65d500fa1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ecs.json
+SPDXID: SPDXRef-a652cacd25fb49ecf48aa13dc4945228504028a0
+FileChecksum: SHA1: c4d649e6243e91247b37f6396f23999aaae8941e
+FileChecksum: SHA256: 8475b5c31b8fa21dc72ab4a03d6361b163b8217805734c0542086eb08dc15fa2
+FileChecksum: MD5: 6765c22ce957af0b56b3ef0cd29bfe1e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ecs_service.json
+SPDXID: SPDXRef-0f7f8dd2988aa9227f5c670851d2ae02d223bdc8
+FileChecksum: SHA1: 6e9c8ce8dbc6c521dbb0c1518870951c1329d597
+FileChecksum: SHA256: f8e971097258de3b05efcd3f46cf809d7a13c9ef2d4ddaa474e870e92281752a
+FileChecksum: MD5: da65f5b08af84686360d230220059fb7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/ecs_task_definition.json
+SPDXID: SPDXRef-797c717e34b6013f517513f21f23876fa21adbf2
+FileChecksum: SHA1: 0482b72243b724bb1d52fa863f6d770118b5ca02
+FileChecksum: SHA256: b51557c2be808814a6120dc25f89b3bbd3497b54da94da2d73a8677b4bd288be
+FileChecksum: MD5: 059be7adfa85a273a5b7591eadef8b78
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/efs.json
+SPDXID: SPDXRef-3abcd7d6969986db5f8e04e4de5ea13b1b6cc726
+FileChecksum: SHA1: 3b4d6bac3b584c94c9cee11cff845c705d2ac877
+FileChecksum: SHA256: b3a0e2675c30f8710eefbeaea4d10c82419a5095c79db69f16eb3511d8018215
+FileChecksum: MD5: fb370a29c50b7a32da3ffd87055f74db
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/efs_filesystem.json
+SPDXID: SPDXRef-b41f83a770c36281f01ea700e4ba3d4ee404a1cb
+FileChecksum: SHA1: ee6a3496f7a0710482d96988c74a4cb2eb118cf8
+FileChecksum: SHA256: a56c68fcaf59e509f9adf15c8596452035bd27485bad450ee87f30af6418b5bf
+FileChecksum: MD5: d132237ac328fe7a318694b5211ae97b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/efs_mounttarget.json
+SPDXID: SPDXRef-1b700e7dfc804e7fc66f46f78036c3b3a5eedb2d
+FileChecksum: SHA1: 087e109600e6d3510d8a60c8609b41b5cb8f3409
+FileChecksum: SHA256: 0ace8f7847cfba3670bafee7fc40671ff0bc7d37bcef5052b0503f55ead549ef
+FileChecksum: MD5: 0aca63dd6516a17ee568d591115b0ca3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/efsmount.json
+SPDXID: SPDXRef-7c4a34e4c736936893568c3a9914e4ca888abd3a
+FileChecksum: SHA1: 7e10552fd208502524c162f8652b918cd7c8cb08
+FileChecksum: SHA256: 58b97b6e614d9733a033115f01b5569055eb64f24c363ce2d1aab240b4071387
+FileChecksum: MD5: 515d8df457d9a7535801208a052ea7c9
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/eip.json
+SPDXID: SPDXRef-9a8f1f1b5af19332c6dd9a8f84e34dd4393c0a36
+FileChecksum: SHA1: f97aafed5671fe26bd5a3aa77a39a3b2c8d1bc14
+FileChecksum: SHA256: cc6a995172ebd693b26de37f40310a3d16c664b0decfed86326f2b7fe5f4c333
+FileChecksum: MD5: ee1407eb1b588a71265dcdb5524a21d3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/elasticache.json
+SPDXID: SPDXRef-85ff9d92220baf507d24d0a33875fd6c61bffd3d
+FileChecksum: SHA1: 12be40f53176a59c0c6595903c6d730a406c1fc3
+FileChecksum: SHA256: cf8f452f46b06ae8e3259a72dac24a8a7e632a2daab72fc5f8f2cae36b85615a
+FileChecksum: MD5: 9dbb53f3781d6021a160a3c9791175a8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/elasticachesubnet.json
+SPDXID: SPDXRef-0b186d510b895b58da021c2e4718c9131070c97d
+FileChecksum: SHA1: bde9efac9ee2a35a5907ff49f8f174d42e9fcb93
+FileChecksum: SHA256: 5509dbacbd235a8a5fe3148876e6118e1dbede293f77bf23c3a8edadfeeb8bd7
+FileChecksum: MD5: 8aee9f4a3811051f6b101a9a266e6f2e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/elasticsearch.json
+SPDXID: SPDXRef-bc8d1b1e7304ee3cc1352f8f593d2bcbe9dee68a
+FileChecksum: SHA1: c64b20887fc1577a3218175cb4377eb982fde759
+FileChecksum: SHA256: 372197418ae391c3ce6b2e1b594f276f8eef4c73824928345ed98ecda924a73c
+FileChecksum: MD5: 552ca61ee680f0b929c1fe53832b5192
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/elb.json
+SPDXID: SPDXRef-e6c36355564259a7752a99d54bc8e509ea2c5fad
+FileChecksum: SHA1: 275d02ae8b6307aa1e0cdb533a7775599624b487
+FileChecksum: SHA256: 446c44d3263f6e86a46d06d10dfcb601e335c8d96ae6421479b33e444df93d42
+FileChecksum: MD5: 3bb78806d388b4d58955f8a8917cda20
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/events.json
+SPDXID: SPDXRef-daffbbd5c7c1e049dffe5b4102e213d6b70c254d
+FileChecksum: SHA1: 3d24f3ff3ded54e205ed9c73e0516640f812ee59
+FileChecksum: SHA256: 6cc8e704fddfa60bac65748aa9886fc24ac5ca51510497ef1b1d4c7339cbbdb1
+FileChecksum: MD5: bc88e6476bbbd87b40af23a6f962a240
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/iam_policies.json
+SPDXID: SPDXRef-09e42d9ad1218071664a4ddabdae4023504fd076
+FileChecksum: SHA1: a50ab321247f7ed281826832edb053bfd645fa02
+FileChecksum: SHA256: d5ce254c9f4f45d2af587d9591a886586b53301a7414ce6f435a2226acb4b6ad
+FileChecksum: MD5: 0f3400cd5445b7e00f2527b8ff71a7f6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/iam_roles.json
+SPDXID: SPDXRef-8f0499eae5b073389155b05a80ca5dfd5826017c
+FileChecksum: SHA1: ed4124690e148ef1a6d3b1c93655b7997df25c28
+FileChecksum: SHA256: aace278dcacb55e0e487a1e9c8035485aba7a580aeed1d5165c691feaad2889e
+FileChecksum: MD5: 35341b6eddd2f69cfd212aea68412a3a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/iam_users.json
+SPDXID: SPDXRef-7ad6a540299f2a16e8ddd0eaa2ebd8cea62c3116
+FileChecksum: SHA1: 7699601a091b766591654b73367270aec0c9c550
+FileChecksum: SHA256: b005e334f65fcbe92fb1179f424fd9f8028d4ce1feb7f233045fe0029d7f5d46
+FileChecksum: MD5: 5a673437053f13c323e61c477dce7c83
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/kinesis_firehose.json
+SPDXID: SPDXRef-351db64f7af0d3ac1b249a34dfb8467c882aa1bb
+FileChecksum: SHA1: 431fea917936aee78f42e306484fe47fe3c050e6
+FileChecksum: SHA256: b7cde6806453a177168cce1ea0470ab803a4589e64d00172a8dbd5b517ac075a
+FileChecksum: MD5: 98a053106663bde9b98c3541b26f29ad
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/kinesis_stream.json
+SPDXID: SPDXRef-95432204c37b824a8a07fa1d0f0f5adb0be4c103
+FileChecksum: SHA1: 279b2fbd9722fde7eed790b0a14880e70434e022
+FileChecksum: SHA256: cc344124976167f894ba01cb115aad1bdb136914bac29b09b9dbf95f572b18f9
+FileChecksum: MD5: a0f134fc0f2d1119d519e3f9f81a9568
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/kms.json
+SPDXID: SPDXRef-97e02ddf4cc930b70036abc43a23885ea61822e5
+FileChecksum: SHA1: 77c87b1a97e665189777e58392e954d129603722
+FileChecksum: SHA256: 8735d9261ee65bd58e7c76a7a9ab30180b85f8af95258b8283605487195339ea
+FileChecksum: MD5: 069c9b78cc100a60098ecfcc3bbc5767
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/lambda.json
+SPDXID: SPDXRef-553909b68ba4767f068ad9dbd67c2a3f1f7c6857
+FileChecksum: SHA1: acc4ae1c3327e66a4a35a46a641303339ac0fe14
+FileChecksum: SHA256: 5868667f48ed060d5e67a5f26862c4be268ca48e827d7a37a6b13534582ee6cc
+FileChecksum: MD5: 54577ca14a851045bf4e935483d5110b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/lambda_events.json
+SPDXID: SPDXRef-e02927964550178c9e253794de0c2d731e9b8c43
+FileChecksum: SHA1: 708ea8948f6bd39317eb8ff51e5252b58a88a235
+FileChecksum: SHA256: 4200a14ef20d0b6f799711b8be8d27ab4c71372ab9fd71c852c7e262c5a27c72
+FileChecksum: MD5: 0d6c0da9095da51f3a9676bd2fb890ad
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/lambda_permissions.json
+SPDXID: SPDXRef-f981b66fcb42b50b63857702d789d3b63a1f6999
+FileChecksum: SHA1: 8824b5b385dc204ec427d4f1e7d6eb32029d5f9b
+FileChecksum: SHA256: af19db413284062cf6d37e0143f9d1f59af7f493a318d1d1c7ae9d0da7117eab
+FileChecksum: MD5: 1b073417857b1bae203801dc895edbd0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/launch_configuration.json
+SPDXID: SPDXRef-4e3d3baf402a91b23e5af99e19c31adf2c94477c
+FileChecksum: SHA1: 6e38326fc674d62fa06e993085716ae16e2c6f4b
+FileChecksum: SHA256: 496389c204017baed484e54059b884718899bbc392337d114c44a054712105e4
+FileChecksum: MD5: f8ac8146dbaacb1e29ac9623ef538931
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/logs_group.json
+SPDXID: SPDXRef-127670b002343277a91f16cdf854d9ec0437cbaa
+FileChecksum: SHA1: 8bc125c3de97dbc16b88a55a8fb5110fe5b27160
+FileChecksum: SHA256: 0556f0368a800bd7187090b1c022e1a094427fb39aa2908fbf177e6a5141c662
+FileChecksum: MD5: 102504da4770a1550f5b0c4b3bcc9334
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/microsoftad.json
+SPDXID: SPDXRef-70874e18a29fc25fbe8bd4b65bde39d2594f9df5
+FileChecksum: SHA1: af7d8c1d07996341580372487a4ac7a46ca3896c
+FileChecksum: SHA256: 712aad8c41d23636f1af641549759dc5887f36241993feeae7a8d8981ee0ee4e
+FileChecksum: MD5: 827d8d1b81d98d5310586cb7ed8c0846
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/network_interface.json
+SPDXID: SPDXRef-db73aefc8af6fd1dc105c7a76a4c8babe5cc7075
+FileChecksum: SHA1: 0b8ad77c98993648dc848f0d2a7c72c845021c2f
+FileChecksum: SHA256: 0d8f6ffffa509bc8ef5ffec8a6e9f571b4f811a66e5e109f20143e6202618072
+FileChecksum: MD5: dd45688b6637ea8d61c5e0dfc0d10805
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/nlb.json
+SPDXID: SPDXRef-a4179cb72b92096fdbfa54f8083028851bf0ac95
+FileChecksum: SHA1: 684abc0be93a46ac5db86bdda4ae3a8ee7b094ea
+FileChecksum: SHA256: c7abc2162b37e9e37934ec222964674921be92be786ab77a7870dab0a7b64d1e
+FileChecksum: MD5: 6e17115a9f32a7e1476cf2aa0b2a60b3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rds.json
+SPDXID: SPDXRef-d5bc5993388a71e4bf2dfbf6dd0cf47ab4336165
+FileChecksum: SHA1: 03cbe8d080d6c614fda91e1d7af705161c9ecdd3
+FileChecksum: SHA256: dbdabc67deadfc7487ee7dd840de004a2952bb3fd1118997490f6a5240b94114
+FileChecksum: MD5: c37ffbcc6902aa97c2b89a137b8a6f6b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rdscluster.json
+SPDXID: SPDXRef-146c615c262509b118b1b48d84551b507cdf8276
+FileChecksum: SHA1: 65091bbf6e42f01c16d151022b766ec1ef554236
+FileChecksum: SHA256: f85b1173bd5814b666a5ea722268f77c16f162b2a444092396a1466b642d7d8a
+FileChecksum: MD5: c25bdc511655f5221ca58c791471085d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rdsclusterparamsgroup.json
+SPDXID: SPDXRef-5af90eea4a9991926343fd4e0380feff3fb15f39
+FileChecksum: SHA1: f683b604c5a60245b734ad9bce7449de89d25711
+FileChecksum: SHA256: bd921f4bf49a4f29aa275953863b60afbd56ced7f8587a2566c19c61386d4c30
+FileChecksum: MD5: eee32e60337da3866bcbba2f68ba6f1b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rdsoptiongroup.json
+SPDXID: SPDXRef-8f56b78715f28eba835eee053284f0a54c20e7a1
+FileChecksum: SHA1: b00b037fa301c5dbd158178b873587dc7dd92ad2
+FileChecksum: SHA256: 75a1909957b165d05fd763282a7437a50b2dc6c98a77119fbffe32007bd4ef35
+FileChecksum: MD5: df6fd9d411e91ead276f54b419ac3336
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rdsparamsgroup.json
+SPDXID: SPDXRef-fbbbf486cc5edbdb6b14e4d92fc9d6dd83874c00
+FileChecksum: SHA1: c20d08fe218aeb30051aa3082cde7e0fbb32dd7c
+FileChecksum: SHA256: 2e127b73d0a67138e3358bf80aff660a43a6762ff31491be012d9750d251457f
+FileChecksum: MD5: bdb873e1b3f181798b5791250cbc3af0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/rdssubnet.json
+SPDXID: SPDXRef-fc78278a36841987f1a6688320028a9a47db9100
+FileChecksum: SHA1: b04a097de016745f3f9e3559aa53efcf3800b6df
+FileChecksum: SHA256: bb9f93e470d4720488fe1999cbc041ec096c133824a98f511656e9adac03ec08
+FileChecksum: MD5: 7bbac12fc696ec25607b07446204d1da
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/redshift.json
+SPDXID: SPDXRef-37517e958db8c551389a11b276d68d1c14de7a65
+FileChecksum: SHA1: c25a9dd2f7cd57f45d4ec640cc931c23c186e881
+FileChecksum: SHA256: 6ba48aa7586e07c6aeb9cc51090537a3eeb93dbdb23aeaf126de6ab816edf00e
+FileChecksum: MD5: fd478b43f4ee3b769d80b211664aefbf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/redshift_paramsgroup.json
+SPDXID: SPDXRef-0d8bbda9740c4be385a889cd9a110e7e104586b2
+FileChecksum: SHA1: e5f42f2b6ebac19c6f50cd8396c08e8fcef2f1cf
+FileChecksum: SHA256: a1e188cfc5cff7ff803f4d5637157d9321516581d20538330cbfb3ccfb93af88
+FileChecksum: MD5: 8c507289104384126171739a692165d8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/redshift_subnetgroup.json
+SPDXID: SPDXRef-a094bb27147fce13cab9a76c14770468939af0c8
+FileChecksum: SHA1: 0727a8539fcc451d964ab95885290c72f2567b76
+FileChecksum: SHA256: 06b36503b0d766a98b3cc43cb50154396cc78cab235fceae6d0d271ca60794e4
+FileChecksum: MD5: 2f9faa450e10adc0ef554b4cbf8553ce
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/route53_record.json
+SPDXID: SPDXRef-6061fae21600c3e20e20af1ffc7be1f7a1f2f56e
+FileChecksum: SHA1: 3d129a4e401c62bc04db066f81f0aad2357370f4
+FileChecksum: SHA256: b274cf8d6da22ab9f6079bfe080c7aaca33f16129ab4bff9823372d9dc4ff0ed
+FileChecksum: MD5: 09b163d5ea4e701f1f3476075a81c0b5
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/route53_zone.json
+SPDXID: SPDXRef-67986450431c4e038b4da39d579b6d85c10fb3dc
+FileChecksum: SHA1: 2b39fd547ad3820c8062e4bd9aa96eecabe43417
+FileChecksum: SHA256: 31f6c4373ef064ec558cd8ce80e6d3025ecf97aa761b340d9dbf7f0e441dee96
+FileChecksum: MD5: 150f8d5d28ed82897b0afbda5f851e9a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/s3.json
+SPDXID: SPDXRef-8cb8e8ce1ff765b75e610009b1165650d0c0dca0
+FileChecksum: SHA1: f17091141293ab6e92f30cd706865d7c42fa2f63
+FileChecksum: SHA256: 30d87ad70728c8d2f35d00c5038182b850eb0d0c0df3121e674d712dc6c0cb59
+FileChecksum: MD5: e2cf74fea42d2b7cc5747e77273baafa
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/s3_policies.json
+SPDXID: SPDXRef-4e5eecf2d57ddeeef08be01acfda86407a4be9ef
+FileChecksum: SHA1: d0580aeeb8203c15c100dc86dd874092f8ca2eee
+FileChecksum: SHA256: fae0918d7854420c808b8a03ee90741a96eb765a5941bfa7c61adfd5387897a1
+FileChecksum: MD5: 3f8f7cb0453146ba9e50a9863a243f30
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/securitygroups.json
+SPDXID: SPDXRef-6734663a5304fbe856c0a833f89dcdab0da038db
+FileChecksum: SHA1: 640da8ec2008084a425b5d8e76f68ed2e7cd1b4b
+FileChecksum: SHA256: 74fc84846d84d2afb2b3993d7b14e811aef3c2e32947fc1c3f6687533c4dfe36
+FileChecksum: MD5: 2341c8bde916b87fed172680619a9d5a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/sns.json
+SPDXID: SPDXRef-c4fb8152a1e61e1cfc7729ca28932073a93869a9
+FileChecksum: SHA1: ecfc49b21604892a7976ed4c0d5e196b7a763cb0
+FileChecksum: SHA256: 49f1f24140d526db3d6fd1f8a3e7b2a493a9af5e1c7bce480e3e7118a60a5a16
+FileChecksum: MD5: 50b7e326ca383cc1ea9cf1434397eb4d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/snstopic.json
+SPDXID: SPDXRef-3af82155aab2a44333bc721b1ad4e1b9bacecc0e
+FileChecksum: SHA1: 43135923e54415c5d49e94ad6c65221c6b7c0882
+FileChecksum: SHA256: 49e8faf1cc8351ae3dada417853aa79315e167766c103231f5c38ad2ff7df39d
+FileChecksum: MD5: ad914e391a56a426a08d20682c1baec6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/sqs.json
+SPDXID: SPDXRef-4b7f8caadce51602eacb2549344114a10f97a0ab
+FileChecksum: SHA1: f8940295bb73016d8ca2c1f97dafbd96cd32ccda
+FileChecksum: SHA256: 6933d0c466dae71898c215f46caa12983599c7b60b305be13bc160d7186b9c5e
+FileChecksum: MD5: fb6167af68b61541186bfbfdaba55697
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/stepfunctions.json
+SPDXID: SPDXRef-66a95139a0112d7c978d37f1e763a9426ed7533c
+FileChecksum: SHA1: ff38218ce3dcf2d6527b3ac935750d6a747928f8
+FileChecksum: SHA256: 8727e79048ce0b0f331808baba837adcf5fdafd1a3d63f2096d1156b6c9e0cad
+FileChecksum: MD5: c6ed5c6160aebbb1b701abb2d202ba56
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/stepfunctions_activity.json
+SPDXID: SPDXRef-8fa0caaf17144c1d99c9cfa4d7750ee81e433434
+FileChecksum: SHA1: 6219be99ca3b495b51dedd8c92e122c328650e8f
+FileChecksum: SHA256: 8383b7635ed73285d4e17f02d1ef6b00e140c0837f21a0c8727cf94b66c7ac14
+FileChecksum: MD5: 4442b7b9905e7a66dafd47d0a25847e5
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/cftemplates/resources/vpc.json
+SPDXID: SPDXRef-6a02f9bb0bf4a1cb064792301ab821c3ce83239b
+FileChecksum: SHA1: ec915f0d15bee53dadf064dcbc9b9e8821548b17
+FileChecksum: SHA256: 5235c812158ecfad52b82196c7ab6db23b9e13a075934b444b14708f08fbba00
+FileChecksum: MD5: 2db17841d24d5d81f9b93fa416581af8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/dns/test.zone
+SPDXID: SPDXRef-01d5b6b149cf55f4a8631a79ee754f6e430c6eb1
+FileChecksum: SHA1: c242d3478179e0f774fa8071dac35a3f991a2357
+FileChecksum: SHA256: 0fc17153e80a74df362b0a60e72140a5399dab9742f149d27fe45263ed125144
+FileChecksum: MD5: 4abc712d26d4533c0a11b5174e6b5fed
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/dns/test_blank.zone
+SPDXID: SPDXRef-ead81d603699036ced471454da0298033e4318b5
+FileChecksum: SHA1: 02b9ded8e9f1cb0ce17004a61d91353edd7d2f64
+FileChecksum: SHA256: f3e58420d4752b30ae982b487432e9a384a2fea33a5e33823ac8239d1a61b893
+FileChecksum: MD5: 62868874d00fa3963a20b66dc3605dce
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/dns/test_writezonezone
+SPDXID: SPDXRef-693cd821edeb1837f20f99124c852cc084602e85
+FileChecksum: SHA1: bc4919c6adf7168088eaea06e27a5b23f0f9f9da
+FileChecksum: SHA256: 426fc04f04bf8fdb5831dc37bbb6dcf70f63a37e05a68c6ea5f63e85ae579376
+FileChecksum: MD5: 94232c5b8fc9272f6f73a1e36eb68fcf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/dns_test/test_writezonezone
+SPDXID: SPDXRef-133946e5f1f69714624eaaadf7e2205a1f9fe816
+FileChecksum: SHA1: bc4919c6adf7168088eaea06e27a5b23f0f9f9da
+FileChecksum: SHA256: 426fc04f04bf8fdb5831dc37bbb6dcf70f63a37e05a68c6ea5f63e85ae579376
+FileChecksum: MD5: 94232c5b8fc9272f6f73a1e36eb68fcf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/acm.yml
+SPDXID: SPDXRef-6841c9ae036be2c51d0083f324cf67126f97d63c
+FileChecksum: SHA1: 79296741248f9a82832f7e15660ded7648b71b61
+FileChecksum: SHA256: 93d579fdec24828c5985200fdf97e5fcbd63c2907184b56c07f442295729be81
+FileChecksum: MD5: 664ff2135fcd365510034c1b204b745f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/activedirectory.yml
+SPDXID: SPDXRef-5b7036b8f77e20fbb71461a4d1328f91e83e6e11
+FileChecksum: SHA1: 2ef408c4e095e67d24e73751734a54f03846a9bb
+FileChecksum: SHA256: 07c787157f5cede3b25e0b97df46810def1e9fed79861663c11cf9284a14b4c4
+FileChecksum: MD5: 24fcd7d63cea7e5c7a9f7d0f6d9e5f0c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/alb.yml
+SPDXID: SPDXRef-ea37c5b7046c997bc46d9d78dffb5e4c26ef3427
+FileChecksum: SHA1: 01966e36fa3b7557127ee2f8f92c40eb3e86b601
+FileChecksum: SHA256: 890001427e977f733490c0455406e65f3b08a5c7ac8e6d27318693926f3ffe5d
+FileChecksum: MD5: 8381ac0b1d4892ce7890b113dc9e765f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/apigateway.yml
+SPDXID: SPDXRef-e4999699e44751c5213ba2eecebbb7d106abefe9
+FileChecksum: SHA1: 7551c9b8509711f46b53d42efdf3a992b7230487
+FileChecksum: SHA256: af0141989da8d40b45cb46a7c14c4cd705d5bcbf4cad6534980a5e97683a585d
+FileChecksum: MD5: dbab660481ba05b5fd52e3aa2a0986b0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/dns_records.yml
+SPDXID: SPDXRef-82b3d733a63156f2ff44d48db03c87eccfd7dd25
+FileChecksum: SHA1: 1e0b8c1076c152e50a66600c414d22227a47cfe5
+FileChecksum: SHA256: 2f05f8b4fced8239217bbc98ecd39c3db2f086ea70a4c5bf20e0887e97fb9ff5
+FileChecksum: MD5: c17814ac440f8224cb673f17c89c1514
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/ecs.yml
+SPDXID: SPDXRef-0e47d9f696a9cc66c5cc90f056ecbc8ac9c3f8fb
+FileChecksum: SHA1: bad6967cb7048f6ebdbf35bae13ddd3c5d36a7ca
+FileChecksum: SHA256: e94117b4ab0aae1d549a368aee3adde65f446080f464e6bf1a590f4145d02dab
+FileChecksum: MD5: ce1585503a02436be4fbd48729b29833
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/efs.yml
+SPDXID: SPDXRef-8f8135c2050a5a983224ea9390f1e473cbe7dde5
+FileChecksum: SHA1: 63947c330e15386c3e95bcfede38d77bbe1b9286
+FileChecksum: SHA256: 1b7f95afabafb2ab13fd759d4d69a1c574d8ac0de7fbce002dd80ded1e80f26a
+FileChecksum: MD5: 0df1e5decd10c37571a3eff8acd827c7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/elasticache.yml
+SPDXID: SPDXRef-c2c1ae8e4e5c113fb6ea107891dad0617d41ad16
+FileChecksum: SHA1: e29558010d0a397586322541b528704715a65296
+FileChecksum: SHA256: 8e77566b04fcde51b679b23f56f72b8cad3be6767a82fc93ababa34a42305b16
+FileChecksum: MD5: b0c72e4f85a7a1289cd23cab70c7bdcf
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/elasticachesubnet.yml
+SPDXID: SPDXRef-ac511a84e4d81511c2c03d73368b10e7b9fecf9e
+FileChecksum: SHA1: f33bddbfc1415e9d0abf1be9c51aeeea1ee7c3b2
+FileChecksum: SHA256: 749ead13d5c4fd8a56e4964fb225aeeff6d0986d949303a4eeae33320ae8eb0d
+FileChecksum: MD5: 1a60fb2cd52f41b7e4cad1bd66fa8cc0
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/greengrass.yml
+SPDXID: SPDXRef-1ed81d3c9958f1366410e69c00d2e885e081f1a1
+FileChecksum: SHA1: 4b664e62a1c3cc2e07ec5d293f1877789fa3deef
+FileChecksum: SHA256: 81163aaec0a5100cdc133d65bd147ecaece6a660100f65dca0bc7b00555da54e
+FileChecksum: MD5: 1082960b92ae6197ad3149719c68e482
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/iam_policies.yml
+SPDXID: SPDXRef-bcc64009846b696d71aee014969704b0cd305f21
+FileChecksum: SHA1: c695edf13137d715f4cfcac68852d27626e14f7c
+FileChecksum: SHA256: cb3f602957c6ee03116f9ef509fd8f8837d5470eb0cdaa32609ebb3be5b5e6c2
+FileChecksum: MD5: 9e1fee2dd5e2761fb3ec9a7c5b7b6c31
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/iam_roles.yml
+SPDXID: SPDXRef-ec9474bee89403fad0f9324d9ce9f66f7c0fcb32
+FileChecksum: SHA1: 4ce7c6d86fb6b36de80aabd8290f5c0ef0289845
+FileChecksum: SHA256: 1cdc1ab3906957df0de73c62b77367f4b1f0a923ca6a01834f2f09ee9fea8ea8
+FileChecksum: MD5: 3ca6472e83a95a034122964508d2dbbe
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/iam_users.yml
+SPDXID: SPDXRef-758db4d8f22a63b511a6daf868284280ceeff042
+FileChecksum: SHA1: e8756cb7574bf81dcbecb57138e15fad349770b4
+FileChecksum: SHA256: c0af20607d6993a1e95c2de4c6efd7738c643f173db3b0552ad231356eb70dd8
+FileChecksum: MD5: 259c16b3d0a13fba80d71b818e231352
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/missing_stackname_test.yml
+SPDXID: SPDXRef-343c12ed0099ebdd5287057a47100f2a4e1936da
+FileChecksum: SHA1: 63af5a99384e7154468e242a7af8e0c672946ae1
+FileChecksum: SHA256: 3543fd1cc84877179af4efa50ebbc5a571d691368b2acd3ac6d1dbd2dfe267e3
+FileChecksum: MD5: a5308f28c645742e34890277a38cd816
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/rds-subnetgroups.yml
+SPDXID: SPDXRef-b10c6f50a8b0b309188864e980516cb66d5a91cd
+FileChecksum: SHA1: 1146e94520e736152d5fad4736d5e0a78b895f18
+FileChecksum: SHA256: df6ad6196b209fdeedb02d11b2d0efc373f0e5d64ecce479a8db4fbd3c500769
+FileChecksum: MD5: 982ecbcb14f99625d38afba455d89d63
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/rds.yml
+SPDXID: SPDXRef-8c961516379b2b823d2472b7fedf5e10dab12ed4
+FileChecksum: SHA1: ea32057d35d3c4905831417ae53ecf2a3a64d064
+FileChecksum: SHA256: de4fb7ab7919062fc04daa3dd3d3ad71c4e0dd12544c880fed38b65cefb5c345
+FileChecksum: MD5: ae90a03a8a6a3655d16174dcc9b52e4c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/redshift.yml
+SPDXID: SPDXRef-8722e4ada0f7e76544fc554788a6411f7c01a07d
+FileChecksum: SHA1: 26f1bc68298fd4c9f964d0d1e45b586f32c837af
+FileChecksum: SHA256: cd3c01419e96235aeffd1095000b01e82e83d8d475e032bd1925337f43d6cfee
+FileChecksum: MD5: b256bdb1327cc9b656aa5954fbf185a1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/s3_lambda.yml
+SPDXID: SPDXRef-4efcdd5e1f6e6bf1a771963ed7d0ca651afa7299
+FileChecksum: SHA1: f8c438cdb59ad87c7ef37421d99b8e3af252e57b
+FileChecksum: SHA256: aadeb13179ead6dbdf452fbadb270a18e3979bc6d71beee011e01ce896180a06
+FileChecksum: MD5: cc574314051152c17624ce2bca59dcb8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/s3_policies.yml
+SPDXID: SPDXRef-39f00ef2996d7be06fe71048433bcac3e961d150
+FileChecksum: SHA1: 5e4e7c1c7ca1567f0b10b14ea91f13b4b258784e
+FileChecksum: SHA256: ee5a3349a9dcba5ee568a7fdc33465f43a47231c38ed404e2981e4f89c7daffd
+FileChecksum: MD5: e7a99477bdf9ed239b8666aba4206ff2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/securitygroups.yml
+SPDXID: SPDXRef-586a0457a73e369fbc0bab3ef7af0b7054877f3e
+FileChecksum: SHA1: c2c8bdf39007409b04bf0837ece9b0641fd169ba
+FileChecksum: SHA256: d10c7654a079facba1af29a09653064d5daaf160f85f6159bb8a1ef7bd2dc2fd
+FileChecksum: MD5: d0e5fb2eab89e6fc57d0bcaf061e7dda
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/squidservers.yml
+SPDXID: SPDXRef-014cb547e2ddb7dbfc313bf5c667909394bf238f
+FileChecksum: SHA1: bbb98c1522cf1c07973ca0cc1201caa2fecae1d2
+FileChecksum: SHA256: f5fdcad0aec6b00449ebf8c4a967e2d6207876538d3c757b487ed626dec69c52
+FileChecksum: MD5: 08b669e440f71cc8493517e700ec7340
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/test_stack.yml
+SPDXID: SPDXRef-5ab95652a435bb611156fe11bf43fd374bda4957
+FileChecksum: SHA1: cc27eedf94f179f9bfb63fbbfc785186d3adb762
+FileChecksum: SHA256: d32d1c79388a1e2e4ec58b3df53836f71aec7f010a0751a722004a24b8e9e637
+FileChecksum: MD5: cbc2f5af7400b8ba13873a01c5d691c5
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/aps2/vpc.yml
+SPDXID: SPDXRef-35af5aa8486a834a8f0864d22569af5ae9d0b685
+FileChecksum: SHA1: 60f9baac2fb2762ef6522506f890892bed507e88
+FileChecksum: SHA256: 70bb8182861d7d2be081b28d6676496004a609f6183ca1e1ef5f545dcdece4b1
+FileChecksum: MD5: cd9429fc9ff53f71631bbbed8b5fab6d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/global/test.zone
+SPDXID: SPDXRef-a1b7930b53f5c299526434cace0704661c31ae34
+FileChecksum: SHA1: 25b538cc49cf45952b8f14ffa94d697548f298c3
+FileChecksum: SHA256: b6fc284d8e0e6467c9ed7d25835139248834ab37a0ee50dd2f774fa4b68f8432
+FileChecksum: MD5: 87e2407483150157a4db8a729420b247
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/configs/user/region/global/test_parse.zone
+SPDXID: SPDXRef-d257b6087b976924eb921713fd9dc2898eb821c2
+FileChecksum: SHA1: 25b538cc49cf45952b8f14ffa94d697548f298c3
+FileChecksum: SHA256: b6fc284d8e0e6467c9ed7d25835139248834ab37a0ee50dd2f774fa4b68f8432
+FileChecksum: MD5: 87e2407483150157a4db8a729420b247
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/__init__.py
+SPDXID: SPDXRef-2b213a69a758dd1856b0b282dd7a2ed9e697dc00
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+FileChecksum: SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+FileChecksum: MD5: d41d8cd98f00b204e9800998ecf8427e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/__init__.pyc
+SPDXID: SPDXRef-83da5807b6740ecd6aac32448377f9151ada00a4
+FileChecksum: SHA1: 9c2e71e8e3f5d22eecfaf2595ae1e093dd0f19ee
+FileChecksum: SHA256: b872927651190cae6e36fe734ac27956605208799b1b0fff63a3f2ebc8ed028e
+FileChecksum: MD5: fefae92fb43dba56fde97167c61f3a9d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_cloudformation.py
+SPDXID: SPDXRef-8fd2186f3fb53dc9cba4bc6ef4819c936492c782
+FileChecksum: SHA1: c4028a01956192a8edd8146dd09c15dde3bbcb70
+FileChecksum: SHA256: d0fe6f97f51c071bae41f97362ca394bfdc00551c146eee1a42232e7e442c456
+FileChecksum: MD5: 37c392443f3e59bc0a2ee39b0bf261b8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_cloudformation_helpers.py
+SPDXID: SPDXRef-8ce3bacbc078413527480a35f0f9de757c4f77ea
+FileChecksum: SHA1: e9dc86ad657a32a4995ea40c74379cce39af7bb4
+FileChecksum: SHA256: d1cd3f0adb8a7708c6bb5c1c4b24534a71e1fcad58322118a42d2dda4ed0edc6
+FileChecksum: MD5: 43b5cd8ca7df2c3f00c7a5c6edebe2f6
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_configs.py
+SPDXID: SPDXRef-0019b968e5b35b6862c04ea0879b8eaef09b749e
+FileChecksum: SHA1: df263b60488227aa485d9f3048bbfb4677ed50c2
+FileChecksum: SHA256: c20aa5408bc60cf172490da7d692b1552b00cd368409d1333640c2806d87f40d
+FileChecksum: MD5: a6c0d5e3970932aed05d69018a6edbd8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_ec2tasks.py
+SPDXID: SPDXRef-be110396ed73f87cd3fa7a3d76116db83a035309
+FileChecksum: SHA1: f205df3de8cdec7bd1a8e008e3ca66967d17a2b2
+FileChecksum: SHA256: 19d702dc216d1d9b592a02422964896c8592b050bd3b6aaec62603673a785a61
+FileChecksum: MD5: df7e75f8649ebe2f57fc31cdf45397bb
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_greengrass.py
+SPDXID: SPDXRef-6bb74368b7064d290df13a1a38eb4fa8d3c3712f
+FileChecksum: SHA1: 60f2e65afaaeafdbee1d69aea87fc003f941d3af
+FileChecksum: SHA256: 38c3e5f6e2d39fbcf8b47debdbdc29424cbf39b255adfd33665574b5abe6fff3
+FileChecksum: MD5: 0b34fab99c01253e2429c7d78d848313
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_iot.py
+SPDXID: SPDXRef-de84ecbd4fe7d8d6ff1d38b82ed328d2af128f69
+FileChecksum: SHA1: 2e0e3ed304e0053b788d3d394b4e454b1a542ca4
+FileChecksum: SHA256: 7d2d66b81a13e65d2e168ea4a314e6401ad297989fa2e1cb684f40238da9bf00
+FileChecksum: MD5: bfed41cc5997d4a3bb494a0f238b165f
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_organizationstasks.py
+SPDXID: SPDXRef-18b9f4c771894dd326bac18597b0fc1edbf27b3d
+FileChecksum: SHA1: 20db24c1b52af85c269f9f0bd962038836adae3c
+FileChecksum: SHA256: 11d88ead2b0ac6edd5d7348e349b48e17f38e2db7b9276154751756985bb17b7
+FileChecksum: MD5: f23041e30dbe2dcad0f00e1aa230dcd8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_output.py
+SPDXID: SPDXRef-f619696b897384bb88208ca27bc14b3a1dccdd00
+FileChecksum: SHA1: e283b4dd3f414c9403c08d7c6ae0828e348273e4
+FileChecksum: SHA256: 5a77ca5d7f7653e13149d12f3648072bba8063a84508cebecaabb1bee5bf761f
+FileChecksum: MD5: bd11e8555c88162e27d095badcb74c64
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_route53.py
+SPDXID: SPDXRef-39e2514853cc1c62965b19b34b380dab33731969
+FileChecksum: SHA1: 9883af1d57216ecab12e15728277da58170e4df1
+FileChecksum: SHA256: ed2d043baf851dc9ed7e8fbb2951736023727f6fd71966522769e614e4a0aec5
+FileChecksum: MD5: 98b9fbf486504885b2012c88bfbb9285
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_route53tasks.py
+SPDXID: SPDXRef-b0d9f477d8ec5e41bcad8624f29b3ff9935ae2fa
+FileChecksum: SHA1: e121ce4428e79d58f4e7602f5902b74876d21792
+FileChecksum: SHA256: 04440c8da177c1f91e79c29b7bb61cb90f53382e0e01a992e33f56d3948d96ca
+FileChecksum: MD5: 155b4b1c84e0f3bdca1bd94fa1e93590
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_template.py
+SPDXID: SPDXRef-d35a3fdad0bdb146b9282bd7174dec23e8fa0dd6
+FileChecksum: SHA1: b32a6ae1079d1e0964e0fdf21b9e1e1c8ba7fd2e
+FileChecksum: SHA256: 2c33e02e945209e184b8601936ed48b64e0ec5851e6259cf9f5851eff2dd48a1
+FileChecksum: MD5: 762c7335bead1952f760f6fe1412b304
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_verification.py
+SPDXID: SPDXRef-7a6235dd2fa4a3df5a578bb8bf0a320a37acaa25
+FileChecksum: SHA1: 34f1df0ec05262dbc3c6121aa5fc96ea9d7c3f10
+FileChecksum: SHA256: 68ffc2cd774e50d3f729ea11c3c077736270c3c288f8a8b808d00dc22787d810
+FileChecksum: MD5: 73c09f6282379d106b97893ffcb16bc3
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/test_zonefile.py
+SPDXID: SPDXRef-d0ad914e603e12961131c67d95fafcdc873dd3dc
+FileChecksum: SHA1: 9c9c4612656e01d7803cc19ca80c9e76fcd31295
+FileChecksum: SHA256: f1ea0243b5f368435ebeac610a6a92b4108c8ee8d91224d8b350abdca700ecbd
+FileChecksum: MD5: d17fc723b87d9af1308852b2717fadce
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/__init__.py
+SPDXID: SPDXRef-db7b28cabb7ba1b85f94f422efa776ebf3eda1f6
+FileChecksum: SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+FileChecksum: SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+FileChecksum: MD5: d41d8cd98f00b204e9800998ecf8427e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/__init__.pyc
+SPDXID: SPDXRef-bc35633344b9a81aed9fae3c3d2caf64f39d51c0
+FileChecksum: SHA1: c0ee13c7c038b88881d593d90aa0d589f2503bd7
+FileChecksum: SHA256: f5d19a463fb65be08fd0583979881fe8c4af1fbc1b547597c73d7336e6f93519
+FileChecksum: MD5: 72aeeac1cd57ae60c8a61ed84205e099
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_acm.py
+SPDXID: SPDXRef-e66adc59c515f3d29a4f257e1b7eb08c5f004121
+FileChecksum: SHA1: 2ff5e2c4db2d11d77e175a550ab8e4724ad06f60
+FileChecksum: SHA256: c7251fd2c81d85b93a85768b0c4809571a4ead21aebb1444710a6f19eb8353d0
+FileChecksum: MD5: 1b3d7fb8743e275f80f1327ba9cfce84
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_apigateway.py
+SPDXID: SPDXRef-e4be2469dc1b6369537f542e2bc2d64246f2f3ed
+FileChecksum: SHA1: 2f37051ffe3de5509242538d44dc6d41f517c09c
+FileChecksum: SHA256: ed691ae19b66cf4b21169b2887f147818bce193fbea04c7742edd4c4051ddf17
+FileChecksum: MD5: d7837a2b997a8fcc3d748101a89ac309
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_athena_namedquery.py
+SPDXID: SPDXRef-83fc205bf9f4ee20676e563e476f031eaa4e90bd
+FileChecksum: SHA1: e3d77566830a8ff15cba7c47f6b832c94b5a52e8
+FileChecksum: SHA256: 7b361175804e613d42e3f55af3f146282b82e1e5ac5153dde8329763b15c72e2
+FileChecksum: MD5: 505bec1b0a0c60e9db0834470eed825e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_cloudfront.py
+SPDXID: SPDXRef-6d1c99e62869eec84e8677f7c524b668d34f7652
+FileChecksum: SHA1: 5ab695d91a4690bbea159fc299301521baa80ae0
+FileChecksum: SHA256: 2d9a6ce734f6c727ded4b2ab11484f2443e35a671ceed598a2e191b978b263a3
+FileChecksum: MD5: 3b9896e35e526a09ce5e4125a0bfdd3b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_cloudwatch.py
+SPDXID: SPDXRef-0303d9daefd3987d18c9d510f5daf64bae1fb8c9
+FileChecksum: SHA1: a473188768fc6132ecaf4e095232cd6ee68516d2
+FileChecksum: SHA256: 5ef956c5be5f4f9689725939cd8dd22b27e23c8848ecfc6d5ff3118138c7c427
+FileChecksum: MD5: 1ddc79e5c882c9ea1f6b2cb23c5a14d5
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_config_rule.py
+SPDXID: SPDXRef-c92b0066301ad37e5c338cdce817dd0cc3857cd1
+FileChecksum: SHA1: 4a4fc96e3835f5d7c0d2938122460b44126e249b
+FileChecksum: SHA256: cd73f900091591b5fc406b0912a803ccf776127f264f1ef07a9322057989623f
+FileChecksum: MD5: 385e3f80365d9ae56fc461922763eb7e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_dms.py
+SPDXID: SPDXRef-bb539833c18a5a9f8dcb7fd2af73cd00ce575cab
+FileChecksum: SHA1: 5428ff1e94040d32519db6ea112f6b1f5b627f69
+FileChecksum: SHA256: 7967aea7fef605a69a1f5c4053a143e4c73f986cd4d23eab8f92d1b54d81122b
+FileChecksum: MD5: 085311a53e1004947eff66f50ed1be2d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_dynamodb_tables.py
+SPDXID: SPDXRef-ca76b86a41ed8cdf21817530d63269cf6118463a
+FileChecksum: SHA1: 3fe438587d45e7c3c982c8128945c46d6b40cb97
+FileChecksum: SHA256: 8f98298376c3bd56a263caa2e4b2d16de7d95d2990403838a0e76ee28a9277b4
+FileChecksum: MD5: 6b88abc53edc2b80257f96900a516310
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_ecs_service.py
+SPDXID: SPDXRef-0e6b3c54b9ae1c62c550e5c5c87bfd5aadb2ce65
+FileChecksum: SHA1: 44c6243e80e9e362d06d1a33063e0197c1a9df0e
+FileChecksum: SHA256: 100628b24de1983aea1c27cccde45c15c55bd927ebf5153f99fd50b5e2a632c5
+FileChecksum: MD5: 68377a3f180ff4f7e2117d429d424e55
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_efs.py
+SPDXID: SPDXRef-25160c372655319d9e50e6d32c363b21cc07b219
+FileChecksum: SHA1: 9212b6a03d3fd0b92e01e531925551a99a942485
+FileChecksum: SHA256: 4b5efbfc8a7187a5eebb1f6d5f948c15a825900de9c252383b21fa3e191a7d1a
+FileChecksum: MD5: 5c0fd722019eba5ef7f74ed7e2becc53
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_eip.py
+SPDXID: SPDXRef-57eb1c58ff0cb0d39891b69083dc92647640c90b
+FileChecksum: SHA1: cbdeeea49ef9899370c218c7d868f8b6be833edd
+FileChecksum: SHA256: 36913093d4033d30136244bb2ea1ddca06133127bcc09eb4684bd3128a0fbac2
+FileChecksum: MD5: b20d6d833326bbe8deddd030a12f9f59
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_elasticache.py
+SPDXID: SPDXRef-b7ad28ab50e24c55658186f217337f5412e8ffae
+FileChecksum: SHA1: fa75c92be8fd43552dcdf86893febcf9ead8ee79
+FileChecksum: SHA256: 17ed8f88fcdb61c7cbbd62b7e5286c447ceb8b92587db0aea90bcd61eddc62b2
+FileChecksum: MD5: fc307d26dfa2b3f48dded7cfe3700eaa
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_elasticsearch.py
+SPDXID: SPDXRef-d2ee3d6be86d028542a57f27adda3398c5d070ad
+FileChecksum: SHA1: 6c0fa6729a397b2c43d10a6c95866d61be92a7ee
+FileChecksum: SHA256: eb9a4113c339159129f98a0cad6770053a3e03cd76848148113ad0987d7a5213
+FileChecksum: MD5: a02492b1d805345d0df2341aeea2f7d4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_elb.py
+SPDXID: SPDXRef-486ab71262f2d90348570aa345be21f8bb676bc8
+FileChecksum: SHA1: 8aa72b8cfdae511e7bf4bd6356777474427988dd
+FileChecksum: SHA256: 434b4b79d01c82d92ba55129dbb7df33ad3c844486f020d19f04d83ec58a8208
+FileChecksum: MD5: 46c3ac5ef84f76502fb62e995327e8ea
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_events.py
+SPDXID: SPDXRef-12fad5be5b26b927eb83da4d3c93160d5c62635c
+FileChecksum: SHA1: a256bf9d4484b0d7a0db78bca708404c3ae35e73
+FileChecksum: SHA256: ac5c45ccb577077000ee4571c59b67c40b3a88d5a619fdb123c704fee77a29ae
+FileChecksum: MD5: e42c5af671ecab533192e14eb860a91c
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_iam.py
+SPDXID: SPDXRef-ad91706178a84b5a2e1cf3e04b4ef4aebeed0053
+FileChecksum: SHA1: e1d34b40ab3ca17f3356b91ccf688b1107a48196
+FileChecksum: SHA256: ce35432f1348773ae3dc5ea7b72289cf6b85b3e2b98b98f1d152e0d53192e628
+FileChecksum: MD5: df0ce4a85c22157638f41915131f5cd9
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_kms.py
+SPDXID: SPDXRef-6bf134f9b4097c1426b0ba30bdef0183a771a904
+FileChecksum: SHA1: e639f271ba5bf8126af0bb6ac654727fe9b30d85
+FileChecksum: SHA256: 431ebb824e26a40d98a46ec07a0d4f4da8bdde443e2d36c182d5853d73cb4c4e
+FileChecksum: MD5: 543ad7ea9fcf298499820eda6214e626
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_lambda.py
+SPDXID: SPDXRef-59e54ba314691f8032e9626d5525f712155b7693
+FileChecksum: SHA1: c635b799073d5a0940302e090aecfbb7c3c5cd34
+FileChecksum: SHA256: 998f1c138b03724e565254873a675c5d41bfc66b47440cf629ede0812e343552
+FileChecksum: MD5: 32e4dc28205f5d8e62e57b664ef131a4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_lambda_events.py
+SPDXID: SPDXRef-660a5d6105c888c88d072d9364fac38dcbe53977
+FileChecksum: SHA1: 31d997c71ff28719972d13458042e3455bab182f
+FileChecksum: SHA256: 9f79ae9f6d9ac08a62a9a045550efebd7bb1485806c08ef74f15148d21ab765d
+FileChecksum: MD5: f4a87d9d94964dcd2d710e2565824ac8
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_microsoftad.py
+SPDXID: SPDXRef-719f808991c7ca45b75b85aaa7823abc0bb4e5f7
+FileChecksum: SHA1: b3743a79918250b457ae33a37400cb2cc6b890ce
+FileChecksum: SHA256: 397841a025aa4a7dea9eee459e8d7067d8b31b2202f5177f3062b7fd116711f0
+FileChecksum: MD5: f75eb992d937a60a123c4fa0962e8f83
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_nlb.py
+SPDXID: SPDXRef-678364a212a96d73a60943786ee02de589391a08
+FileChecksum: SHA1: 2f442c8a13dde1d365f44cdba2c22216db90ce7b
+FileChecksum: SHA256: 499f879cb67fa1ac7519cdb56fa1db3bf7a4abc1eb6c5ec75849d862c934ceeb
+FileChecksum: MD5: 08bdea268097b3cc88ea02e4c596e51a
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_rds.py
+SPDXID: SPDXRef-b08770540301938aa23b44f11b8b19b69d46dff5
+FileChecksum: SHA1: b02c50ae6f15f2c5c00d3864087aaa8ce62b9f10
+FileChecksum: SHA256: bcf5d967ece064c1f777e22ccdc63e0e087aa3f5b6a480e406518fc8bc44133e
+FileChecksum: MD5: 363f1d005eebc4715e81c52229063d4d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_redshift.py
+SPDXID: SPDXRef-ed3d1c28c614a669fb3065117ac86fa9b081db44
+FileChecksum: SHA1: d94b546d8bc17abb0a1f4f7839f9f56837685b29
+FileChecksum: SHA256: c39167a61156554d0421acf0ad3a8299de32551621ee2d6a57e775214ec2ca16
+FileChecksum: MD5: fea6c53e06c9086d6801c271a736f88b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_route53.py
+SPDXID: SPDXRef-dec01f6662fac5c022f94d06d264a6b0dedd7070
+FileChecksum: SHA1: 75d17bf8334cbcd8955fc0ed7473d31abb879c20
+FileChecksum: SHA256: 101c9bfb55d6ca0d6448c3fcb7723291c54e3351ae79554b8fa0a74afa4a9467
+FileChecksum: MD5: 281f5ec13ec6a0a441d5306c8914c565
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_s3.py
+SPDXID: SPDXRef-96a0e71eff98478b9e3378cec1613b4e3e0b1fca
+FileChecksum: SHA1: cd329695ce98f9a7ac76556867309197199867d4
+FileChecksum: SHA256: 3baade94de74cd85ba5bc85f4931c01e8cd7fe57cc08247e67f55ac4dca79968
+FileChecksum: MD5: e8ee79ae3e9df1892ae3cd1c3b4894b7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_securitygroups.py
+SPDXID: SPDXRef-3ae641f56c9ebfed9e7d490dcc8343b052f4397d
+FileChecksum: SHA1: a7795ef35e2e0711cced3489bd0001782e3d3bc9
+FileChecksum: SHA256: 49deec890c7a6a341ab35ceb1acc0174057e944aa92479daed4dbaa1e841b37a
+FileChecksum: MD5: 6b559c738449418ab46b5b3380103a2d
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_sns.py
+SPDXID: SPDXRef-1375a30dfda4ce6cd6db67fec3dfa57b46f16c1d
+FileChecksum: SHA1: ef2c53e2f620c435af8d02c9715d8811d0609338
+FileChecksum: SHA256: 9885429a3832e1f9a8e2553bde4a08f4157c7d90c71d08b1a2c715662f3c34ff
+FileChecksum: MD5: e50a621cd3582e9a5aa537152ade18e2
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_sqs.py
+SPDXID: SPDXRef-43cc7e4b8ca4fb5aefffa88e093a20a1fa46dedd
+FileChecksum: SHA1: 0b01a2acb80124d94cfc684a8f3529bb1032a78a
+FileChecksum: SHA256: d0826af5914256eb3968ddfc077de609e7829eb780c511f59e5e05308c946677
+FileChecksum: MD5: 5f55b9d1e834046fa912a7c82ff3cad7
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./PyStacks/test/templates/test_vpc.py
+SPDXID: SPDXRef-a059dbb148f8e75f923d6d7990bb4767bdc0ad5b
+FileChecksum: SHA1: cc89ea6f9b9ceeb6df2ef7db2bc9010826b295ed
+FileChecksum: SHA256: 9a8420a476cbffa6e9023b764bd2482f645977e53094d818df986ba78acdd931
+FileChecksum: MD5: e15620cabc42aba788c4eae4f5257eb1
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./bin/pystacks
+SPDXID: SPDXRef-d7d0b8bafe8432710aafff514c7db49f1eab0282
+FileChecksum: SHA1: e6b9f200c6b5066d5b0d928be9435da28d030a15
+FileChecksum: SHA256: a10d80bc5470760abe16fb936a4f1ac6e91e9b8087d7060d2909a40d5dac5f90
+FileChecksum: MD5: b9e9d34c6b11e91dcef9fb86d480736b
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/build_deploy.sh
+SPDXID: SPDXRef-558d282cf2fa16e238a09e67911d80eff51053fe
+FileChecksum: SHA1: bff833cf6f0845fb2a2b9119c487124148b8f3b7
+FileChecksum: SHA256: 961384533ee0e1e48472b2df8d70a253f45edc8cc6df5bd71b3ce3dbd727c0da
+FileChecksum: MD5: 4b35041583aefe796e36d1c6976734f4
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/code_check.sh
+SPDXID: SPDXRef-52084f4324688a63407dcfca4a815b3b536603aa
+FileChecksum: SHA1: cdd2ed421c761d7fb11a239e14618dfdc74c4e99
+FileChecksum: SHA256: a5560534ca84c655f5480d0ee15a54247c06628fafd4983beb340c803168a1c4
+FileChecksum: MD5: 5df99c22b1cea4ea515bd5ca7fc71e88
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/code_coverage.sh
+SPDXID: SPDXRef-21110a51f625a64e84996ba6e089f9128fc23bbe
+FileChecksum: SHA1: 13276e45a97e60563c9862832b8a2cbc657d2fdb
+FileChecksum: SHA256: fb866bbee44065f19c6049278d2188ebbea45c51b49ea0d827e0df13480eda8b
+FileChecksum: MD5: 192c1730e2bca73ffbab7f506ceb538e
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/get_commit_json.sh
+SPDXID: SPDXRef-f32937cc03af78ceb0d88d4e1f4cd2a48b01c1d0
+FileChecksum: SHA1: 6c6f0fbc668313fdd77b75445d8d0c71ee1ce951
+FileChecksum: SHA256: 737463efc8cc5c9d2dd9a0eeaf67a5c0ffb524cfda00d19b677ef7c96e59fa30
+FileChecksum: MD5: 0e76ebb1d251b48043df0fa2ba881631
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/slack_alert.py
+SPDXID: SPDXRef-813363d743e5d6037698a4b4ff0af0e2f0a5a16a
+FileChecksum: SHA1: 451f774fe0c73ac3f8d949a8066a17433d022382
+FileChecksum: SHA256: c3be41f731e9b705d331c81eba3590d2104a438fb089ba595a38bb7cc5591274
+FileChecksum: MD5: 3d21c7113827319b8021bd4d813a8ffc
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/unit_test.sh
+SPDXID: SPDXRef-ba6a304a6461a5fe9aabe36ee4323c7dbf0052b1
+FileChecksum: SHA1: 3a06f553fdb9ac45da58d646b918abecdc362e96
+FileChecksum: SHA256: 2d5eddc2371400e06e6bde4884b91f64ec00881fd7072305a9d84fac0870a711
+FileChecksum: MD5: 2368ff0a4df329ac68e23e3c6523a264
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./ci/version.txt
+SPDXID: SPDXRef-0fcaa9c90756a96eb768419953c8361503558a76
+FileChecksum: SHA1: 61652cd1568dcf2614df833eba241755eee34e89
+FileChecksum: SHA256: 5717e7c840171019a4eeab5b79a7f894a4986eaff93d04ec5b12c9a189f594bf
+FileChecksum: MD5: 2542b79651fab56d0ebfff75a0fdf7be
+LicenseConcluded: MIT
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION

@@ -1,0 +1,16 @@
+{
+{% for elasticachesubnet, settings in elasticachesubnet.iteritems() %}
+"{{elasticachesubnet}}": {
+   "Type" : "AWS::ElastiCache::SubnetGroup",
+   "Properties" : {
+      "CacheSubnetGroupName" : "{{settings["name"]}}",
+      "Description" : "{{settings["description"]}}",
+      "SubnetIds" : [
+{% for subnet in settings["subnets"] %} 
+	    { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+{% endfor %}
+      ]
+   }
+}{% if not loop.last %},{% endif %}
+{% endfor %}
+} 

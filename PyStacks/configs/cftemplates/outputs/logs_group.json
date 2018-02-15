@@ -1,0 +1,14 @@
+{
+{% for loggroup, settings in logs_group.iteritems() %}
+  "{{loggroup}}": {
+    "Description": "{{loggroup}} LogGroup",
+    "Value": { "Ref": "{{loggroup}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-LogGroup-{{loggroup}}" }}
+    },
+  "{{loggroup}}ARN": {
+    "Description": "{{loggroup}} Arn",
+    "Value": { "Fn::GetAtt" : [ "{{loggroup}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-LogGroup-{{loggroup}}-ARN" }}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,39 @@
+{
+{% for cloudtrail, settings in cloudtrail.iteritems() %}
+    "{{cloudtrail}}": {
+        "Type" : "AWS::CloudTrail::Trail",
+        "Properties" : {
+        {% if settings["cloudwatch"]["loggroup"] and settings["cloudwatch"]["rolearn"] %}
+            "CloudWatchLogsLogGroupArn" : { "Fn::ImportValue" : {"Fn::Sub" : ["${LogGroupsStack}-LogGroup-{{settings["cloudwatch"]["loggroup"]}}-ARN", {"LogGroupsStack":  {"Ref": "LogGroupsStack"}}] }},
+            "CloudWatchLogsRoleArn" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RoleStack}-SecGroup-{{settings["cloudwatch"]["rolearn"]}}", {"RoleStack":  {"Ref": "RoleStack"}}] }},
+        {% endif %}
+        {% if settings["filevalidation"] %}
+            "EnableLogFileValidation" : {{settings["filevalidation"]}},
+        {% endif %}
+        {% if settings["globalevents"] %}
+            "IncludeGlobalServiceEvents" : {{settings["globalevents"]}},
+        {% endif %}
+            "IsLogging" : {{settings["islogging"]}},
+        {% if settings["multiregion"] %}
+            "IsMultiRegionTrail" : {{settings["multiregion"]}},
+        {% endif %}
+        {% if settings["kmskey"] %}
+            "KMSKeyId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${KMSStack}-KMS-{{settings["kmskey"]}}-ARN", {"KMSStack":  {"Ref": "KMSStack"}}] }},
+        {% endif %}
+            "S3BucketName" : {{settings["s3"]["name"]}},
+        {% if settings["S3"]["prefix"] %}
+            "S3KeyPrefix" : {{settings["s3"]["prefix"]}},
+        {% endif %}
+        {% if settings["sns"] %}
+            "SnsTopicName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${SNSStack}-SNS-{{settings["sns"]}}", {"SNSStack":  {"Ref": "SNSStack"}}] }},
+        {% endif %}
+            "Tags" : [
+            {% for k, v in settings["tags"].iteritems() %}
+                {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],
+            "TrailName" : {{settings["trailname"]}}
+        }
+    }
+{% endfor %}
+}

@@ -1,0 +1,150 @@
+{
+"{{vpc["Details"]["VPC_Name"]}}" : {
+  "Type" : "AWS::EC2::VPC",
+  "Properties" : {
+    "CidrBlock" : "{{vpc["Details"]["VPC_CIDR"]}}",
+    "Tags" : [      
+{% for k, v in vpc["Tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+    ],
+  "EnableDnsSupport" : "true",
+  "EnableDnsHostnames": "true"
+  }
+},
+
+{% for subnet, settings in vpc["Subnets"].iteritems() %}
+"{{subnet}}" : {
+  "Type" : "AWS::EC2::Subnet",
+  "Properties" : {
+    "VpcId" : { "Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+    "CidrBlock" : "{{settings["CIDR"]}}",
+    "AvailabilityZone" : {
+    "Fn::Select" : [ "{{settings["AZ"]}}", { "Fn::GetAZs" : "" } ]
+    },
+    "Tags": [{"Key" : "Name", "Value" : "{{subnet}}"}]
+  }
+},
+{% endfor %}
+
+"DHCPSet": {
+  "Type" : "AWS::EC2::DHCPOptions",
+  "Properties": {
+    "DomainName": "{{vpc["DHCP"]["dhcp_name"]}}",
+    "DomainNameServers": [ "{{vpc["DHCP"]["dhcp_dns_servers"]}}"],
+    "NetbiosNodeType": "{{vpc["DHCP"]["dhcp_ntb_type"]}}",
+    "NtpServers": ["{{vpc["DHCP"]["dhcp_ntp_servers"]}}"],
+    "Tags": [{"Key" : "Name", "Value" : "{{vpc["DHCP"]["dhcp_name"]}}"}]
+   }
+},
+
+"DHCPAssociate": { 
+   "Type" : "AWS::EC2::VPCDHCPOptionsAssociation",
+   "Properties" : {
+      "DhcpOptionsId" : { "Ref" : "DHCPSet" },
+      "VpcId" : { "Ref" : "{{vpc["Details"]["VPC_Name"]}}" }
+   }
+},  
+
+"InternetGateway" : {
+  "Type" : "AWS::EC2::InternetGateway",
+  "Properties" : {
+  }
+},
+
+"AttachGatewayIgw" : {
+    "Type" : "AWS::EC2::VPCGatewayAttachment",
+    "DependsOn": ["InternetGateway", "{{vpc["Details"]["VPC_Name"]}}"],
+    "Properties" : {
+      "VpcId" : { "Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+      "InternetGatewayId" : { "Ref" : "InternetGateway" }
+    }
+},
+
+{% for table, routesettings in vpc["Routetables"].iteritems() %}
+
+"{{table}}" : {
+  "Type" : "AWS::EC2::RouteTable",
+  "Properties" : {
+    "VpcId" : {"Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+    "Tags": [{"Key" : "Name", "Value" : "{{table}}"}]
+  }
+},
+  {% for route, settings in routesettings.iteritems() %}
+{% if settings|length > 0 %}
+"{{settings["route_name"]}}" : {
+  "Type" : "AWS::EC2::Route",
+  "DependsOn": "AttachGatewayVgw",
+  "Properties" : {
+    "RouteTableId" : { "Ref" : "{{table}}" },
+    "DestinationCidrBlock" : "{{settings["route_cidr"]}}",
+    "GatewayId" : { "Ref" : "{{settings["route_gw"]}}" }
+  }
+},
+    {% endif %}
+  {% endfor %}
+"{{table}}RoutePropagation" : {
+  "Type" : "AWS::EC2::VPNGatewayRoutePropagation",
+  "Properties" : {
+    "RouteTableIds" : [{"Ref" : "{{table}}"}],
+    "VpnGatewayId" : {"Ref": "VGW"}
+  },
+  "DependsOn" : "AttachGatewayVgw"
+},
+{% endfor %}
+
+{% for subnet, settings in vpc["Subnets"].iteritems() %}
+"{{subnet}}SubnetRouteTableAssociation" : {
+  "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+  "Properties" : {
+    "SubnetId" : { "Ref" : "{{subnet}}" },
+    "RouteTableId" : { "Ref" : "{{settings["RouteTable"]}}" }
+  }
+},
+
+"{{subnet}}SubnetNetworkAclAssociation" : {
+  "Type" : "AWS::EC2::SubnetNetworkAclAssociation",
+  "Properties" : {
+    "SubnetId" : { "Ref" : "{{subnet}}" },
+    "NetworkAclId" : { "Ref" : "{{settings["NetAcl"]}}" }
+  }
+},
+
+{% endfor %}
+
+{% for acl, rules in vpc["NetworkAcls"].iteritems() %}
+
+"{{acl}}" : {
+  "Type" : "AWS::EC2::NetworkAcl",
+  "Properties" : {
+    "VpcId" : {"Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+    "Tags": [{"Key" : "Name", "Value" : "{{acl}}"}]
+  }
+}, 
+    {% for rule, settings in rules.iteritems() %}
+    {% set splitset = settings.split(',') %}
+"{{rule}}" : {
+  "Type" : "AWS::EC2::NetworkAclEntry",
+  "Properties" : {
+    "NetworkAclId" : {"Ref" : "{{acl}}"},
+    "RuleNumber" : "{{splitset[0]}}",
+    "Protocol" : "{{splitset[1]}}",
+    "RuleAction" : "{{splitset[2]}}",
+    "Egress" : "{{splitset[3]}}",
+    "CidrBlock" : "{{splitset[4]}}",
+    "PortRange" : {"From" : "{{splitset[5]}}", "To" : "{{splitset[6]}}"}
+  }
+},
+    {% endfor %}
+{% endfor %}
+"AttachGatewayVgw" : {
+    "Type" : "AWS::EC2::VPCGatewayAttachment",
+    "DependsOn": ["InternetGateway", "{{vpc["Details"]["VPC_Name"]}}"],
+    "Properties" : {
+      "VpcId" : { "Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+      "VpnGatewayId" : { "Ref" : "VGW" }
+    }
+}
+}
+
+

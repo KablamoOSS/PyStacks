@@ -1,0 +1,16 @@
+{
+{% for ecr_repo, settings in ecr.iteritems() %}
+  "{{ecr_repo}}":{
+  	"Type" : "AWS::ECR::Repository",
+  	"Properties" : {
+    	"RepositoryName" : "{{settings["name"]}}",
+    	"RepositoryPolicyText" :  {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {{settings["policy_document"]}}
+                ]
+  		}
+	}	
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

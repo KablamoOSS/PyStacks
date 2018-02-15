@@ -1,0 +1,117 @@
+description: "Example for use with Greengrass commands.  Designed to be use with the RobotArm example from the CPP device SDK. Run with `pystacks upsertGGDeployment2 greengrass aps2`"
+region: "ap-southeast-2"
+stackname: "RobotArmPyStack"
+resources:
+  greengrass:
+    name: "RobotArmPy"
+    s3Bucket: example-gg-projects                       # Required. Project folder are nested beneath
+    core:                                               # Must exist
+      ip: 172.16.19.227                                 # Required
+      policyName: AllGGandIoT
+    devices:                                            # Must change device name for pystacks to recognise a change.
+      RobotArm:
+        policyName: AllGGandIoT
+      SwitchCPP:
+        policyName: AllGGandIoT
+        syncShadow: false                               # Optional: defaults to true
+      SwitchPy:
+        policyName: AllGGandIoT
+        syncShadow: false
+    subscriptions:
+          - source: SwitchCPP
+            subject:
+              device: RobotArm
+              path: update
+            target: shadow
+          - source: SwitchPy
+            subject:
+              device: RobotArm
+              path: update
+            target: shadow
+          - source: RobotArm
+            subject: /topic/state
+            target: uptime
+          - source: RobotArm
+            subject:
+              device: RobotArm
+              path: update
+            target: shadow
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/delta
+            target: RobotArm
+          - source: uptime
+            subject: topic/metering
+            target: cloud
+          - source: message
+            subject:
+              device: RobotArm
+              path: update
+            target: shadow
+          - source: cloud
+            subject: topic/update
+            target: message
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/accepted
+            target: SwitchCPP
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/rejected
+            target: SwitchCPP
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/accepted
+            target: SwitchPy
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/rejected
+            target: SwitchPy
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/accepted
+            target: RobotArm
+          - source: shadow
+            subject:
+              device: RobotArm
+              path: update/rejected
+            target: RobotArm
+    lambdas:
+      uptime:
+        arn: arn:aws:lambda:ap-southeast-2:012345678910:function:RAuptime:GGRobotArmPY
+        configuration:
+          {
+              "Executable": "uptimeLambda.uptime_handler",
+              "MemorySize": 128000,
+              "Timeout": 3,
+              'Pinned': False,
+          }
+      message:
+        arn: arn:aws:lambda:ap-southeast-2:012345678910:function:RAmessage:GGRobotArmPY
+        configuration:
+          {
+              "Executable": "messageLambda.message_handler",
+              "MemorySize": 128000,
+              "Timeout": 3,
+              'Pinned': False,
+          }
+    logging: [
+        {
+            "Component": "GreengrassSystem",
+            "Level": "INFO",
+            "Space": 5120,
+            "Type": "FileSystem"
+        },
+        {
+            "Component": "Lambda",
+            "Level": "DEBUG",
+            "Space": 5120,
+            "Type": "FileSystem"
+        }
+      ]

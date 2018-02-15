@@ -1,0 +1,41 @@
+description: "ExampleStacks Demo Redshift Definition"
+stackname: "ExampleStacks-RS-Demo"
+region: "ap-southeast-2"
+secrets:
+  DBPassword: shiafijijwf9398yap970afo8a0sfh0as
+parameters:
+  IAMRoleStack: {Description: IAM Role Stack, Type: String, Default: ExampleStacks-IAM-Roles}
+  KMSStack: {Description: KMS Keys Stack, Type: String, Default: ExampleStacks-KMS-RedShift}
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+  RedshiftSubnetGroupStack: {Description: RDS Subnet Group Stack, Type: String, Default: ExampleStacks-RS-SubnetGroups}
+  RedshiftParamsGroupStack: {Description: RS Params Group Stack, Type: String, Default: ExampleStacks-RS-ParamsGroup}
+mappings: {}
+resources:
+  rds:
+    testExampleStacks:
+      allowupgrade: "150"
+      automatedsnapshotretentionperiod: true
+      az: true
+      clusterparamsgroup: "15"
+      clustersecgroups: "02:00-03:00"
+      clustersubnetgroupname: Internal
+      clustertype: multi-node
+      clusterversion: 
+      dbname: ExampleStacks Test
+      #eip:
+      encrypted: true
+      #hsmclientcertificateidentifier:
+      #hsmconfigurationidentifier:
+      iamroles: ["RSUserRole"]
+      kmskeyid: RedshiftKey
+      masterusername: master
+      nodetype: dw.hs1.xlarge
+      numberofnodes: 3
+      #owneraccount:
+      port: 5439
+      maintenancewindow: "Sun:03:00-Sun:04:00"
+      public: false
+      #snapshotidentifier:
+      #snapshotclusteridentifier
+      vpcsecgroupid: ["RSBaselineSecGroup"]

@@ -1,0 +1,167 @@
+description: "Example stack for apigateway and everything it needs"
+region: "ap-southeast-2"
+stackname: "ExampleStacks-API-Gateway"
+parameters:
+  VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
+  SecurityStack: {Deccription: Security Group Stack, type: String, value: ExampleStacks-SecurityGroups}
+mappings: {}
+resources:
+  lambda:
+    nodeLambda:
+      code: 
+        s3bucket: lambda.functions
+        key: node-service-9e381f1.zip
+      description: Nodejs lambda
+      environment:
+        appEnvironment: development
+      functionName: nodeLambda
+      handler: index.handler
+      memorySize: 256
+      role: arn:aws:iam::371048905780:instance-profile/Buildstacks-IAM-Roles-LambdaRole-1C6AH7GJ6E891
+      runtime: nodejs4.3
+      timeout: 30
+      permission: exampleApigateway
+      vpcConfig:
+        securityGroups:
+          - SquidSecurity
+        subnetIds:
+          - Internal1
+          - Internal2
+          - Internal3
+    
+    goLambda:
+      code: 
+        s3bucket: lambda.functions
+        key: go-service-eac2a49.zip
+      description: golang lambda
+      environment:
+        appEnvironment: development
+      functionName: goLambda
+      handler: handler.Example
+      memorySize: 256
+      role: arn:aws:iam::371048905780:instance-profile/Buildstacks-IAM-Roles-LambdaRole-1C6AH7GJ6E891
+      runtime: python2.7
+      timeout: 30
+      permission: exampleApigateway
+      vpcConfig:
+        securityGroups:
+          - SquidSecurity
+        subnetIds:
+          - Internal1
+          - Internal2
+          - Internal3
+
+    javaLambda:
+      code:
+        s3bucket: lambda.functions
+        key: java-service-805d25b.jar
+      description: java lambda
+      environment:
+        appEnvironment: development
+      functionName: javaLambda
+      handler: com.example.lambda.ExampleHandler::handleRequest
+      memorySize: 256
+      role: arn:aws:iam::371048905780:instance-profile/Buildstacks-IAM-Roles-LambdaRole-1C6AH7GJ6E891
+      runtime: java8
+      timeout: 60
+      permission: exampleApigateway
+      vpcConfig:
+        securityGroups:
+          - SquidSecurity
+        subnetIds:
+          - Internal1
+          - Internal2
+          - Internal3
+
+
+  lambda_permissions:
+    nodeLambdaExampleApigateway:
+      lambdaname: nodeLambda
+      apigateway: exampleApigateway
+    goLambdaApigateway:
+      lambdaname: goLambda
+      apigateway: exampleApigateway
+    javaLambdaApigateway:
+      lambdaname: javaLambda
+      apigateway: exampleApigateway
+
+  apigateway:
+    exampleApigateway:
+      description: example apigateway
+      name: exampleApigateway
+      resources:
+        v1Resource:
+          pathPart: v1
+        nodeResource:
+          parent: v1Resource
+          pathPart: node
+        goResource:
+          parent: v1Resource
+          pathPart: go
+        javaResource:
+          parent: v1Resource
+          pathPart: java
+
+      methods:
+        nodeMethod:
+          authorizationType: NONE
+          httpMethod: GET
+          resource: nodeResource
+          dependsOn: [nodeLambda, nodeResource]
+          integration:
+            integrationHttpMethod: POST
+            type: AWS_PROXY
+            lambda: nodeLambda
+
+        goMethod:
+          authorizationType: NONE
+          httpMethod: GET
+          resource: goResource
+          dependsOn: [goLambda, goResource]
+          integration:
+            integrationHttpMethod: POST
+            type: AWS_PROXY
+            lambda: goLambda
+
+        javaMethod:
+          authorizationType: NONE
+          httpMethod: GET
+          resource: javaResource
+          dependsOn: [javaLambda, javaResource]
+          integration:
+            integrationHttpMethod: POST
+            type: AWS_PROXY
+            lambda: javaLambda
+
+      deployments:
+        exampleDeployment:
+          dependsOn:
+            - nodeMethod
+            - goMethod
+            - javaMethod
+
+      stages:
+        exampleStage:
+          stageName: api
+          description: Stage description
+          deployment: exampleDeployment
+          variables:
+            env: dev
+          methodSettings:
+            - 
+              resourcePath: /v1/node
+              httpMethod: GET
+            - 
+              resourcePath: /v1/go
+              httpMethod: POST
+            - 
+              resourcePath: /v1/java
+              httpMethod: POST
+
+      basePathMappings:
+        exampleBasePathMapping:
+          basePath: api
+          domainName: example.custom.domain.com
+          stage: exampleStage
+          dependsOn: 
+            - exampleStage

@@ -1,0 +1,13 @@
+; PLEASE TO NOT REMOVE USED FOR TESTS
+;Configuration for DNS Zone example.com
+
+example.com. 300 IN SOA r53.aws.amazon.com. hostmaster.r53.aws.amazon.com. ( 1481695633 3600 300 1814400 300 )
+example.com. 300 IN A 8.8.8.8
+skypeweb.example.com. 300 IN A 8.8.8.8
+example.com. 300 IN NS ns.rackspace.com.
+example.com. 300 IN NS ns2.rackspace.com.
+example.com.  300  IN  MX  10  cluster5.us.messagelabs.com.
+example.com.  300  IN  MX  20  cluster5a.us.messagelabs.com.
+example.com.  300  IN  TXT  "MS=msexample"
+example.com.  300  IN  TXT  "EXAMPLE"
+example.com.  300  IN  SRV  0  5  5060  sipserver.example.com.

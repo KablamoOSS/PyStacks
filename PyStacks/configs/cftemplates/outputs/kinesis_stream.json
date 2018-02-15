@@ -1,0 +1,10 @@
+{
+    {% for kinesis_stream, settings in kinesis_stream.iteritems() %}
+    "{{kinesis_stream}}": {
+      "Description": "{{kinesis_stream}} Arn",
+      "Value": { "Fn::GetAtt" : [ "{{kinesis_stream}}", "Arn" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-KinesisStream-{{kinesis_stream}}-Arn" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

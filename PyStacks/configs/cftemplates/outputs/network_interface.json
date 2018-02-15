@@ -1,0 +1,10 @@
+{
+    {% for eni, settings in network_interface.iteritems() %}
+    "{{eni}}": {
+      "Description": "{{eni}} Object",
+      "Value": { "Ref": "{{eni}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-eni-{{eni}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

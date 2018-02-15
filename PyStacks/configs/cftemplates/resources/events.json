@@ -1,0 +1,43 @@
+{#
+  EventPattern not currently implemented
+#}
+{
+{% for event, settings in events.iteritems() %}
+  "{{ event }}": {
+    "Type" : "AWS::Events::Rule",
+    "Properties" : {
+      {% if settings['role'] %}
+      "RoleArn" : "{{settings['role']}}",
+      {% endif %}
+      {% if settings["schedule"] %}
+      "ScheduleExpression" : "{{settings['schedule']}}",
+      {% endif %}
+      {% if settings["eventpattern"] %}
+      "EventPattern": {{settings["eventpattern"]}},
+      {% endif %}
+      {% if settings['state'] %}
+      "State" : "{{settings['state']}}",
+      {% endif %}
+      {% if settings['targets'] %}
+      "Targets" : [
+      {% for target in settings['targets'] %}
+      {
+        {% if target['input'] %}
+        "Input" : '{{target['input']}}',
+        {% endif %}
+        {% if target['inputpath'] %}
+        "InputPath" : "{{target['inputpath']}}"
+        {% endif %}
+        "Arn" : { "Fn::GetAtt": ["{{target['arn']}}","Arn"] },
+        "Id" : "{{target['id']}}"
+      }
+      {% endfor %}
+      ],
+      {% endif %}
+      "Description" : "{{settings['description']}}",
+      "Name" : "{{settings['name']}}"
+    }
+  }
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

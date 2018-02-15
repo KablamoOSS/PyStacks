@@ -1,0 +1,30 @@
+{
+  {% for volume, settings in ebs_volume.iteritems() %}
+"{{volume}}": {
+   "Type":"AWS::EC2::Volume",
+    "Properties" : {
+      "AvailabilityZone" : "{{settings["availability_zone"]}}",
+      "Encrypted" : "{{settings["encrypted"]}}",
+      {% if settings["iops"] %}
+      "Iops" : "{{settings["iops"]}}",
+      {% endif %}
+      {% if settings["kms_key"] %}
+      "KmsKeyId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${KmsStack}-KMS-{{settings["kms_key"]}}-ARN", {"KmsStack":  {"Ref": "KmsStack"}}] }},
+      {% endif %}
+      "Size" : "{{settings["size"]}}",
+      {% if settings["source_snapshot"] %}
+      "SnapshotId" : "{{settings["source_snapshot"]}}",
+      {% endif %}
+      {% if settings["tags"] %}
+      "Tags" : [      
+        {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "VolumeType" : "{{settings["volume_type"]}}"
+    }
+}
+  {% if not loop.last %},{% endif %}
+  {% endfor %}
+}

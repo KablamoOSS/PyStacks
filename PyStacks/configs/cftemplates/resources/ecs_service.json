@@ -1,0 +1,45 @@
+{
+
+{% for service, settings in ecs_service.iteritems() %}
+    {{service}}:{
+        "Type" : "AWS::ECS::Service",
+        "Properties" : {
+            "Cluster" : "{{settings["cluster"]}}",
+            {% if settings["deploy_config"]%}
+            "DeploymentConfiguration" : {
+                "MaximumPercent": {{settings["deploy_config"]["max_percent"]}},
+                "MinimumHealthyPercent": {{settings["deploy_config"]["min_healthy_percent"]}}
+            },
+            {% endif %}
+            "DesiredCount" : {{settings["desired_count"]}},
+            {% if settings["load_balancer"] %}
+            "LoadBalancers" : [
+                {
+                    "ContainerName": "{{settings["load_balancer"]["container_name"]}}",
+                    "ContainerPort":  {{settings["load_balancer"]["container_port"]}}
+                    {% if settings["load_balancer"]["load_balancer_name"] %}
+                    ,"LoadBalancerName": "{{settings["load_balancer"]["load_balancer_name"]}}"
+                    {% endif %}
+                    {% if settings["load_balancer"]["target_group_arn"] %}
+                    ,"TargetGroupArn": {"Ref": "{{settings["load_balancer"]["target_group_arn"]}}" }
+                    {% endif %}
+                }
+            ],
+            {% endif %}
+            {% if settings["service_role"] %}
+            "Role" : "{{settings["service_role"]}}",
+            {% endif %}
+            "ServiceName" : "{{settings["service_name"]}}",
+            "TaskDefinition" :  {"Ref": "{{settings["task_def"]}}" },
+        }
+        {% if settings["depends_on"] %}
+        ,"DependsOn" : [
+            {% for dep in settings["depends_on"] %}
+            "{{dep}}",
+            {% endfor %}
+        ]
+        {% endif %}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+}
+

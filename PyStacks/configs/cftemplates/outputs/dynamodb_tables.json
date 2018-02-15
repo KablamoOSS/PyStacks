@@ -1,0 +1,9 @@
+{
+  {% for table, settings in dynamodb_tables.iteritems() %}
+      "{{table}}": {
+        "Description": "{{table}} Dynamo DB Table",
+        "Value": { "Ref": "{{table}}"},
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-dynamodb-{{table}}" }}
+        }{% if not loop.last %},{% endif %}
+  {% endfor %}
+  }

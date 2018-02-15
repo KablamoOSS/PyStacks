@@ -1,0 +1,130 @@
+{
+{% for s3, settings in s3.iteritems() %}
+"{{s3}}": {
+  "Type": "AWS::S3::Bucket",
+  {% if settings["deletionpolicy"] %}
+  "DeletionPolicy": "{{settings["deletionpolicy"]}}",
+  {% endif %}
+  "Properties" : {
+      {% if settings["accesscontrol"] %}
+      "AccessControl" : "{{settings["accesscontrol"]}}",
+      {% endif %}
+      {% if settings["cors"] %}
+      "CorsConfiguration" : {
+        "CorsRules": [      {
+        {% if settings["cors"]["headers"] %}
+          "AllowedHeaders" : [ "{{settings["cors"]["headers"]}}" ],
+        {% endif %}
+        {% if settings["cors"]["methods"] %}
+          "AllowedMethods" : [ "{{settings["cors"]["methods"]}}" ],
+        {% endif %}
+        {% if settings["cors"]["methods"] %}
+          "AllowedOrigins" : [ "{{settings["cors"]["origins"]}}" ],
+        {% endif %}
+        {% if settings["cors"]["methods"] %}
+          "ExposedHeaders" : [ "{{settings["cors"]["exposedheaders"]}}" ],
+        {% endif %}
+          "MaxAge" : "{{settings["cors"]["exposedheaders"]}}",
+          "Id" : "{{settings["cors"]["id"]}}"
+        }
+      ]},
+      {% endif %}
+      {% if settings["lifecycle"] %}
+      "LifecycleConfiguration" : {
+        "Rules": [
+          {
+            "Id": "GlacierRule",
+            "Prefix": "glacier",
+            "Status": "Enabled",
+            "ExpirationInDays": "365",
+            "Transition": {
+              "TransitionInDays": "1",
+              "StorageClass": "Glacier"
+            }
+          }
+        ]},
+      {% endif %}
+      {% if settings["logging"] %}
+      "LoggingConfiguration": {
+        "DestinationBucketName": { "Fn::ImportValue" : {"Fn::Sub" : ["${S3Stack}-S3-{{settings["logging"]["bucket"]}}", {"S3Stack":  {"Ref": "S3Stack"}}] }},
+        "LogFilePrefix": {{settings["logging"]["fileprefix"]}}
+      },
+      {% endif %}
+      {% if settings["notices"] %}
+      "NotificationConfiguration" : {
+      {% for notice, noticesettings in settings["notices"].iteritems() %}
+        {% if notice == "sns" %}
+        "TopicConfigurations": [
+        {% for sns in noticesettings %}
+        {
+          "Event" : "{{sns["event"]}}",
+          "Filter" : "{{sns["filter"]}}",
+          "Topic" : "{{sns["topic"]}}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %} ]{% if not loop.last %},{% endif %}
+        {% endif %}
+        {% if notice == "sqs" %}
+        "QueueConfigurations": [
+        {% for sqs in noticesettings %}
+        {
+          "Event" : "{{sqs["event"]}}",
+          "Filter" : "{{sqs["filter"]}}",
+          "Queue" : "{{sqs["queue"]}}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %} ]{% if not loop.last %},{% endif %}
+        {% endif %}
+        {% if notice == "lamda" %}
+        "LambdaConfigurations": [
+        {% for lamda in noticesettings %}
+        {
+          "Event" : "{{lamda["event"]}}",
+          {% if lamda["filter"] %}
+          "Filter" : {{lamda["filter"]}},
+          {% endif %}
+          "Function": "{{lamda["function"]}}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %} ]{% if not loop.last %},{% endif %}
+        {% endif %}
+      {% endfor %}
+      },
+      {% endif %}
+{% if settings["replication"] %}
+      "ReplicationConfiguration" : {
+        "Role" : "Baseline",
+        "Rules" : [
+    {% for rule, rulesettings in settings["replication"].iteritems() %}
+          {
+          "Destination" : { "Bucket" : "{{rulesettings["destination"]}}" },
+          "Id" : "{{rulesettings["id"]}}",
+          "Prefix" : "{{rulesettings["prefix"]}}",
+          "Status" : "{{rulesettings["status"]}}"
+          }{% if not loop.last %},{% endif %}
+    {% endfor %}]
+      },
+{% endif %}
+{% if settings["versioning"] %}
+      "VersioningConfiguration" : { "Status" : "Enabled" },
+{% endif %}
+{% if settings["website"] %}
+      "WebsiteConfiguration" : {
+{% if settings["website"]["redirect"] %}
+      "RedirectAllRequestsTo" : {
+        "HostName" : String,
+        "Protocol" : String
+      }
+{% else %}
+         "IndexDocument" : "{{settings["website"]["index"]}}",
+         "ErrorDocument" : "{{settings["website"]["error"]}}"
+      },
+{% endif %}
+{% endif %}
+      "BucketName" : "{{settings["name"]|lower}}",
+      "Tags" : [
+{% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]}
+    }
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,19 @@
+{
+  {% for key, settings in kms.iteritems() %}
+  "{{key}}": {
+    "Description": "{{key}} Object",
+    "Value": { "Ref": "{{key}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-KMS-{{key}}" }}
+    },
+  "{{key}}ARN": {
+    "Description": "{{key}} Private IP",
+    "Value": { "Fn::GetAtt" : [ "{{key}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-KMS-{{key}}-ARN" }}
+    },
+  "{{key}}Alias": {
+    "Description": "{{key}} Alias",
+    "Value": { "Ref": "{{key}}Alias"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-KMS-{{key}}-Alias" }}
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

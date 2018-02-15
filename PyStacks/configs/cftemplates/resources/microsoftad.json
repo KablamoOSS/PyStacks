@@ -1,0 +1,23 @@
+{
+{% for microsoftad, settings in microsoftad.iteritems() %}
+  "{{ microsoftad }}": {
+	  "Type" : "AWS::DirectoryService::MicrosoftAD",
+	  "Properties" : {
+	    "CreateAlias" : "{{settings["createalias"]|lower}}",
+	    "EnableSso" : "{{settings["enablesso"]|lower}}",
+	    "Name" : "{{settings["name"]}}",
+	    "Password" : "{{settings["password"]}}",
+	    "ShortName" : "{{settings["shortname"]}}",
+	    "VpcSettings" : { 
+	      "SubnetIds" : [
+	      {% for subnet in settings["subnets"] %} 
+	    		{ "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+				{% endfor %}
+	      ],
+	      "VpcId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-VPC-VPCid", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+    	}
+	  }
+	}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

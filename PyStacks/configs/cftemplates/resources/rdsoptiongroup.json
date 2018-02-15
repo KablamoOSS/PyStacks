@@ -1,0 +1,31 @@
+{
+{% for rdsoptiongroup, settings in rdsoptiongroup.iteritems() %}
+"{{rdsoptiongroup}}":{
+  "Type" : "AWS::RDS::OptionGroup",
+  "Properties" : {
+    "EngineName": "{{settings["engine"]}}",
+    "MajorEngineVersion": "{{settings["engineversion"]}}",
+    "OptionGroupDescription": "{{settings["description"]}}",
+    "OptionConfigurations": [ 
+    {% for optionconfig, optionconfigsettings in settings["options"].iteritems() %}
+    {
+      "OptionName" : "{{optionconfig}}",
+      "OptionSettings": [
+      {% for optionsetting, optionsettingvalue in optionconfigsettings["settings"].iteritems() %}
+      {
+         "Name": "{{optionsetting}}",
+         "Value": "{{optionsettingvalue}}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    "Tags" : [      
+	{% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+	{% endfor %}
+    ]{% endif %}}
+   }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

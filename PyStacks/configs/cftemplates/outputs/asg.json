@@ -1,0 +1,10 @@
+{
+    {% for asg, settings in asg.iteritems() %}
+    "{{asg}}": {
+      "Description": "{{asg}} Object",
+      "Value": { "Ref": "{{asg}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ASG-{{asg}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

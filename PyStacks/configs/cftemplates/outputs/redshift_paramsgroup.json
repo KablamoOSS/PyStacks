@@ -1,0 +1,9 @@
+{
+{% for paramsgroup, settings in redshift_paramsgroup.iteritems() %}
+    "{{paramsgroup}}": {
+      "Description": "{{paramsgroup}} RS Parameters Group",
+      "Value": { "Ref": "{{paramsgroup}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RSParamGroup-{{paramsgroup}}" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

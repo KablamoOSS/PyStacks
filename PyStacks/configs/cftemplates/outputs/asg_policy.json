@@ -1,0 +1,9 @@
+{
+{% for policy, settings in asg_policy.iteritems() %}
+"{{policy}}": {
+  "Description": "{{policy}} Object",
+  "Value": { "Ref": "{{policy}}"},
+  "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ASGPolicy-{{policy}}" }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

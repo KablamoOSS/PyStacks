@@ -1,0 +1,12 @@
+description: "RDS Subnet Groups"
+stackname: "ExampleStacks-RDS-SubnetGroups"
+region: "ap-southeast-2"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+mappings: {}
+resources:
+  rdssubnet:
+    rdsinternal:
+      description: Internal RDS Subnet
+      subnets: ["Internal1", "Internal2", "Internal3"]
+      tags: {Name : InternalRDSSubnet}

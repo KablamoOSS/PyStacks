@@ -1,0 +1,110 @@
+{
+{% for table, settings in dynamodb_tables.iteritems() %}
+    "{{table}}": {
+        "Type": "AWS::DynamoDB::Table",
+        "Properties": {
+            {% if settings["name"] %}
+            "TableName": "{{settings["name"]}}",
+            {% endif %}
+            {% if settings["attributes"] %}
+            "AttributeDefinitions": [
+              {% for attribute in settings["attributes"] %}
+              {
+                "AttributeName": "{{attribute["name"]}}",
+                "AttributeType": "{{attribute["type"]}}"
+              }
+              {% if not loop.last %},{% endif %}
+              {% endfor %}
+            ],
+            {% endif %}
+            "KeySchema": [
+              {% for schema in settings["key_schema"] %}
+              {
+                "AttributeName": "{{schema["name"]}}",
+                "KeyType": "{{schema["type"]}}"
+              }
+              {% if not loop.last %},{% endif %}
+              {% endfor %}
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": "{{settings["throughput"]["read_units"]}}",
+              "WriteCapacityUnits": "{{settings["throughput"]["write_units"]}}",
+            },
+            {% if settings["local_secondary_indexes"] %}
+              "LocalSecondaryIndexes": [
+                {% for index in settings["local_secondary_indexes"] %}
+                  {
+                  "IndexName" : "{{index["name"]}}",
+                  "KeySchema" : [
+                    {% for schema in index["key_schema"] %}
+                    {
+                      "AttributeName": "{{schema["name"]}}",
+                      "KeyType": "{{schema["type"]}}"
+                    }
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                  ],
+                  "Projection" : {
+                    {% if index["projection"]["non_key_attributes"] %}
+                      "NonKeyAttributes" : [
+                        {% for attribute in index["projection"]["non_key_attributes"] %}
+                          "{{attribute}}"
+                        {% if not loop.last %},{% endif %}
+                        {% endfor %}
+                        ],
+                        {% endif %}
+                      "ProjectionType" :  "{{index["projection"]["type"]}}"
+                    },
+                    "ProvisionedThroughput": {
+                      "ReadCapacityUnits": {{index["throughput"]["read_units"]}},
+                      "WriteCapacityUnits": {{index["throughput"]["write_units"]}}
+                    }
+                  }
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+              ],
+            {% endif %}
+            {% if settings["global_secondary_indexes"] %}
+          "GlobalSecondaryIndexes": [
+            {% for index in settings["global_secondary_indexes"] %}
+            {
+              "IndexName" : "{{index["name"]}}",
+              "KeySchema" : [
+                {% for schema in index["key_schema"] %}
+                {
+                  "AttributeName": "{{schema["name"]}}",
+                  "KeyType": "{{schema["type"]}}"
+                }
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+              ],
+              "Projection" : {
+                {% if index["projection"]["non_key_attributes"] %}
+                  "NonKeyAttributes" : [
+                    {% for attribute in index["projection"]["non_key_attributes"] %}
+                      "{{attribute}}"
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                  ],
+                  {% endif %}
+                  "ProjectionType" :  "{{index["projection"]["type"]}}",
+                },
+                "ProvisionedThroughput": {
+                  "ReadCapacityUnits": {{index["throughput"]["read_units"]}},
+                  "WriteCapacityUnits": {{index["throughput"]["write_units"]}}
+                }
+            }
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          {% endif %}
+           {% if settings["stream"] %}
+              "StreamSpecification": {
+                "StreamViewType": "{{settings["stream"]["type"]}}"
+              }
+            {% endif %}
+        },
+}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,10 @@
+{
+{% for apigateway, settings in apigateway.iteritems() %}
+  "{{apigateway}}": {
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-API-{{apigateway}}" }},
+    "Value": { "Ref": "{{apigateway}}" },
+    "Description": "{{apigateway}} API gateway"
+  }
+  {% if not loop.last %},{% endif %}
+{% endfor %}
+}

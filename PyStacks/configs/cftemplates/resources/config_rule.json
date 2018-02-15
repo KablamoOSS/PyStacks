@@ -1,0 +1,62 @@
+{
+{% for config_rule, settings in config_rule.iteritems() %}
+    "{{config_rule}}": {
+        "Type" : "AWS::Config::ConfigRule",
+        "Properties" : {
+            "ConfigRuleName" : "{{settings["name"]}}",
+        {% if settings["description"] %}
+            "Description" : "{{settings["description"]}}",
+        {% endif %}
+        {% if settings["inputparams"] %}
+            "InputParameters" : { 
+            {% for k, v in settings["inputparams"].iteritems() %}
+                "{{ k }}" : 
+                {% if v is iterable %}    
+                    {{v}}
+                {% else %}
+                    "{{v}}"
+                {% endif %}
+                {% if not loop.last %},{% endif %}
+            {% endfor %}
+            },
+        {% endif %}
+        {% if settings["maxfrequency"] %}
+            "MaximumExecutionFrequency" : "{{settings["maxfrequency"]}}",
+        {% endif %}
+        {% if settings["scope"] %}
+            "Scope" : {
+            {% if settings["scope"]["resourceid"] and settings["scope"]["resourcetype"] %}
+                "ComplianceResourceId" : "{{settings["scope"]["resourceid"]}}",
+                "ComplianceResourceTypes" : [
+                {% for resourcetype in settings["scope"]["resourcetype"] %}
+                    "{{resourcetype}}"{% if not loop.last %},{% endif %}
+                ],
+                {% endfor %}
+            {% endif %}
+            {% if settings["scope"]["tagkey"] and settings["scope"]["tagvalue"] %}
+                "TagKey" : "{{settings["scope"]["tagkey"]}}",
+                "TagValue" : "{{settings["scope"]["tagvalue"]}}"
+            },
+            {% endif %}
+        {% endif %}
+            "Source" : {
+                "Owner" : "{{settings["source"]["owner"]}}",
+            {% if settings["source"]["details"] %}
+                "SourceDetails" : [ 
+                {% for source, source_settings in settings["source"]["details"].iteritems() %}
+                    {
+                    "EventSource" : "{{source}}",
+                    {% if source_settings["frequency"] %}
+                    "MaximumExecutionFrequency" : "{{source_settings["frequency"]}}",
+                    {% endif %}
+                    "MessageType" : "{{source_settings["messagetype"]}}"
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+                ],
+            {% endif %}
+                "SourceIdentifier" : "{{settings["source"]["sourceid"]}}",
+            }
+        }
+    }
+{% endfor %}
+}

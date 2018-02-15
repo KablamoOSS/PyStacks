@@ -1,0 +1,41 @@
+description: "Test Database Instance"
+region: "ap-southeast-2"
+stackname: ExampleStacks-RDS
+parameters:
+  VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
+  SecurityStack: {Deccription: Security Group Stack, type: String, value: ExampleStacks-SecurityGroups}
+  RDSParasGroupStack: {Deccription: RDS Params Stack, type: String, value: ExampleStacks-RDS-ParamsGroup}
+  RDSSubnetStack: {Deccription: RDS Subnet Stack, type: String, value: ExampleStacks-RDS-SubnetGroup}
+mappings:
+    AMIRegionMap:
+        us-east-1: { "32" : "ami-6411e20d", "64" : "ami-6411e20d"}
+        us-west-1: { "32" : "ami-c9c7978c", "64" : "ami-6411e20d"}
+        eu-west-1: { "32" : "ami-37c2f643", "64" : "ami-6411e20d"}
+        ap-southeast-1: { "32" : "ami-66f28c34",  "64" : "ami-6411e20d"}
+        ap-northeast-1: { "32" : "ami-9c03a89d",  "64" : "ami-6411e20d"}
+resources:
+  rds:
+    examplemysql:
+      allocatedstorage: "100"
+      allowmajorupgrade: true
+      allowminorupgrade: true
+      backupretention: "15"
+      backupwindow: 
+      clustername: RandomMySQL
+      engine: mysql
+      engineversion: 5.5
+      instanceclass: db.m3.xlarge
+      iops: 100
+      kmskeyid: kmsmaster
+      rdsparamsgroup: 
+      rdssubnetgroup:
+      multiaz: true
+      masterusername: admin
+      masterpassword: password
+      monitorinterval: 5
+      monitorarn: aws:arn:012345678901:/role/namespace/rolename
+      port: 1443
+      maintenancewindow: 
+      storagetype: standard
+      secgroup: randommysql
+      tags: {Name : SquidELB, Taking : care of moar business}

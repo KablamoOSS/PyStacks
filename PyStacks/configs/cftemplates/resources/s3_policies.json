@@ -1,0 +1,11 @@
+{
+{% for policy, settings in s3_policies.iteritems() %}
+"{{policy}}": {
+  "Type": "AWS::S3::BucketPolicy",
+  "Properties" : {
+    {{ settings["policy"]}}
+  }
+}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

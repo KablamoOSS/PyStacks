@@ -1,0 +1,18 @@
+{
+{% for event, settings in lambda_events.iteritems() %}
+  "{{event}}": {
+    "Type": "AWS::Lambda::EventSourceMapping",
+    "Properties": {
+      {% if settings["batchsize"] %}
+      "BatchSize" : "{{ settings["batchsize"] }}",
+      {% endif %}
+      {% if settings["enabled"] %}
+      "Enabled" : "{{ settings["enabled"] }}",
+      {% endif %}
+      "EventSourceArn" : "{{ settings["sourcearn"] }}",
+      "FunctionName" : "{{ settings["lambda"] }}",
+      "StartingPosition" : "{{ settings["startingposition"] }}"
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

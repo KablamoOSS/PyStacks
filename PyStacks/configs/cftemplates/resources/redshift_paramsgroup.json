@@ -1,0 +1,19 @@
+{
+  {% for paramsgroup, settings in redshift_paramsgroup.iteritems() %}
+  "{{paramsgroup}}": {
+	  "Type" : "AWS::Redshift::ClusterParameterGroup",
+	  "Properties" : {
+	    "Description" : "{{settings["description"]}}",
+	    "ParameterGroupFamily" : "{{settings["groupfamily"]}}",
+	    "Parameters" : [
+	    {% for k, v in settings["parameters"].iteritems() %}
+	    	{
+	      "ParameterName" : "{{ k }}",
+	      "ParameterValue" : "{{ v }}"
+	    	}{% if not loop.last %},{% endif %}
+	    {% endfor %}
+	    ]
+	  }
+	}{% if not loop.last %},{% endif %}
+	{% endfor %}
+}

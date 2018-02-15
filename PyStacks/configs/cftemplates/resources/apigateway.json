@@ -1,0 +1,400 @@
+{
+{% for apigateway, settings in apigateway.iteritems() %}
+  "{{apigateway}}": {
+    "Type": "AWS::ApiGateway::RestApi",
+    "Properties": {
+    {% if settings["description"] %}
+      "Description" : "{{settings["description"]}}",
+    {% endif %}
+    {% if settings["failOnWarnings"] %}
+      "FailOnWarnings" : "{{settings["failOnWarnings"]|lower}}",
+    {% endif %}
+      "Name" : "{{settings["name"]}}"
+    }
+  },
+{% if settings["resources"] %}
+{% for resourceName, resource in settings["resources"].iteritems() %}
+  "{{resourceName}}": {
+    "Type": "AWS::ApiGateway::Resource",
+  {% if resource["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in resource["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+    "Properties": {
+    {% if resource["pathPart"] %}
+      "PathPart" : "{{resource["pathPart"]}}",
+    {% endif %}
+    {% if resource["parent"] %}
+      "ParentId" : {"Ref": "{{resource["parent"]}}"},
+    {% else %}
+      "ParentId" : {"Fn::GetAtt": ["{{apigateway}}", "RootResourceId"]},
+    {% endif %}
+      "RestApiId": {"Ref": "{{apigateway}}"}
+    }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["methods"] %}
+{% for methodName, method in settings["methods"].iteritems() %}
+  "{{methodName}}": {
+    "Type" : "AWS::ApiGateway::Method",
+  {% if method["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in method["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+    "Properties": {
+    {% if method["apiKeyRequired"] %}
+      "ApiKeyRequired" : "{{method["apiKeyRequired"]|lower}}",
+    {% endif %}
+    {% if method["authorizationType"] %}
+      "AuthorizationType" : "{{method["authorizationType"]}}",
+    {% endif %}
+    {% if method["authorizerId"] %}
+      "AuthorizerId" : "{{method["authorizerId"]}}",
+    {% endif %}
+    {% if method["httpMethod"] %}
+      "HttpMethod" : "{{method["httpMethod"]}}",
+    {% endif %}
+    {% if method["resource"] %}
+      "ResourceId" : {"Ref": "{{method["resource"]}}"},
+    {% else %}
+      "ResourceId" : {"Fn::GetAtt": ["{{apigateway}}", "RootResourceId"]},
+    {% endif %}
+    {% if method["methodResponses"] %}
+      "MethodResponses" : [
+        {% for responses in method["methodResponses"] %}
+          {
+          "StatusCode": "{{responses["statuscode"]}}",
+          {% if responses["responseparameters"] %}
+          "ResponseParameters": {
+          {% for k, v in responses["responseparameters"].iteritems() %}
+            "method.response.header.{{ k }}":"{{ v }}",
+          {% endfor %}
+          },
+          {% endif %}
+          {% if responses["responseModels"] %}
+          "ResponseModels": {
+          {% for k, v in responses["responseModels"].iteritems() %}
+            "{{ k }}":"{{ v }}",
+          {% endfor %}
+          }
+          {% endif %}
+          },
+        {% endfor %}
+      ],
+    {% endif %}
+    {% if method["integration"] %}
+    {% set integration = method["integration"] %}
+      "Integration": {
+      {% if integration["cacheKeyParameters"] %}
+        "CacheKeyParameters": [
+        {% for v in integration["cacheKeyParameters"] %}
+          "{{ v }}",
+        {% endfor %}
+        ],
+      {% endif %}
+      {% if integration["cacheNamespace"] %}
+        "CacheNamespace" : "{{integration["cacheNamespace"]}}",
+      {% endif %}
+      {% if integration["integrationHttpMethod"] %}
+        "IntegrationHttpMethod" : "{{integration["integrationHttpMethod"]}}",
+      {% endif %}
+      {% if integration["passthroughBehavior"] %}
+        "PassthroughBehavior" : "{{integration["passthroughBehavior"]}}",
+      {% endif %}
+      {% if integration["requestParameters"] %}
+        "RequestParameters" : {
+            {% for k, v in integration["requestParameters"].iteritems() %}
+              "integration.request.header.{{ k }}":"'{{ v }}'",
+            {% endfor %}
+         },
+      {% endif %}
+      {% if integration["requestTemplates"] %}
+        "RequestTemplates" : {
+            {% for k, v in integration["requestTemplates"].iteritems() %}
+              "{{ k }}":"{{ v }}",
+            {% endfor %}
+         },
+      {% endif %}
+      {% if integration["integrationresponses"] %}
+        "IntegrationResponses" : [
+        {% for responses in integration["integrationresponses"] %}
+          {
+          {% if responses["selectionpattern"] %}
+            "SelectionPattern" : "{{responses["selectionpattern"]}}",
+          {% endif %}
+            "StatusCode": "{{responses["statuscode"]}}",
+            {% if responses["responseparameters"] %}
+            "ResponseParameters": {
+              {% for k, v in responses["responseparameters"].iteritems() %}
+              "method.response.header.{{ k }}":"'{{ v }}'",
+              {% endfor %}
+            },
+            {% endif %}
+            {% if responses["responsetemplates"] %}
+            "ResponseTemplates": {
+            {% for k, v in responses["responsetemplates"].iteritems() %}
+              "{{ k }}":"{{ v }}",
+            {% endfor %}
+            }
+            {% endif %}
+          },
+        {% endfor %}
+        ],
+      {% endif %}
+      {% if integration["lambda"] %}
+        "Uri": {"Fn::Join" : ["",
+          ["arn:aws:apigateway:", {"Ref": "AWS::Region"}, ":lambda:path/2015-03-31/functions/", {"Fn::GetAtt": ["{{integration["lambda"]}}", "Arn"]}, "/invocations"]
+        ]},
+      {% endif %}
+      {% if integration["kinesis"] %}
+        "Uri": {"Fn::Join" : ["",
+          ["arn:aws:apigateway:", {"Ref": "AWS::Region"}, ":kinesis:action/", "{{integration["kinesis"]["action"]}}"]
+        ]},
+      {% endif %}
+      {% if integration["credentials"] %}
+        "Credentials" : "{{integration["credentials"]}}",
+      {% endif %}
+        "Type" : "{{integration["type"]}}"
+      },
+    {% endif %}
+      "RestApiId": {"Ref": "{{apigateway}}"}
+    }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["stages"] %}
+{% for stageName, stage in settings["stages"].iteritems() %}
+  "{{stageName}}": {
+    "Type": "AWS::ApiGateway::Stage",
+    "Properties": {
+      "RestApiId": {"Ref": "{{apigateway}}"},
+    {% if stage["deployment"] %}
+      "DeploymentId": {"Ref": "{{stage["deployment"]}}"},
+    {% endif %}
+    {% if stage["stageName"] %}
+      "StageName" : "{{stage["stageName"]}}",
+    {% endif %}
+    {% if stage["cacheClusterEnabled"] %}
+      "CacheClusterEnabled" : "{{stage["cacheClusterEnabled"]}}",
+    {% endif %}
+    {% if stage["cacheClusterSize"] %}
+      "CacheClusterSize" : "{{stage["cacheClusterSize"]}}",
+    {% endif %}
+    {% if stage["clientCertificateId"] %}
+      "ClientCertificateId" : "{{stage["clientCertificateId"]}}",
+    {% endif %}
+    {% if stage["description"] %}
+      "Description" : "{{stage["description"]}}",
+    {% endif %}
+      "Variables": {
+      {% for k, v in stage["variables"].iteritems() %}
+        "{{ k }}": "{{ v }}",
+      {% endfor %}
+      },
+    {% if stage["methodSettings"] %}
+      "MethodSettings": [
+      {% for method in stage["methodSettings"] %}
+        {
+        {% if method["cacheDataEncrypted"] %}
+          "CacheDataEncrypted" : "{{method["cacheDataEncrypted"]}}",
+        {% endif %}
+        {% if method["cacheTtlInSeconds"] %}
+          "CacheTtlInSeconds" : "{{method["cacheTtlInSeconds"]}}",
+        {% endif %}
+        {% if method["cachingEnabled"] %}
+          "CachingEnabled" : "{{method["cachingEnabled"]}}",
+        {% endif %}
+        {% if method["dataTraceEnabled"] %}
+          "DataTraceEnabled" : "{{method["dataTraceEnabled"]}}",
+        {% endif %}
+        {% if method["loggingLevel"] %}
+          "LoggingLevel" : "{{method["loggingLevel"]}}",
+        {% endif %}
+        {% if method["metricsEnabled"] %}
+          "MetricsEnabled" : "{{method["metricsEnabled"]}}",
+        {% endif %}
+        {% if method["throttlingBurstLimit"] %}
+          "ThrottlingBurstLimit" : "{{method["throttlingBurstLimit"]}}",
+        {% endif %}
+        {% if method["throttlingRateLimit"] %}
+          "ThrottlingRateLimit" : "{{method["throttlingRateLimit"]}}",
+        {% endif %}
+          "ResourcePath" : "{{method["resourcePath"]}}",
+          "HttpMethod" : "{{method["httpMethod"]}}"
+        },
+      {% endfor %}
+      ]
+    {% endif %}
+    }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["basePathMappings"] %}
+{% for basePathMappingName, basePathMapping in settings["basePathMappings"].iteritems() %}
+  "{{basePathMappingName}}": {
+    "Type": "AWS::ApiGateway::BasePathMapping",
+  {% if basePathMapping["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in basePathMapping["dependsOn"] %}
+      "{{ v }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+  {% endif %}
+    "Properties": {
+    {% if basePathMapping["basePath"] %}
+      "BasePath" : "{{basePathMapping["basePath"]}}",
+    {% endif %}
+    {% if basePathMapping["domainName"] %}
+      "DomainName" : "{{basePathMapping["domainName"]}}",
+    {% endif %}
+    {% if basePathMapping["stage"] %}
+      "Stage" : {"Ref": "{{basePathMapping["stage"]}}"},
+    {% endif %}
+      "RestApiId": {"Ref": "{{apigateway}}"}
+    }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["deployments"] %}
+{% for deploymentName, deployment in settings["deployments"].iteritems() %}
+  "{{deploymentName}}": {
+    "Type": "AWS::ApiGateway::Deployment",
+  {% if deployment["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in deployment["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+    "Properties": {
+  {% if deployment["stageName"] %}
+      "StageName" : "{{deployment["stageName"]}}",
+  {% endif %}
+      "RestApiId": {"Ref": "{{apigateway}}"}
+    }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["apikeys"] %}
+{% for apikeyname, apikey in settings["apikeys"].iteritems() %}
+"{{apikeyname}}":{
+    {% if apikey["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in apikey["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+  "Type" : "AWS::ApiGateway::ApiKey",
+  "Properties" : {
+    "Description" : "{{apikey["description"]}}",
+    "Enabled" : "{{apikey["enabled"]|lower}}",
+    "Name" : "{{apikey["name"]}}",
+    "StageKeys" : [
+        {% for stage in apikey["stages"] %}
+          {
+          "RestApiId": {"Ref": "{{stage["resource"]}}"},
+          "StageName": "{{stage["stage"]}}"
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+  }
+  },
+{% endfor %}
+{% endif %}
+{% if settings["usageplans"] %}
+{% for usageplanname, usageplan in settings["usageplans"].iteritems() %}
+"{{usageplanname}}":{
+  {% if usageplan["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in usageplan["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+  "Type" : "AWS::ApiGateway::UsagePlan",
+  "Properties" : {
+    "UsagePlanName" : "{{usageplanname}}",
+    "Description" : "{{usageplan["description"]}}",
+    {% if usageplan["limit"] or usageplan["offset"] or usageplan["period"] %}
+    "Quota" : {
+      "Limit" : {{usageplan["limit"]}},
+      "Offset" : {{usageplan["offset"]}},
+      "Period" : "{{usageplan["period"]}}"
+    },
+    {% endif %}
+    {% if usageplan["burst"] or usageplan["rate"] %}
+    "Throttle" : {
+      "BurstLimit" : {{usageplan["burst"]}},
+      "RateLimit" : {{usageplan["rate"]}}
+    },
+    {% endif %}
+    "ApiStages" : [
+      {% for stage in usageplan["stages"] %}
+        {
+          "ApiId": {"Ref": "{{stage["api"]}}"},
+          "Stage": "{{stage["stage"]}}"
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  },
+  {% for usageapikey in usageplan["keys"] %}
+    "{{usageapikey}}usageplankey": {
+      "Type" : "AWS::ApiGateway::UsagePlanKey",
+      "Properties" : {
+        "KeyId" : {"Ref": "{{usageapikey}}"},
+        "KeyType" : "API_KEY",
+        "UsagePlanId" : {"Ref": "{{usageplanname}}"}
+      }
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+{% endfor %}
+{% endif %}
+{% if settings["domainnames"] %}
+{% for domainname, dnsettings in settings["domainnames"].iteritems() %}
+,"{{domainname}}domainname": {
+  {% if dnsettings["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in dnsettings["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+  "Type" : "AWS::ApiGateway::DomainName",
+  "Properties" : {
+    "DomainName" : "{{dnsettings['domainname']}}",
+    "CertificateArn" : "{{dnsettings['certificatearn']}}"
+  }
+}
+{% if dnsettings["basepathmappings"] %}
+{% for basepathmapping, bpmsettings in dnsettings["basepathmappings"].iteritems() %}
+,"{{domainname}}{{basepathmapping}}basepathmapping": {
+  {% if bpmsettings["dependsOn"] %}
+    "DependsOn" : [
+    {% for v in bpmsettings["dependsOn"] %}
+      "{{ v }}",
+    {% endfor %}
+    ],
+  {% endif %}
+  "Type" : "AWS::ApiGateway::BasePathMapping",
+  "Properties" : {
+    "BasePath" : "{{bpmsettings["basepath"]}}",
+    "DomainName" : "{{dnsettings['domainname']}}",
+    "RestApiId" : { "Ref" : "{{apigateway}}" },
+    "Stage" : "{{bpmsettings["stage"]}}",
+  }
+}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,73 @@
+{#
+# WIP
+#}
+{
+{% for rdscluster, settings in rdscluster.iteritems() %}
+"{{rdscluster}}":{
+  "Type" : "AWS::RDS::DBCluster",
+  {% if settings["deletionpolicy"] %}
+  "DeletionPolicy" : "{{settings["deletionpolicy"]}}",
+  {% endif %}
+  "Properties" :
+  {
+    {% if settings["az"] %}
+    "AvailabilityZones": { "Fn::Join": [ "", [ { "Ref" : "AWS::Region" }, "{{settings["az"]}}" ] ] },
+    {% endif %}
+    {% if settings["backupretention"] %}
+    "BackupRetentionPeriod" : "{{settings["backupretention"]}}",
+    {% endif %}
+    {% if settings['dbname'] %}
+    "DatabaseName" : "{{settings["dbname"]}}",
+    {% endif %}
+    {% if settings['rdsparamgroup'] %}
+    "DBClusterParameterGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RDSClusterParamGroupStack}-RDS-{{settings["rdsparamgroup"]}}-ParamsGroup", {"RDSClusterParamGroupStack":  {"Ref": "RDSClusterParamGroupStack"}}] }},
+    {% endif %}
+    "DBSubnetGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RDSSubnetStack}-RDS-{{settings["rdssubnetgroup"]}}-Subnet", {"RDSSubnetStack":  {"Ref": "RDSSubnetStack"}}] }},
+    "Engine" : "{{settings["engine"]}}",
+    "EngineVersion" : "{{settings["engineversion"]}}",
+    {% if settings["kmskeyid"] %}
+    "KmsKeyId" : "{{settings["kmskeyid"]}}",
+    {% endif %}
+    {% if settings["snapshotid"] %}
+        "SnapshotIdentifier" : "{{settings["snapshotid"]}}",
+    {% else %}
+        {% if settings["masterusername"] %}
+    "MasterUsername" : "{{settings["masterusername"]}}",
+        {% endif %}
+    "MasterUserPassword" : {"Ref": "DBPassword"},
+    {% endif %}
+    "Port" : "{{settings["port"]}}",
+    "PreferredBackupWindow" : "{{settings["backupwindow"]}}",
+    "PreferredMaintenanceWindow" : "{{settings["maintenancewindow"]}}",
+    "StorageEncrypted" : "{{settings["storageencryption"]|lower}}",
+    "VpcSecurityGroupIds" : [ 
+    {% for secgroup in settings["secgroups"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{secgroup}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+    {% endfor %} 
+    ]{% if settings["tags"] %},
+    "Tags" : [      
+{% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]{% endif %}}
+  }{% if settings["zoneid"] %},
+  "{{rdscluster|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{rdscluster}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{settings["zoneprefix"]}}.{{settings["zonesuffix"]}}",
+        "Type" : "CNAME",
+        "ResourceRecords" : [
+            { "Fn::GetAtt" : [ "{{rdscluster}}", "Endpoint.Address" ] }
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{rdscluster}}.{{settings["zonesuffix"]}}"
+        }
+      ]
+    }
+  }{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

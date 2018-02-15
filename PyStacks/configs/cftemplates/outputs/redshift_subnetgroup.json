@@ -1,0 +1,9 @@
+{
+{% for redshiftsubnetgroup, settings in redshift_subnetgroup.iteritems() %}
+    "{{redshiftsubnetgroup}}": {
+      "Description": "{{redshiftsubnetgroup}} Redshift Subnet Group",
+      "Value": { "Ref": "{{redshiftsubnetgroup}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RedshiftSubnetGroup-{{redshiftsubnetgroup}}" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

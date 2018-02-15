@@ -1,0 +1,9 @@
+{
+  {% for efsmount, settings in efsmount.iteritems() %}
+  "{{efsmount}}": {
+    "Description": "{{efsmount}} Mount",
+    "Value": { "Ref": "{{efsmount}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-EFSMount-{{efsmount}}" }}
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

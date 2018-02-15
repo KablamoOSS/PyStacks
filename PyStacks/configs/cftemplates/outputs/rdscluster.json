@@ -1,0 +1,19 @@
+{
+{% for rdscluster, settings in rdscluster.iteritems() %}
+    "{{rdscluster}}": {
+      "Description": "{{rrdsclusterds}} RDS",
+      "Value": { "Ref": "{{rdscluster}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rdscluster}}" }}
+      },
+    "{{rdscluster}}EndPoint": {
+      "Description": "{{rdscluster}} Endpoint",
+      "Value": { "Fn::GetAtt" : [ "{{rdscluster}}", "Endpoint.Address" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rdscluster}}-EndPoint" }}
+      },
+    "{{rdscluster}}Port": {
+      "Description": "{{rdscluster}} Port",
+      "Value": { "Fn::GetAtt" : [ "{{rdscluster}}", "Endpoint.Port" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rdscluster}}-Port" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,23 @@
+{
+{% for key, settings in kms.iteritems() %}
+  "{{ key }}": {
+    "Type" : "AWS::KMS::Key",
+    "Properties" : {
+      "Description" : "{{ settings["description"] }}",
+      "Enabled" : "{{ settings["enabled"]|lower }}",
+      "EnableKeyRotation" : "{{ settings["rotation"]|lower }}"
+      {% if settings["policy"] %}
+      ,"KeyPolicy" :
+      {{ settings["policy"] }}
+      {% endif %}
+    }
+  },
+  "{{key}}Alias": {
+    "Type" : "AWS::KMS::Alias",
+    "Properties" : {
+      "AliasName": "alias/{{ settings["aliasname"] }}",
+      "TargetKeyId": {"Ref": "{{ key }}"}
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

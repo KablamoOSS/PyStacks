@@ -1,0 +1,10 @@
+{
+{% for ecs, settings in ecs.iteritems() %}
+  "{{ecs}}":{
+    "Type" : "AWS::ECS::Cluster",
+    "Properties" : {
+      "ClusterName" : "{{settings["clustername"]}}"
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

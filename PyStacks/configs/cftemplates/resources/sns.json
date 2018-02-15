@@ -1,0 +1,27 @@
+{
+{% for sns, settings in sns.iteritems() %}
+  "{{sns}}": {
+    "Type" : "AWS::SNS::Topic",
+    "Properties" : {
+      "DisplayName" : "{{settings['displayname']}}",
+      "Subscription" : [
+      {% for sub in settings['subscription'] %}
+        {
+          {% if sub['endpointtype']=="export" and sub['protocol']=="lambda" %}
+          "Endpoint" : { "Fn::ImportValue" : {"Fn::Sub" : ["${LambdaStack}-Lambda-{{sub["value"]}}-ARN", {"LambdaStack":  {"Ref": "LambdaStack"}}] }},
+          {% elif sub['endpointtype']=="export" and sub['protocol']=="sqs" %}
+          "Endpoint" : { "Fn::ImportValue" : {"Fn::Sub" : ["${SQSStack}-SQS-{{sub["value"]}}-ARN", {"SQSStack":  {"Ref": "SQSStack"}}] }},
+          {% else %}
+          "Endpoint" : { "Ref": "{{sub["value"]}}" },
+          {% endif %}
+          "Protocol" : "{{sub['protocol']}}"
+        }
+      {% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      "TopicName" : "{{settings['topicname']}}"
+    }
+  }
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

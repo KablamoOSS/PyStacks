@@ -1,0 +1,25 @@
+{
+{% for efs_filesystem, settings in efs_filesystem.iteritems() %}
+"{{efs_filesystem}}": {
+	"Type": "AWS::EFS::FileSystem",
+	"Properties": {
+		{% if settings["filesystemtags"] %}
+		"FileSystemTags": [
+			{% for k, v in settings["filesystemtags"].iteritems() %}
+			{ "Key": "{{k}}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+			{% endfor %}
+		],
+		{% endif %}
+		{% if settings["encrypted"] %}
+		"Encrypted": {{settings["encrypted"]}},
+		{% endif %}
+		{% if settings["kmskeyid"] %}
+		"KmsKeyId": "{{settings["kmskeyid"]}}",
+		{% endif %}
+		{% if settings["performancemode"] %}
+		"PerformanceMode": "{{settings["performancemode"]}}",
+		{% endif %}
+	}
+}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

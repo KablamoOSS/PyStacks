@@ -1,0 +1,9 @@
+{
+{% for elasticache, settings in elasticache.iteritems() %}
+    "{{elasticache}}": {
+      "Description": "{{elasticache}} ElastiCache ParamsGroup",
+      "Value": { "Ref": "{{elasticache}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ElastiCache-{{elasticache}}" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

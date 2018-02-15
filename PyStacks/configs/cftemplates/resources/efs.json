@@ -1,0 +1,20 @@
+{# Not included in Spec ####
+
+ PerformanceMode: generalPurpose | maxIO
+
+#}
+{
+{% for efs, settings in efs.iteritems() %}
+  "{{ efs }}": {
+    "Type" : "AWS::EFS::FileSystem",
+    "Properties" : {
+      "FileSystemTags" : [
+      {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      "PerformanceMode" : "{{settings["performancemode"]}}"
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

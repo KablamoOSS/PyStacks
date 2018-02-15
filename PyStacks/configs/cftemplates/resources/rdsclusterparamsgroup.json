@@ -1,0 +1,20 @@
+{
+{% for rdsclusterparamsgroup, settings in rdsclusterparamsgroup.iteritems() %}
+"{{rdsclusterparamsgroup}}":{
+  "Type" : "AWS::RDS::DBClusterParameterGroup",
+  "Properties" : {
+    "Description" : "{{settings["description"]}}",
+    "Family" : "{{settings["family"]}}",
+    "Parameters" : {
+    {% for k, v in settings["parameters"].iteritems() %}
+      "{{ k }}" : "{{v}}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    }{% if settings["tags"] %},
+    "Tags" : [      
+	{% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+	{% endfor %}
+    ]{% endif %}}
+   }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

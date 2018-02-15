@@ -1,0 +1,49 @@
+description: "Example Account VPC"
+region: "ap-southeast-2"
+stackname: Example-VPC
+parameters:
+    CoreIpRange: {Description: Core, Type: String, Default: 10.0.0.0/8}
+    ServerIpRange: {Description: Mi9 Equinix,Type: String,Default: 192.168.96.0/20}
+    GlobalIpRange: {Description: Global IPRange, Type: String, Default: 0.0.0.0/0}
+    DirectConnectIpRange: {Description: Direct Connect Peer IPRange, Type: String, Default: 169.254.247.0/24}
+    VGW: {Description: VPC Gateway, Type: String, Default: vgw-nullnull}
+mappings: {}
+resources:
+    vpc:
+        Details: {VPC_Name: EXAMPLEVPC, VPC_Desc: Example VPC, VPC_CIDR: 10.0.0.0/20, Region: ap-southeast-2}
+        Tags: {Name : EXAMPLE-VPC, Taking : care of business}            
+        DHCP: {dhcp_name: DhcpOptions, dhcp_dns_servers: 10.0.0.2, dhcp_ntb_type: 2}
+        Subnets:
+            ReservedMgmt1: {CIDR: 10.0.0.0/26, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            ReservedMgmt2: {CIDR: 10.0.1.0/26, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            ReservedMgmt3: {CIDR: 10.0.2.0/26, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            ReservedNet1: {CIDR: 10.0.0.192/26, AZ: 0, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+            ReservedNet2: {CIDR: 10.0.1.192/26, AZ: 1, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+            ReservedNet3: {CIDR: 10.0.2.192/26, AZ: 2, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+            Internal1: {CIDR: 10.0.3.0/24, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            Internal2: {CIDR: 10.0.4.0/24, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            Internal3: {CIDR: 10.0.5.0/24, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            PerimeterInternal1: {CIDR: 10.0.6.0/24, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            PerimeterInternal1: {CIDR: 10.0.7.0/24, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            PerimeterInternal1: {CIDR: 10.0.8.0/24, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
+            PerimeterExternal1: {CIDR: 10.0.9.0/24, AZ: 0, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+            PerimeterExternal1: {CIDR: 10.0.10.0/24, AZ: 1, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+            PerimeterExternal1: {CIDR: 10.0.11.0/24, AZ: 2, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+        Routetables:
+            PublicRT:
+                routes: {route_name: PublicRoute, route_cidr: 0.0.0.0/0,  route_gw: InternetGateway}
+            InternalRT:
+                routes: {}
+        NetworkAcls:
+            RestrictedSubnetAcl:
+                RestrictedSubnetAclEntryInTCPUnReserved: 201,6,allow,false,0.0.0.0/0,1024,65535
+                RestrictedSubnetAclEntryInUDPUnReserved: 202,17,allow,false,0.0.0.0/0,1024,65535
+                RestrictedSubnetAclEntryOutHTTP: 101,6,allow,true,0.0.0.0/0,80,80
+                RestrictedSubnetAclEntryOutHTTPS: 102,6,allow,true,0.0.0.0/0,443,443
+                RestrictedSubnetAclEntryOutTcpUnReserved: 203,6,allow,true,0.0.0.0/0,1024,65535
+                RestrictedSubnetAclEntryOutUdpUnReserved: 204,17,allow,true,0.0.0.0/0,1024,65535
+            InternalSubnetAcl:
+                InternalSubnetAclEntryInTCPUnreserved: 201,6,allow,false,0.0.0.0/0,1024,65535
+                InternalSubnetAclEntryInUDPUnreserved: 202,17,allow,false,0.0.0.0/0,1024,65535
+                InternalSubnetAclEntryOutTCPUnreserved: 203,6,allow,true,10.0.0.0/8,1024,65535
+                InternalSubnetAclEntryOutUDPUnreserved: 204,6,allow,true,10.0.0.0/8,1024,65535

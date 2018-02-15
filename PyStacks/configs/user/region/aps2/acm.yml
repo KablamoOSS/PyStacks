@@ -1,0 +1,12 @@
+description: "ExampleStacks ACM List"
+stackname: "ExampleStacks-ACM-Certs"
+region: "ap-southeast-2"
+parameters: {}
+mappings: {}
+resources:
+  certificatemanager:
+    shopexamplecom:
+      domainname: shop.example.com
+      domainvalidationoptions: {shop.example.com: example.com, www.shop.example.com: example.com}
+      subjectalternativenames: ["www.shop.example.com"]
+      tags: {Name : Shop Certificate}

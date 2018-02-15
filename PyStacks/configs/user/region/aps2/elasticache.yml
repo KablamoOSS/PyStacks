@@ -1,0 +1,14 @@
+description: "Example elasticache"
+region: "ap-southeast-2"
+stackname: "ExampleStacks-Elasticache"
+parameters:
+  SecurityStack: {Deccription: Security Group Stack, type: String, value: ExampleStacks-SecurityGroups}
+  CacheSubnetStack: {Description: Cache Subnet Stack, Type: String, Default: ExampleStacks-ElastiCache-SubnetGroups}
+mappings: {}
+resources:
+  elasticache:
+    exampleCache:
+      name: example-cache
+      cacheSubnetGroup: elasticacheinternal
+      secgroups:
+        - ExampleRedisSecurity

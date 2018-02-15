@@ -1,0 +1,21 @@
+{
+{% for subnet, settings in vpc["Subnets"].iteritems() %}
+"{{subnet}}": {
+    "Description": "{{subnet}}",
+    "Value": { "Ref" : "{{subnet}}" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Subnet-{{subnet}}" }}
+},
+{% endfor %}
+{% for table, routename in vpc["Routetables"].iteritems() %}
+"{{table}}": {
+    "Description": "{{table}}",
+    "Value": { "Ref" : "{{table}}" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RouteTable-{{table}}" }}
+},
+{% endfor %}
+"VPCid": {
+    "Description": "{{vpc["Details"]["VPC_Name"]}}",
+    "Value": { "Ref" : "{{vpc["Details"]["VPC_Name"]}}" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-VPCid" }}
+}
+}

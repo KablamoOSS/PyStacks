@@ -1,0 +1,70 @@
+{
+{% for policy, settings in asg_policy.iteritems() %}
+   "{{policy}}": {
+    "Type" : "AWS::AutoScaling::ScalingPolicy",
+    "Properties" : {
+      {% if settings["adjustment_type"] %}
+      "AdjustmentType" : "{{settings["adjustment_type"]}}",
+      {% endif %}
+      {% if settings["policy_type"] %}
+      "PolicyType" : "{{settings["policy_type"]}}",
+      {% endif %}
+      {% if settings["cooldown"] %}
+      "Cooldown" : "{{settings["cooldown"]}}",
+      {% endif %}
+      {% if settings["instance_warmup"] %}
+      "EstimatedInstanceWarmup" : {{settings["instance_warmup"]}},
+      {% endif %}
+      {% if settings["aggregation_type"] %}
+      "MetricAggregationType" : "{{settings["aggregation_type"]}}",
+      {% endif %}
+      {% if settings["adjustment_magnitude"] %}
+      "MinAdjustmentMagnitude" : {{settings["adjustment_magnitude"]}},
+      {% endif %}
+      {% if settings["policy_type"] == "StepScaling" %}
+      "StepAdjustments" : [
+        {% for step in settings["stepadjustments"] %}
+        {
+          "MetricIntervalLowerBound" : "{{step["lower"]}}",
+          "MetricIntervalUpperBound" : "{{step["upper"]}}",
+          "ScalingAdjustment" : {{step["adjustment"]}}
+        }
+        {% endfor %}
+      ],
+      {% elif settings["policy_type"] == "TargetTrackingScaling" %}
+      "TargetTrackingConfiguration" :
+      {
+        {% if settings["targettracking"]["custom_metric"] %}
+        "CustomizedMetricSpecification" : {
+          "Dimensions" : [
+          {% for k, v in settings["targettracking"]["custom_metric"]["dimensions"].iteritems() %}
+            {"Name": "{{ k }}", "Value": {"Ref": "{{v}}"}}{% if not loop.last %},{% endif %}
+          {% endfor %}
+          ],
+          {% if settings["targettracking"]["custom_metric"]["unit"] %}
+          "Unit" : "{{settings["targettracking"]["custom_metric"]["unit"]}}",
+          {% endif %}
+          "Namespace" : "{{settings["targettracking"]["custom_metric"]["namespace"]}}",
+          "Statistic" : "{{settings["targettracking"]["custom_metric"]["statistic"]}}",
+          "MetricName" : "{{settings["targettracking"]["custom_metric"]["metric_name"]}}"
+        },
+        {% endif %}
+        {% if settings["targettracking"]["disable_scalein"] %}
+        "DisableScaleIn" : {{settings["targettracking"]["disable_scalein"]}},
+        {% endif %}
+        {% if settings["targettracking"]["predefined_metric"] %}
+        "PredefinedMetricSpecification" : {
+          "PredefinedMetricType" : "{{settings["targettracking"]["predefined_metric"]["metric_type"]}}",
+          "ResourceLabel" : "{{settings["targettracking"]["predefined_metric"]["label"]}}"
+        },
+        {% endif %}
+        "TargetValue" : "{{[settings["targettracking"]]}}"
+      },
+      {% else %}
+      "ScalingAdjustment" : {{settings["scaling_adjustment"]}},
+      {% endif %}
+      "AutoScalingGroupName" : { "Ref": "{{settings["group_name"]}}" }
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

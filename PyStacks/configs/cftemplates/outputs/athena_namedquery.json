@@ -1,0 +1,10 @@
+{
+{% for query, settings in athena_namedquery.iteritems() %}
+  "{{query}}": {
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Athena-{{query}}-NamedQuery" }},
+    "Value": { "Ref": "{{query}}" },
+    "Description": "{{query}} Athena Named Query"
+  }
+  {% if not loop.last %},{% endif %}
+{% endfor %}
+}

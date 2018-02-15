@@ -1,0 +1,15 @@
+{
+{% for efsmount, settings in efsmount.iteritems() %}
+  "{{ efsmount }}": {
+    "Type" : "AWS::EFS::MountTarget",
+    "Properties" : {
+      "FileSystemId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${EFSStack}-EFS-{{settings["filesystemid"]}}", {"EFSStack":  {"Ref": "EFSStack"}}] }},
+      {% if settings["ipaddress"] %}
+      "IpAddress" : "{{settings["ipaddress"]}}",
+      {% endif %}
+      "SecurityGroups" : [{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{settings["securitygroupid"]}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}],
+      "SubnetId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{settings["subnetid"]}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

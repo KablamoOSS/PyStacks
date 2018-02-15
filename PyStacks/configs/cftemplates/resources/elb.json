@@ -1,0 +1,97 @@
+{
+{% for elb, settings in elb.iteritems() %}
+"{{elb}}" : {
+  "Type" : "AWS::ElasticLoadBalancing::LoadBalancer",
+  "Properties" : {
+    "Instances" : [
+    {% for instance in settings["instances"] %}  
+      { "Ref" : "{{instance|replace("-", "")|replace(".", "")}}" }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    {% if settings["lbcookie"] %}
+    "LBCookieStickinessPolicy": [{
+      "CookieExpirationPeriod": {{settings["lbcookie"]}},
+      "PolicyName": "LbStickyPolicy"
+    }],
+    {% endif %}
+    "Scheme" : "{{settings["scheme"]}}",
+    "CrossZone" : "true",
+    {% if settings["idletimeout"] %}
+    "ConnectionSettings": {"IdleTimeout" : {{settings["idletimeout"]}}},
+    {% else %}
+    "ConnectionSettings": {"IdleTimeout" : 10},
+    {% endif  %}
+    {% if settings["policies"] %}
+    "Policies": [
+    {% for policy, policysettings in settings["policies"].iteritems() %}
+      {
+        "PolicyName": "{{policy}}",
+        "Attributes": [{% for k, v in policysettings["attributes"].iteritems() %}{
+            "Name": "{{k}}",
+            "Value": "{{v}}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}],
+        "PolicyType": "{{policysettings["policytype"]}}"
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    {% endif %}
+    "Listeners" : [ 
+    {% for listener, lbsettings in settings["listeners"].iteritems() %}  
+    {
+      "LoadBalancerPort" : "{{lbsettings["port"]}}",
+      "InstancePort" : "{{lbsettings["instanceport"]}}",
+      "Protocol" : "{{lbsettings["protocol"]}}",
+      {% if lbsettings["protocol"] == "HTTPS" %}
+      "SSLCertificateId" : "{{lbsettings["certid"]}}",
+      {% endif %}
+      {% if lbsettings["policynames"] %}
+      "PolicyNames" : [{% for policyname in lbsettings["policynames"] %}
+        "{{policyname}}"{% if not loop.last %},{% endif %}
+      {% endfor %}],
+      {% endif %}
+      "InstanceProtocol" : "{{lbsettings["instanceprotocol"]}}"
+    }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+  "HealthCheck" : {
+      "Target" : "{{settings["healthcheck"]["target"]}}",
+      "HealthyThreshold" : "{{settings["healthcheck"]["healthythreshold"]}}",
+      "UnhealthyThreshold" : "{{settings["healthcheck"]["unhealthythreshold"]}}",
+      "Interval" : "{{settings["healthcheck"]["interval"]}}",
+      "Timeout" : "{{settings["healthcheck"]["timeout"]}}"
+    },
+    "Subnets" : [ 
+    {% for subnet in settings["subnets"] %}
+      { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+    ],
+    "SecurityGroups" : [{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{settings["securitygroupid"]}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}],
+    "Tags" : [      
+    {% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ]}
+  }{% if settings["zoneid"] %},
+  "{{elb|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{elb}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{elb}}.{{settings["zonesuffix"]}}",
+        "Type" : "CNAME",
+        "ResourceRecords" : [
+            { "Fn::GetAtt" : [ "{{elb}}", "DNSName" ] }
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{elb}}.{{settings["zonesuffix"]}}"
+        }]
+    }
+  }{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+}

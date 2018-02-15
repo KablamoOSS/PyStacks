@@ -1,0 +1,13 @@
+description: "Example DNS Records"
+stackname: "ExampleStacks-DNS-Records"
+region: "ap-southeast-2"
+parameters:
+  DNSStack: {Description: DNS Stack, Type: String, Default: ExampleStacks-DNS-Zone}
+mappings: {}
+resources:
+  route53_record:  
+    ExampleRecord:
+      comment: Example Record
+      zoneid: examplecom
+      recordsets:
+        - [test.example.com, A, 10.0.0.1, 10, 5, example-record]

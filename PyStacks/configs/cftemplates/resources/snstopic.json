@@ -1,0 +1,17 @@
+{
+  {% for snstopic, settings in snstopic.iteritems() %}
+  "{{snstopic}}": {
+    "Type" : "AWS::SNS::TopicPolicy",
+    "Properties" :
+      {
+        "PolicyDocument" : "{{settings['policy']}}",
+        "Topics" : [
+        {% for topics in settings['topics'] %}
+          { "Fn::ImportValue" : {"Fn::Sub" : ["${SNSStack}-SNS-{{topics}}", {"SNSStack":  {"Ref": "SNSStack"}}] }}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
+      }
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

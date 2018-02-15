@@ -1,0 +1,110 @@
+{
+{% for lambda, settings in lambda.iteritems() %}
+{% if settings["functionName"] %}
+{% if settings["subscription"] %}
+"{{lambda}}SubscriptionFilter" : {
+  "Type": "AWS::Logs::SubscriptionFilter",
+  "Properties": {
+    "LogGroupName": "/aws/lambda/{{ settings["functionName"] }}",
+    "FilterPattern": "",
+    "DestinationArn": { "Fn::Join" : [ "", [ "arn:aws:lambda:", { "Ref" : "AWS::Region"} ,":", { "Ref" : "AWS::AccountId"} ,":function:{{ settings["subscription"] }}" ] ] }
+  },
+  "DependsOn": "{{lambda}}LogGroup"
+},
+{% endif %}
+{% if settings["logretention"] %}
+"{{lambda}}LogGroup": {
+  "Type": "AWS::Logs::LogGroup",
+  "Properties": {
+    "RetentionInDays": "{{ settings["logretention"] }}",
+    "LogGroupName" : "/aws/lambda/{{ settings["functionName"] }}"
+  },
+},
+{% endif %}
+{% endif %}
+"{{lambda}}": {
+  "Type": "AWS::Lambda::Function",
+  {% if settings["dependsOn"] %}
+  "DependsOn" : [
+    {% for v in settings["dependsOn"] %}
+    "{{ v }}",
+    {% endfor %}
+  ],
+  {% endif %}
+  "Properties": {
+    {% if settings["handler"] %}
+    "Handler" : "{{ settings["handler"] }}",
+    {% endif %}
+    {% if settings["description"] %}
+    "Description" : "{{ settings["description"] }}",
+    {% endif %}
+    "Code": {
+      "S3Bucket": "{{ settings["code"]["s3bucket"]}}",
+      "S3Key": "{{ settings["code"]["key"]}}"
+      {% if settings["code"]["s3objectversion"] %}
+      , "S3ObjectVersion": "{{ settings["code"]["s3objectversion"] }}"
+      {% endif %}
+    },
+    {% if settings["functionName"] %}
+    "FunctionName" : "{{ settings["functionName"] }}",
+    {% endif %}
+    {% if settings["runtime"] %}
+    "Runtime" : "{{ settings["runtime"] }}",
+    {% endif %}
+    {% if settings["memorySize"] %}
+    "MemorySize" : "{{ settings["memorySize"] }}",
+    {% endif %}
+    {% if settings["timeout"] %}
+    "Timeout" : "{{ settings["timeout"] }}",
+    {% endif %}
+    {% if settings["kmskeyarn"] %}
+    "KmsKeyArn" : "{{ settings["kmskeyarn"] }}",
+    {% endif %}
+    {% if settings["environment"] %}
+    "Environment": {
+      "Variables" : {
+      {% for name, value in settings['environment'].iteritems() %}
+        {% if value is string %}
+            {% if '"Ref"' in value %}
+            "{{ name }}": {{ value }}
+            {% else %}
+            "{{ name }}": "{{ value }}"
+            {% endif %}
+        {% else %}
+         "{{ name }}": "{{ value }}"
+        {% endif %}
+        {% if not loop.last %},{% endif %}
+      {% endfor %}
+      }
+    },
+    {% endif %}
+    "Role" : "{{settings["role"]}}"
+
+
+    {% if settings["vpcConfig"] %}
+    ,"VpcConfig": {
+      "SecurityGroupIds" : [
+        {% for group in settings["vpcConfig"]["securityGroups"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{group}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] } }
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      "SubnetIds" : [
+        {% for subnet in settings["vpcConfig"]["subnetIds"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] } }
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if settings["tags"] %}
+    ,"Tags" : [
+      {% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+    {% endif %}
+  },
+},
+{% endfor %}
+}

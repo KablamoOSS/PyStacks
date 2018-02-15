@@ -1,0 +1,34 @@
+{
+{% for cert, settings in certificatemanager.iteritems() %}
+  "{{cert}}": {
+    "Type" : "AWS::CertificateManager::Certificate",
+    "Properties" : {
+    {% if settings["domainvalidationoptions"] %}
+      "DomainValidationOptions" : [
+      {% for domainname, validationdomain in settings["domainvalidationoptions"].iteritems() %}
+        {
+          "DomainName" : "{{domainname}}",
+          "ValidationDomain" : "{{validationdomain}}"
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+    {% endif %}
+    {% if settings["subjectalternativenames"] %}
+      "SubjectAlternativeNames" : [
+      {% for san in settings["subjectalternativenames"] %}
+        "{{san}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+    {% endif %}
+    {% if settings["tags"] %}
+      "Tags" : [
+      {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+    {% endif %}
+      "DomainName" : "{{settings["domainname"]}}"
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

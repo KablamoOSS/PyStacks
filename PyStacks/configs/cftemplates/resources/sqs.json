@@ -1,0 +1,32 @@
+{
+{% for sqs, settings in sqs.iteritems() %}
+   "{{sqs}}" : {
+      "Type" : "AWS::SQS::Queue",
+      "Properties" : {
+         {% if settings["delay"] %}
+         "DelaySeconds": "{{settings["delay"]}}",
+         {% endif %}
+         {% if settings["maxsize"] %}
+         "MaximumMessageSize": "{{settings["maxsize"]}}",
+         {% endif %}
+         {% if settings["fifoqueue"] %}
+         "FifoQueue": "{{settings["fifoqueue"]}}",
+         {% endif %}
+         {% if settings["retention"] %}
+         "MessageRetentionPeriod": "{{settings["retention"]}}",
+         {% endif %}
+         "QueueName": "{{settings["name"]}}",
+         {% if settings["waittime"] %}
+         "ReceiveMessageWaitTimeSeconds": "{{settings["waittime"]}}",
+         {% endif %}
+         {% if settings["redirectpolicy"] %}
+         "RedrivePolicy": {
+            "deadLetterTargetArn" : { "Fn::GetAtt" : ["{{settings["redirectpolicy"]["deadletterqueue"]}}", "Arn"]},
+            "maxReceiveCount" : "{{settings["redirectpolicy"]["count"]}}"
+         },
+         {% endif %}
+         "VisibilityTimeout": "{{settings["visibilitytimeout"]}}"
+      }
+   }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

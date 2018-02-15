@@ -1,0 +1,9 @@
+{
+{% for asg_action, settings in asg_scheduledaction.iteritems() %}
+"{{asg_action}}": {
+  "Description": "{{asg_action}} Scheduled Action",
+  "Value": { "Ref": "{{asg_action}}"},
+  "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ASG-ScheduledAction-{{asg_action}}" }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

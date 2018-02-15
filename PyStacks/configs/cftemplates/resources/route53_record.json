@@ -1,0 +1,27 @@
+{
+  {% for record, settings in route53_record.iteritems() %}
+  "{{record}}": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{settings["comment"]}}",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [ 
+      	{% for set in settings["recordsets"]  %}
+        {
+        "Name" : "{{set[0]}}",
+        "Type" : "{{set[1]}}",
+        {% if 'Fn' in set[2] %}
+        "ResourceRecords" : [{{set[2]}}],
+        {% else %}
+        "ResourceRecords" : ["{{set[2]}}"],
+        {% endif %}
+        "TTL" : "{{set[3]}}",
+        "Weight" : "{{set[4]}}",
+        "SetIdentifier" : "{{set[5]}}"
+        }{% if not loop.last %},{% endif %} 
+      	{% endfor %}	
+      	]
+    }
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

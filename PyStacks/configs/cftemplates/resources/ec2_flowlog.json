@@ -1,0 +1,20 @@
+{#
+
+ResourceType { VPC | Subnet | NetworkInterface }
+TrafficType { ACCEPT | REJECT | ALL }
+
+#}
+{
+  {% for flowlog, settings in ec2_flowlog.iteritems() %}
+  "{{flowlog}}": {
+    "Type" : "AWS::EC2::FlowLog",
+    "Properties" : {
+      "DeliverLogsPermissionArn" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RolesStack}-Role-{{settings["rolearn"]}}-ARN", {"RolesStack":  {"Ref": "RolesStack"}}] }},
+      "LogGroupName" : "{{settings["loggroupname"]}}",
+      "ResourceId" : "{{settings["resourceid"]}}",
+      "ResourceType" : "{{settings["resourcetype"]}}",
+      "TrafficType" : "{{settings["traffictype"]}}"
+    }
+  }
+  {% endfor %}
+}

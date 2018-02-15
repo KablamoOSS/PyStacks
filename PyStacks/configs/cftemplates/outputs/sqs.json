@@ -1,0 +1,19 @@
+{
+  {% for sqs, settings in sqs.iteritems() %}
+  "{{sqs}}": {
+    "Description": "{{sqs}} Object",
+    "Value": { "Ref": "{{sqs}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SQS-{{sqs}}" }}
+  },
+  "{{sqs}}ARN": {
+    "Description": "{{sqs}} ARN",
+    "Value": { "Fn::GetAtt" : [ "{{sqs}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SQS-{{sqs}}-ARN" }}
+  },
+  "{{sqs}}QueueName": {
+    "Description": "{{sqs}} Queue Name",
+    "Value": { "Fn::GetAtt" : [ "{{sqs}}", "QueueName" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SQS-{{sqs}}-QueueName" }}
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

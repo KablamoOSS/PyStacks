@@ -1,0 +1,25 @@
+{
+{% for user, settings in iam_users["Users"].iteritems() %}
+    "{{ user|replace("-", "")|replace(".", "") }}": {
+        "Type": "AWS::IAM::User",
+        "Properties": {
+            "Groups": [ 
+{% for group in settings["Groups"] %}                 
+               {"Ref": "{{group}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+             ],
+            "Path": {"Fn::Join" : [ "", ["/",{ "Ref" : "AccountName" }, "/IAM/Users/"] ]},
+            "UserName": "{{user}}"
+        }
+    },
+{% endfor %}
+{% for group, settings in iam_users["Groups"].iteritems() %}
+    "{{group}}": {
+        "Type": "AWS::IAM::Group",
+        "Properties": {
+            "GroupName": "{{group}}",
+            "Path": {"Fn::Join" : [ "", ["/",{ "Ref" : "AccountName" }, "/IAM/Groups/"] ]}
+        }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

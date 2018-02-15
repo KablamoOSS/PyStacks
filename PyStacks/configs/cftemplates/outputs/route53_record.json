@@ -1,0 +1,9 @@
+{
+  {% for record, settings in route53_record.iteritems() %}
+  "{{record}}": {
+    "Description": "{{record}} Zone",
+    "Value": { "Ref": "{{record}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Route53-{{record}}-RecordSet" }}
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

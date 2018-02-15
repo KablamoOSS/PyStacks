@@ -1,0 +1,20 @@
+{
+{% for es, settings in elasticsearch.iteritems() %}
+"{{es}}": {
+    "Description": "{{es}}",
+    "Value": { "Ref" : "{{es}}" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ES-{{es}}" }}
+},
+"{{es}}ARN": {
+    "Description": "{{es}}-ARN",
+    "Value": { "Fn::GetAtt" : [ "{{es}}", "DomainArn"] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ES-ARN-{{es}}" }}
+},
+"{{es}}EndPoint": {
+    "Description": "{{es}}-EndPoint",
+    "Value": { "Fn::GetAtt" : [ "{{es}}", "DomainEndpoint"] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ES-EndPoint-{{es}}" }}
+}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

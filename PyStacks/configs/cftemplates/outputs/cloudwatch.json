@@ -1,0 +1,14 @@
+{
+{% for cw, settings in cloudwatch.iteritems() %}
+  "{{cw}}": {
+    "Description": "{{cw}} Object",
+    "Value": { "Ref": "{{cw}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-cw-{{cw}}" }}
+  },
+  "{{cw}}ARN": {
+    "Description": "{{cw}} ARN",
+    "Value": { "Fn::GetAtt" : [ "{{cw}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Cloudwatch-{{cw}}-ARN" }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

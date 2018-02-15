@@ -1,0 +1,26 @@
+{
+  {% for s3, settings in s3.iteritems() %}
+  "{{s3}}": {
+    "Description": "{{s3}} Object",
+    "Value": { "Ref": "{{s3}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-S3-{{s3}}" }}
+    },
+  "{{s3}}ARN": {
+    "Description": "{{s3}} ARN",
+    "Value": { "Fn::GetAtt" : [ "{{s3}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-S3-{{s3}}-ARN" }}
+  },
+  {% if settings["website"] %}
+  "{{s3}}WebsiteURL": {
+    "Description": "{{s3}} Website URL",
+    "Value": { "Fn::GetAtt" : [ "{{s3}}", "WebsiteURL" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-S3-{{s3}}-WebsiteURL" }}
+  },
+  {% endif %}
+  "{{s3}}DomainName": {
+    "Description": "{{s3}} Domain Name",
+    "Value": { "Fn::GetAtt" : [ "{{s3}}", "DomainName" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-S3-{{s3}}-DomainName" }}
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

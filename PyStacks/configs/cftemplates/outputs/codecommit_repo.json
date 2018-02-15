@@ -1,0 +1,29 @@
+{
+  {% for repo, settings in codecommit_repo.iteritems() %}
+  "{{repo}}": {
+    "Description": "{{repo}} Object",
+    "Value": { "Ref": "{{repo}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-REPO-{{repo}}" }}
+    },
+  "{{repo}}Arn": {
+    "Description": "{{repo}} DNS",
+    "Value": { "Fn::GetAtt" : [ "{{repo}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-REPO-{{repo}}-Arn" }}
+    },
+  "{{repo}}CloneUrlHttp": {
+    "Description": "{{repo}} CloneUrlHttp",
+    "Value": { "Fn::GetAtt" : [ "{{repo}}", "CloneUrlHttp" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-REPO-{{repo}}-CloneHTTP" }}
+    },
+  "{{repo}}CloneUrlSsh": {
+    "Description": "{{repo}} CloneUrlSsh",
+    "Value": { "Fn::GetAtt" : [ "{{repo}}", "CloneUrlSsh" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-REPO-{{repo}}-CloneUrlSsh" }}
+    },
+  "{{repo}}Name": {
+    "Description": "{{repo}} Name",
+    "Value": { "Fn::GetAtt" : [ "{{repo}}", "Name" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-REPO-{{repo}}-Name" }}
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

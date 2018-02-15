@@ -1,0 +1,57 @@
+{
+    {% for dms, settings in dms_instance.iteritems() %}
+        "{{dms|replace("-", "")|replace(".", "")}}Instance": {
+          {% if settings["dependsOn"] %}
+            "DependsOn" : [
+            {% for v in settings["dependsOn"] %}
+              "{{ v }}",
+            {% endfor %}
+            ],
+          {% endif %}
+           "Type" : "AWS::DMS::ReplicationInstance",
+           "Properties" : {
+              {% if settings["allocatedstorage"] %}
+              "AllocatedStorage" : "{{ settings["allocatedstorage"] }}",
+              {% endif %}
+              {% if settings["autominorversionupgrade"] %}
+              "AutoMinorVersionUpgrade" : "{{ settings["autominorversionupgrade"]|lower }}",
+              {% endif %}
+              {% if settings["az"] %}
+              "AvailabilityZone" : "{{ settings["az"] }}",
+              {% endif %}
+              {% if settings["engineversion"] %}
+              "EngineVersion" : "{{ settings["engineversion"] }}",
+              {% endif %}
+              {% if settings["kmskeyid"] %}
+              "KmsKeyId" : "{{ settings["kmskeyid"] }}",
+              {% endif %}
+              {% if settings["multiaz"] %}
+              "MultiAZ" : "{{ settings["multiaz"]|lower }}",
+              {% endif %}
+              {% if settings["preferredmaintenancewindow"] %}
+              "PreferredMaintenanceWindow" : "{{ settings["preferredmaintenancewindow"] }}",
+              {% endif %}
+              {% if settings["publiclyaccessible"] %}
+              "PubliclyAccessible" : "{{ settings["publiclyaccessible"]|lower }}",
+              {% endif %}
+              {% if settings["replicationinstanceid"] %}
+              "ReplicationInstanceIdentifier" : "{{ settings["replicationinstanceid"] }}",
+              {% endif %}
+              {% if settings["replicationsubnetgroupid"] %}
+              "ReplicationSubnetGroupIdentifier" : "{{ settings["replicationsubnetgroupid"] }}",
+              {% endif %}
+              {% if settings["tags"] %}
+              "Tags" : [      
+                {% for k, v in settings["tags"].iteritems() %}
+                {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ],{% endif %}
+              {% if settings["securitygroupid"] %}
+              "VpcSecurityGroupIds" : [{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{settings["securitygroupid"]}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}],
+              {% endif %}
+              "ReplicationInstanceClass" : "{{ settings["replicationinstanceclass"] }}"
+           }
+        }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

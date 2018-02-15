@@ -1,0 +1,9 @@
+{
+  {% for zone, settings in route53_zone.iteritems() %}
+  "{{zone}}": {
+    "Description": "{{zone}} Zone",
+    "Value": { "Ref": "{{zone}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Route53-{{zone}}-Zone" }}
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

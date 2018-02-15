@@ -1,0 +1,49 @@
+{
+{% for dynamodb, settings in dynamodb.iteritems() %}
+    "{{dynamodb}}": {
+        "Type" : "AWS::DynamoDB::Table",
+        "Properties" : {
+            "AttributeDefinitions" : [
+            {% for k, v in settings["tags"].iteritems() %}
+                {"AttributeName": "{{ k }}", "AttributeType": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],
+            {% if settings["secondaryindexes"] %}
+            "GlobalSecondaryIndexes" : [
+            {% for index, index_settings in settings["secondaryindexes"].iteritems() %}
+                {
+                    "IndexName" : "{{index}}",
+                    "KeySchema" : [
+                    {% for k, v in index_settings["keyschema"].iteritems() %}
+                        {"AttributeName": "{{ k }}", "KeyType": "{{v}}"}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+                    "Projection" : {
+                        "NonKeyAttributes" : [
+                        {% for attribute in index_settings["projection"]["attribute"] %}
+                            "{{attribute}}"{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                        ],
+                        "ProjectionType" : "{{index_settings["projection"]["type"]}}"
+                    },
+                    "ProvisionedThroughput" : {
+                        "ReadCapacityUnits" : {{index_settings["throughput"]["read"]}},
+                        "WriteCapacityUnits" : {{index_settings["throughput"]["write"]}}
+                    }
+                }
+            ],
+            "KeySchema" : [ KeySchema, ... ],
+            "LocalSecondaryIndexes" : [ LocalSecondaryIndexes, ... ],
+            "ProvisionedThroughput" : ProvisionedThroughput,
+            "StreamSpecification" : StreamSpecification,
+            "TableName" : String,
+            "Tags" : [
+            {% for k, v in settings["tags"].iteritems() %}
+                {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ],
+            "TimeToLiveSpecification" : TimeToLiveSpecification
+        }
+    }
+{% endfor %}
+}

@@ -1,0 +1,11 @@
+{% for map, mapkey in mappings.iteritems() %}
+"{{map}}": {
+    "{{mapkey}}": {
+{% for k, v in mapkey.iteritems() %}
+    "{{k}}":"{{v}}"
+    {% if loop.index != loop.length %},{% endif %}
+{% endfor %}
+}
+{% if loop.index != loop.length %},{% endif %}
+}
+{% endfor %}

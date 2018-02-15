@@ -1,0 +1,58 @@
+{
+  {% for elasticache, settings in elasticache.iteritems() %}
+  "{{ elasticache }}": {
+    "Type" : "AWS::ElastiCache::CacheCluster",
+    "Properties" : {
+    {% if settings["nodeType"] %}
+      "CacheNodeType" : "{{settings["nodeType"]}}",
+    {% else %}
+      "CacheNodeType" : "cache.t2.micro",
+    {% endif %}
+    {% if settings["name"] %}
+      "ClusterName" : "{{settings["name"]}}",
+    {% endif %}
+    {% if settings["engine"] %}
+      "Engine" : "{{settings["engine"]}}",
+      {% if settings["numCacheNodes"] %}
+      "NumCacheNodes" : {{settings["numCacheNodes"]}},
+      {% else %}
+      "NumCacheNodes" : 1,
+      {% endif %}
+    {% else %}
+      "Engine" : "redis",
+      "NumCacheNodes" : 1,
+    {% endif %}
+    {% if settings["engineVersion"] %}
+      "EngineVersion" : "{{settings["engineVersion"]}}",
+    {% endif %}
+    {% if settings["notificationTopicArn"] %}
+      "NotificationTopicArn" : "{{settings["notificationTopicArn"]}}",
+    {% endif %}
+    {% if settings["port"] %}
+      "Port" : {{settings["port"]}},
+    {% endif %}
+    {% if settings["snapshotName"] %}
+      "SnapshotName" : "{{settings["snapshotName"]}}",
+    {% endif %}
+    {% if settings["snapshotRetentionLimit"] %}
+      "SnapshotRetentionLimit" : "{{settings["snapshotRetentionLimit"]}}",
+    {% endif %}
+    {% if settings["snapshotWindow"] %}
+      "SnapshotWindow" : "{{settings["snapshotWindow"]}}",
+    {% endif %}
+      "CacheSubnetGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${CacheSubnetStack}-ElastiCache-{{settings["cacheSubnetGroup"]}}-Subnet", {"CacheSubnetStack":  {"Ref": "CacheSubnetStack"}}] }},
+      "VpcSecurityGroupIds" : [ 
+      {% for secgroup in settings["secgroups"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{secgroup}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}{% if not loop.last %},{% endif %}
+      {% endfor %} 
+      ]{% if settings["tags"] %},
+      "Tags" : [      
+      {% for k, v in settings["tags"].iteritems() %}
+        {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]{% endif %}
+    }
+  }
+  {% if not loop.last %},{% endif %}
+  {% endfor %}
+}

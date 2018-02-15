@@ -1,0 +1,28 @@
+{
+  {% for role in iam_roles["Roles"] %}
+  "{{role}}": {
+    "Description": "IAM Roles {{role}}",
+    "Value": { "Ref": "{{role}}" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-{{role}}" }}
+  },
+  "{{role}}ARN": {
+    "Description": "{{role}} ARN",
+    "Value": { "Fn::GetAtt" : [ "{{role}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Role-{{role}}-ARN" }}
+  },
+  {% endfor %}
+  {% if iam_roles["InstanceProfiles"] %}
+    {% for profile in iam_roles["InstanceProfiles"] %}
+    "{{profile}}": {
+      "Description": "IAM Roles {{profile}}",
+      "Value": { "Ref": "{{profile}}" },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-{{profile}}" }}
+      },
+    "{{profile}}ARN": {
+      "Description": "{{profile}} ARN",
+      "Value": { "Fn::GetAtt" : [ "{{profile}}", "Arn" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Role-{{profile}}-ARN" }}
+    },
+    {% endfor %}
+  {% endif %}
+}

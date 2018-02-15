@@ -1,0 +1,10 @@
+{
+    {% for ecs_service, settings in ecs_service.iteritems() %}
+    "{{ecs_service}}": {
+      "Description": "{{ecs_service}} Object",
+      "Value": { "Ref": "{{ecs_service}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ecs-service-{{ecs_service}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

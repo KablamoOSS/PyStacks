@@ -1,0 +1,70 @@
+{
+    {% for secgroup, settings in securitygroups.iteritems() %}
+        "{{secgroup}}": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-VPCid", {"VPCStack":  {"Ref": "VPCStack"}}] }},
+                "GroupDescription": "{{settings["sg_description"]}}",
+                "SecurityGroupIngress" : [
+                {% for ingress in settings["ingress"] %}
+                    {
+                        "IpProtocol": "{{ingress [0]}}",
+                        "FromPort": "{{ingress [1]}}",
+                        "ToPort": "{{ingress [2]}}",
+                        {% if ingress|length > 4 %}
+                            {% set ingressType = ingress[4] %}
+                            {% if ingressType == "SG" %}
+                                "SourceSecurityGroupName": "{{ingress[3]}}"
+                            {% elif ingressType == "SG_REF" %}
+                                "SourceSecurityGroupName": { "Ref": "{{ingress[3]}}" }
+                            {% elif ingressType == "SG_VPC" %}
+                                "SourceSecurityGroupId": "{{ingress[3]}}"
+                            {% elif ingressType == "SG_REF_VPC" %}
+                                "SourceSecurityGroupId": { "Ref": "{{ingress[3]}}" }
+                            {% else %}
+                                "CidrIp": { "Ref": "{{ingress[3]}}" }
+                            {% endif %}
+                        {% else %}
+                            "CidrIp": { "Ref": "{{ingress[3]}}" }
+                        {% endif %}
+                    }
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+                ],
+                "SecurityGroupEgress" : [
+                {% for egress in settings["egress"] %}
+                    {
+                        "IpProtocol": "{{egress [0]}}",
+                        "FromPort": "{{egress [1]}}",
+                        "ToPort": "{{egress [2]}}",
+                        {% if egress|length > 4 %}
+                            {% set egressType = egress[4] %}
+                            {% if egressType == "SG" %}
+                                "SourceSecurityGroupName": "{{egress[3]}}"
+                            {% elif egressType == "SG_REF" %}
+                                "SourceSecurityGroupName": { "Ref": "{{egress[3]}}" }
+                            {% elif egressType == "SG_VPC" %}
+                                "SourceSecurityGroupId": "{{egress[3]}}"
+                            {% elif egressType == "SG_REF_VPC" %}
+                                "SourceSecurityGroupId": { "Ref": "{{egress[3]}}" }
+                            {% else %}
+                                "CidrIp": { "Ref": "{{egress[3]}}" }
+                            {% endif %}
+                        {% else %}
+                            "CidrIp": { "Ref": "{{egress[3]}}" }
+                        {% endif %}
+                    }
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+                ],
+                "Tags" :  [
+                    { 
+                        "Key": "Name",
+                        "Value": "{{secgroup}}" 
+                    }
+                ]
+            }
+        }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

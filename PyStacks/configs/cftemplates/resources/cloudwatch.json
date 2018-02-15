@@ -1,0 +1,59 @@
+{
+{% for cloudwatch, settings in cloudwatch.iteritems() %}
+  "{{cloudwatch}}": {
+    "Type" : "AWS::CloudWatch::Alarm",
+    "Properties" : {
+      {% if settings['actionsenabled'] %}
+      "ActionsEnabled" : "{{settings['actionsenabled']|lower}}",
+      {% endif %}
+      {% if settings['alarmactions'] %}
+      "AlarmActions" : [
+        {% for actions in settings['alarmactions'] %}
+        {"Ref": "{{actions}}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      {% if settings['alarmdescription'] %}
+      "AlarmDescription" : "{{settings['alarmdescription']}}",
+      {% endif %}
+      {% if settings['alarmname'] %}
+      "AlarmName" : "{{settings['alarmname']}}",
+      {% endif %}
+      "ComparisonOperator" : "{{settings['comparisonoperator']}}",
+      {% if settings['dimensions'] %}
+      "Dimensions" : [
+        {% for k, v in settings['dimensions'].iteritems() %}
+        {
+          "Name" : "{{ k }}",
+          "Value" : "{{ v }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "EvaluationPeriods" : "{{settings['evalationperiods']}}",
+      {% if settings['insufficientdataactions'] %}
+      "InsufficientDataActions" : [
+        {% for actions in settings['insufficientdataactions'] %}
+        "{{actions}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "MetricName" : "{{settings['metricname']}}",
+      "Namespace" : "{{settings['namespace']}}",
+      {% if settings['okactions'] %}
+      "OKActions" : [
+        {% for actions in settings['okactions'] %}
+        "{{actions}}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      "Period" : "{{settings['period']}}",
+      "Statistic" : "{{settings['statistic']}}",
+      "Threshold" : "{{settings['threshold']}}"
+      {% if settings['unit'] %}
+      ,"Unit" : "{{settings['unit']}}"
+      {% endif %}
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

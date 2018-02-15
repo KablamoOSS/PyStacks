@@ -1,0 +1,38 @@
+{
+{% for policy in iam_policies["Policies"] %}
+    "{{policy["Name"]}}": {
+        "Type": "AWS::IAM::Policy",
+        "Properties": {
+            "PolicyName": "{{policy["Name"]}}",
+            "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {{policy["PolicyDocument"]}}
+                ]
+            }{% if policy["ManagedPolicys"] %},
+            "ManagedPolicyArns": [
+                {% for managedpolicys in policy["ManagedPolicys"] %}    
+                "arn:aws:iam::aws:policy/{{managedpolicys}}"{% if not loop.last %},{% endif %}
+                {% endfor %}        
+            ]
+            {% endif %}
+            
+            {% if policy["Roles"] %},
+            "Roles": [
+{% for role in policy["Roles"] %}
+                {"Fn::ImportValue" : {"Fn::Sub" : "{{role}}"}}{% if not loop.last %},{% endif %}
+{% endfor %}
+			]
+			{% endif %}
+{% if policy["Groups"] %},
+            "Groups": [
+{% for group in policy["Groups"] %}
+                {"Fn::ImportValue" : {"Fn::Sub" : "{{group}}"}}{% if not loop.last %},{% endif %}
+{% endfor %}
+			]
+			{% endif %}
+
+        }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

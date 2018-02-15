@@ -1,0 +1,15 @@
+{
+  {% for redshiftsubnet, settings in redshift_subnetgroup.iteritems() %}
+  "{{redshiftsubnet}}": {
+    "Type" : "AWS::Redshift::ClusterSubnetGroup",
+    "Properties" : {
+      "Description" : "{{settings["description"]}}",
+      "SubnetIds" : [ 
+      {% for subnet in settings["subnets"] %} 
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]
+    }
+  }
+  {% endfor %}
+}

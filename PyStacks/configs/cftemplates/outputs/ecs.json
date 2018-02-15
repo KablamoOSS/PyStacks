@@ -1,0 +1,14 @@
+{
+{% for ecs, settings in ecs.iteritems() %}
+  "{{ecs}}": {
+    "Description": "{{ecs}} Cluster",
+    "Value": { "Ref": "{{ecs}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ECS-{{ecs}}" }}
+  },
+  "{{ecs}}ARN": {
+    "Description": "{{ecs}} Cluster ARN",
+    "Value": { "Fn::GetAtt" : [ "{{ecs}}", "Arn" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ECS-{{ecs}}-ARN" }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

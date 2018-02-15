@@ -1,0 +1,12 @@
+description: "ElastiCache Subnet Groups"
+stackname: "ExampleStacks-ElastiCache-SubnetGroups"
+region: "ap-southeast-2"
+parameters:
+  VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
+mappings: {}
+resources:
+  elasticachesubnet:
+    elasticacheinternal:
+      name: ExampleStacks-ElastiCache-SubnetGroups
+      description: Internal ElastiCache Subnet
+      subnets: ["Internal1", "Internal2", "Internal3"]

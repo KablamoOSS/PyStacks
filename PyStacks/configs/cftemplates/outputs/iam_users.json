@@ -1,0 +1,16 @@
+{
+    {% for user in iam_users["Users"] %}
+    "{{ user|replace("-", "")|replace(".", "") }}": {
+      "Description": "IAM User {{user}}",
+      "Value": { "Fn::GetAtt" : [ "{{ user|replace("-", "")|replace(".", "") }}", "Arn" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-User-{{ user|replace("-", "")|replace(".", "") }}-ARN" }}
+      },
+    {% endfor %}
+    {% for group in iam_users["Groups"] %}
+    "{{group}}": {
+      "Description": "IAM Group {{group}}",
+      "Value": { "Ref": "{{group}}" },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Group-{{group}}" }}
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+}

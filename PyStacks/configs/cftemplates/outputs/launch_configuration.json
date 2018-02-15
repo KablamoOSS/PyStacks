@@ -1,0 +1,10 @@
+{
+    {% for lc, settings in launch_configuration.iteritems() %}
+    "{{lc}}": {
+      "Description": "{{lc}} Object",
+      "Value": { "Ref": "{{lc}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-LaunchConfiguration-{{lc}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

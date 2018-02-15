@@ -1,0 +1,10 @@
+{
+{% for ecr_repo, settings in ecr.iteritems() %}
+  "{{ecr_repo}}": {
+    "Description": "{{ecr_repo}} Cluster",
+    "Value": { "Ref": "{{ecr_repo}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ecr-repo-{{ecr_repo}}" }}
+  },
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

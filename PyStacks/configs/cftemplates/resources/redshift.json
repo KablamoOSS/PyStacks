@@ -1,0 +1,85 @@
+{#
+  The following are not implemented:
+  ClusterSecurityGroups - Classic EC2 days, not appliable to VPC defined Redshift
+#}
+
+{
+  {% for redshift, settings in redshift.iteritems() %}
+  "{{ redshift }}": {
+    "Type" : "AWS::Redshift::Cluster",
+    "Properties" : {
+      {% if settings["allowupgrade"] %}
+      "AllowVersionUpgrade": "{{settings["allowupgrade"]|lower}}",
+      {% endif %}
+      {% if settings["automatedsnapshotretentionperiod"] %}
+      "AutomatedSnapshotRetentionPeriod": "{{settings["automatedsnapshotretentionperiod"]}}",
+      {% endif %}
+      {% if settings["az"] %}
+      "AvailabilityZone" : "{{settings["az"]}}",
+      {% endif %}
+      {% if settings["clusterparamsgroup"] %}
+      "ClusterParameterGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RedshiftParamsGroupStack}-ParamsGroup-{{settings["clusterparamsgroup"]}}", {"RedshiftParamsGroupStack":  {"Ref": "RedshiftParamsGroupStack"}}] }},
+      {% endif %}
+      "ClusterSubnetGroupName" : { "Fn::ImportValue" : {"Fn::Sub" : ["${RedshiftSubnetGroupStack}-Subnet-{{settings["clustersubnetgroupname"]}}", {"RedshiftSubnetGroupStack":  {"Ref": "RedshiftSubnetGroupStack"}}] }},
+      {% if settings["clustertype"] %}
+      "ClusterType" : "{{settings["clustertype"]}}",
+      {% endif %}
+      {% if settings["clusterversion"] %}
+      "ClusterVersion" : "{{settings["clusterversion"]}}",
+      {% endif %}
+      "DBName" : "{{settings["dbname"]}}",
+      {% if settings["eip"] %}
+      "ElasticIp" : "{{settings["eip"]}}",
+      {% endif %}
+      {% if settings["encrypted"] == false %}
+      "Encrypted" : "false",
+      {% else %}
+      "Encrypted" : "true",
+      {% endif %}
+      {% if settings["hsmclientcertificateidentifier"] and settings["hsmconfigurationidentifier"] %}
+      "HsmClientCertificateIdentifier" : "{{settings["hsmclientcertificateidentifier"]}}",
+      "HsmConfigurationIdentifier" : "{{settings["hsmconfigurationidentifier"]}}",
+      {% endif %}
+      {% if settings["iamroles"] %}
+      "IamRoles" : [ 
+        {% for iamrole in settings["iamroles"] %}
+        { "Fn::ImportValue" : {"Fn::Sub" : ["${IAMRoleStack}-{{iamrole}}", {"IAMRoleStack":  {"Ref": "IAMRoleStack"}}] }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      {% endif %}
+      {% if settings["kmskeyid"] %}
+      "KmsKeyId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${KMSStack}-KMS-{{settings["kmskeyid"]}}", {"KMSStack":  {"Ref": "KMSStack"}}] }},
+      {% endif %}
+      "MasterUsername" : "{{settings["masterusername"]}}",
+      "MasterUserPassword" : {"Ref": "DBPassword"},
+      "NodeType" : "{{settings["nodetype"]}}",
+      {% if settings["clustertype"]=="multi-node" %}
+      "NumberOfNodes" : {{settings["numberofnodes"]}},
+      {% endif %}
+      {% if settings["owneraccount"] %}
+      "OwnerAccount" : "{{settings["owneraccount"]}}",
+      {% endif %}
+      {% if settings["port"] %}
+      "Port" : {{settings["port"]}},
+      {% else %}
+      "Port" : 5439,
+      {% endif %}
+      "PreferredMaintenanceWindow" : "{{settings["maintenancewindow"]}}",
+      {% if settings["public"] %}
+      "PubliclyAccessible" : "{{settings["public"]|lower}}",
+      {% else %}
+      "PubliclyAccessible" : "false",
+      {% endif %}
+      {% if settings["snapshotidentifier"] and settings["snapshotclusteridentifier"] %}
+      "SnapshotClusterIdentifier" : "{{settings["snapshotclusteridentifier"]}}",
+      "SnapshotIdentifier" : "{{settings["snapshotidentifier"]}}",
+      {% endif %}
+      "VpcSecurityGroupIds" : [
+      {% for secgroupid in settings["secgroupid"] %}
+      "{{secgroupid}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

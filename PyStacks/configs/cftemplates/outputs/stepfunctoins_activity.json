@@ -1,0 +1,14 @@
+{
+  {% for step_activity, settings in stepfunctions_activity.iteritems() %}
+  "{{step_activity}}": {
+    "Description": "{{step_activity}} Object",
+    "Value": { "Ref": "{{step_activity}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-StepFunction-{{step_activity}}-Activity" }}
+    },
+  "{{step_activity}}dns": {
+    "Description": "{{step_activity}} Name",
+    "Value": { "Fn::GetAtt" : [ "{{step_activity}}", "Name" ] },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-StepFunction-{{step_activity}}-ActivityName" }}  	
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

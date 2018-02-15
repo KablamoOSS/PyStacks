@@ -1,0 +1,16 @@
+description: "Micorosft AD Servers"
+stackname: "ExampleStacks-Microsoft-AD"
+region: "ap-southeast-2"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+mappings: {}
+resources:
+  microsoftad:
+    demotest:
+      createalias: true
+      enablesso: true
+      name: demo.test
+      password: examplepassword
+      shortname: demo
+      subnets: ["Internal1", "Internal2", "Internal3"]

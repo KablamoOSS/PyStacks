@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+export PYSTACKS_DIR=$(python ${SCRIPT_PATH}/get_pystacks_location.py)
+
+if [ -z ${PYSTACKS_DIR+x} ];
+then
+    echo "PyStacks module cannot be found. Exiting ..."
+    exit 1
+else
+    invoke -r ${PYSTACKS_DIR}/tasks.py $@;
+fi

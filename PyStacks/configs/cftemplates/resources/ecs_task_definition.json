@@ -1,0 +1,128 @@
+{
+{% for taskdef, settings in ecs_task_definition.iteritems() %}
+    {{taskdef}}:{
+        "Type" : "AWS::ECS::TaskDefinition",
+        "Properties" : {
+            {% if settings["family"] %}
+            "Family" : "{{settings["family"]}}",
+            {% endif %}
+            {% if settings["task_role_arn"] %}
+            "TaskRoleArn": "{{settings["task_role_arn"]}}",
+            {% endif %}
+            {% if settings["network_mode"] %}
+            "NetworkMode": "{{settings["network_mode"]}}",
+            {% endif %}
+            "ContainerDefinitions": [
+            {% for conf_def, settings in settings["container_definitions"].iteritems() %}
+                {
+                    {% if settings["commands"] %}
+                    "Command" : [
+                    {% for command in settings["commands"] %}
+                        {{command}}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+                    {% endif %}
+                    "Cpu" : {{settings["cpu"]}},
+                    {% if settings["dns_search_domains"] %}
+                    "DnsSearchDomains" : [
+                    {% for domain in settings["dns_search_domains"] %}
+                        "{{domain}}"{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["disable_networking"] %}
+                    "DisableNetworking" : {{settings["disable_networking"]}},
+                    {% endif %}
+                    {% if settings["dns_servers"] %}
+                    "DnsServers" : [
+                    {% for server in settings["dns_servers"] %}
+                        "{{server}}"{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["entry_point"] %}
+                    "EntryPoint" : [
+                    {% for entrypoint in settings["entry_point"] %}
+                        "{{entrypoint}}"{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["environment_variables"] %}
+                    "Environment" : [
+                        {% for name, value in settings["environment_variables"].iteritems() %}
+                        {
+
+                            "Name": "{{name}}",
+                            "Value": "{{value}}"
+
+                        }{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["essential"] %}
+                    "Essential" : {{settings["essential"]}},
+                    {% endif %}
+                    {% if settings["hostname"] %}
+                    "Hostname" : "{{settings["hostname"]}}",
+                    {% endif %}
+                    "Image" : "{{settings["image"]}}",
+                    "Memory" : {{settings["memory"]}},
+                    {% if settings["memory_reservation"] %}
+                    "MemoryReservation" : {{settings["memory_reservation"]}},
+                    {% endif %}
+                    "Name" : "{{settings["name"]}}",
+                    {% if settings["port_map"] %}
+                    "PortMappings" : [
+                        {% for port_map in settings["port_map"] %}
+                        {
+                            "ContainerPort": {{port_map['cont_port']}}
+                            {% if port_map['host_port'] %}
+                            ,"HostPort": {{port_map['host_port']}}
+                            {% endif %}
+                            {% if port_map['protocol'] %}
+                            ,"Protocol": "{{port_map['protocol']}}"
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["privileged"] %}
+                    "Privileged" : {{settings["privileged"]}},
+                    {% endif %}
+                    {% if settings["user"] %}
+                    "User" : "{{settings["user"]}}",
+                    {% endif %}
+                    {% if settings["work_dir"] %}
+                    "WorkingDirectory" : "{{settings["work_dir"]}}",
+                    {% endif %}
+                    {% if settings["ulimits"] %}
+                    "Ulimits" : [
+                        {% for name, value in settings["ulimits"].iteritems() %}
+                        {
+
+                            "Name": "{{name}}",
+                            "HardLimit": "{{value["hard_limit"]}}",
+                            "SoftLimit": "{{value["soft_limit"]}}"
+
+                        }{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    {% endif %}
+                    {% if settings["log_configuration"] %}
+                    "LogConfiguration" : {
+                        "LogDriver": "{{settings["log_configuration"]["driver"]}}",
+                        "Options": {
+                            {% for name, value in settings["log_configuration"]["options"].iteritems() %}
+                                "{{name}}": "{{value}}"
+                            {% if not loop.last %},{% endif %}
+                            {% endfor %}
+                        }
+                    }
+                    {% endif %}
+                }{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ]
+        }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,9 @@
+{
+{% for firehose, settings in kinesis_firehose.iteritems() %}
+  "{{firehose}}": {
+    "Description": "{{firehose}} Object",
+    "Value": { "Ref": "{{firehose}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Firehose-{{firehose}}" }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

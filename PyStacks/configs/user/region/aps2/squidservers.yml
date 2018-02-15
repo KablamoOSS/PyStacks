@@ -1,0 +1,86 @@
+description: "Example Squid Servers"
+stackname: "ExampleStacks-SquidServers"
+region: "ap-southeast-2"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+  DNSStack: {Description: DNS Stack, Type: String, Default: ExampleStacks-DNS}
+mappings:
+  AMIRegionMap:
+    us-east-1: { "32" : "ami-6411e20d", "64" : "ami-45b69e52"}
+    us-west-1: { "32" : "ami-c9c7978c", "64" : "ami-dab5e0ba"}
+    eu-west-1: { "32" : "ami-37c2f643", "64" : "ami-07174474"}
+    ap-southeast-1: { "32" : "ami-66f28c34",  "64" : "ami-5b268538"}
+    ap-southeast-2: { "32" : "ami-66f28c34",  "64" : "ami-e199a682"}
+    ap-northeast-1: { "32" : "ami-9c03a89d",  "64" : "ami-483f9429"}
+resources:
+  ec2:
+    exsqu0001:
+      ebsoptimized: false
+      instancetype: t2.small
+      keyname: pem-key
+      privateip: 10.0.0.1
+      zoneid: devdigitalaws
+      zonesuffix: example
+      sourcedestcheck: false
+      userdata: 
+        - '#!/bin/bash -v \n'
+        - sudo timedatectl set-timezone Australia/Sydney \n
+        - sudo hostnamectl set-hostname exsqu0001 \n
+        - echo $(hostname) >/home/ubuntu/isHostNameOk.log \n
+        - echo 127.0.0.1 $(hostname).example $(hostname) >> /etc/hosts \n
+        - apt-get update >/home/ubuntu/isUpdateOk.log \n
+      securitygroupid: "SquidSecurity"
+      subnetid: "ReservedNet1"
+      tags: {Name : exsqu0001.example, uptimeProfile: 0000-2400x7}
+    exsqu0002:
+      ebsoptimized: false
+      instancetype: t2.small
+      keyname: pem-key
+      privateip: 10.0.0.2
+      zoneid: devdigitalaws
+      zonesuffix: example
+      sourcedestcheck: false
+      userdata:
+        - '#!/bin/bash -v \n'
+        - sudo timedatectl set-timezone Australia/Sydney \n
+        - sudo hostnamectl set-hostname exsqu0002 \n
+        - echo $(hostname) >/home/ubuntu/isHostNameOk.log \n
+        - echo 127.0.0.1 $(hostname).example $(hostname) >> /etc/hosts \n
+        - apt-get update >/home/ubuntu/isUpdateOk.log \n
+      securitygroupid: "SquidSecurity"
+      subnetid: "ReservedNet2"
+      tags: {Name : exsqu0002.example, uptimeProfile: 0000-2400x7}
+    exsqu0003:
+      ebsoptimized: false
+      instancetype: t2.small
+      keyname: pem-key
+      privateip: 10.0.0.3
+      zoneid: examplecom
+      zonesuffix: example.com
+      sourcedestcheck: false
+      userdata: 
+        - '#!/bin/bash -v \n'
+        - sudo timedatectl set-timezone Australia/Sydney \n
+        - sudo hostnamectl set-hostname exsqu0003 \n
+        - echo $(hostname) >/home/ubuntu/isHostNameOk.log \n
+        - echo 127.0.0.1 $(hostname).example $(hostname) >> /etc/hosts \n
+        - apt-get update >/home/ubuntu/isUpdateOk.log \n
+      securitygroupid: "SquidSecurity"
+      subnetid: "ReservedNet3"
+      tags: {Name : exsqu0003.example, uptimeProfile: 0000-2400x7}
+  eip: ["exsqu0001", "exsqu0002", "exsqu0003"]
+  elb:
+    squidserverselb:
+      instances: ["exsqu0001","exsqu0002","exsqu0003"]
+      scheme: internal
+      listeners:
+        default: {port: 3128,instanceport: 3128,protocol: "TCP",instanceprotocol: "TCP"}
+      healthcheck:
+        target: "TCP:3128"
+        healthythreshold: 10
+        unhealthythreshold: 3
+        interval: 10
+        timeout: 5
+      subnets: ["ReservedNet1", "ReservedNet2", "ReservedNet3"]
+      tags: {Name: SquidELB, Purpose: Squids Servers}

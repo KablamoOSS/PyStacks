@@ -1,0 +1,20 @@
+{
+    {% for microsoftad, settings in microsoftad.iteritems() %}
+    "{{microsoftad}}": {
+      "Description": "{{microsoftad}} Object",
+      "Value": { "Ref": "{{microsoftad}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-MSAD-{{microsoftad}}" }}
+      },
+    "{{microsoftad}}Alias": {
+      "Description": "{{microsoftad}} Alias",
+      "Value": { "Fn::GetAtt" : [ "{{microsoftad}}", "Alias" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-MSAD-{{microsoftad}}-Alias" }}
+      },
+    "{{microsoftad}}DnsIpAddresses": {
+      "Description": "{{microsoftad}} DNS IP Addresses",
+      "Value": { "Fn::GetAtt" : [ "{{microsoftad}}", "DnsIpAddresses" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-MSAD-{{microsoftad}}-DNSIP" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

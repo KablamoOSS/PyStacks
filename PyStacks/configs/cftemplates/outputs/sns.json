@@ -1,0 +1,15 @@
+{
+    {% for sns, settings in sns.iteritems() %}
+    "{{sns}}": {
+      "Description": "{{sns}} Object",
+      "Value": { "Ref": "{{sns}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SNS-{{sns}}" }}
+      },
+    "{{sns}}TopicName": {
+      "Description": "{{sns}} TopicName",
+      "Value": { "Fn::GetAtt" : [ "{{sns}}", "TopicName" ] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SNS-{{sns}}-TopicName" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

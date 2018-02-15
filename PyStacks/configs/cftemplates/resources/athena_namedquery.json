@@ -1,0 +1,13 @@
+{
+{% for query, settings in athena_namedquery.iteritems() %}
+  "{{query}}": {
+    "Type" : "AWS::Athena::NamedQuery",
+    "Properties" : {
+      "Description" : "{{settings["description"]}}",
+      "QueryString" : "{{settings["querystring"]}}",
+      "Database" : "{{settings["database"]}}",
+      "Name" : "{{settings["name"]}}"
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

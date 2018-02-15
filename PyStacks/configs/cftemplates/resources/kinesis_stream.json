@@ -1,0 +1,16 @@
+{
+{% for kinesis_stream, settings in kinesis_stream.iteritems() %}
+"{{kinesis_stream}}" : {
+  "Type" : "AWS::Kinesis::Stream",
+  "Properties" : {
+    "Name": "{{kinesis_stream}}",
+    "RetentionPeriodHours": "{{settings["RetentionPeriodHours"]}}",
+    "ShardCount": "{{settings["ShardCount"]}}",
+    "Tags" : [
+    {% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ]}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

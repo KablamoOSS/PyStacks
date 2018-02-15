@@ -1,0 +1,12 @@
+description: "S3 For Lambda Functions"
+region: "ap-southeast-2"
+stackname: "ExampleStacks-S3-Lambda-Functions"
+parameters: {}
+mappings: {}
+resources:
+  s3:
+    ExampleLambdaFuctions:
+      name: example.lambda.functions
+      accesscontrol: PublicRead
+      versioning: false
+      tags: { Name : Example Lambda Functions }

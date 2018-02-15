@@ -1,0 +1,9 @@
+{
+  {% for efs, settings in efs_filesystem.iteritems() %}
+  "{{efs}}": {
+    "Description": "{{efs}} FileSystem",
+    "Value": { "Ref": "{{efs}}"},
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-EFS-{{efs}}" }}
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+}

@@ -1,0 +1,9 @@
+{
+{% for rdssubnet, settings in rdssubnet.iteritems() %}
+    "{{rdssubnet}}": {
+      "Description": "{{rdssubnet}} RDS ParamsGroup",
+      "Value": { "Ref": "{{rdssubnet}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rdssubnet}}-Subnet" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

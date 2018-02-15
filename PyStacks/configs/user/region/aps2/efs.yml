@@ -1,0 +1,27 @@
+description: "Example EFS"
+stackname: "ExampleStacks-EFS"
+region: "ap-southeast-2"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+mappings: {}
+resources:
+  efs_filesystem:
+    exampleefs:
+      filesystemtags: {Name: example-efs}
+  efs_mounttarget:
+    exampleefsmt1:
+      filesystemid: exampleefs
+      subnetid: "Internal1"
+      securitygroups:
+        - EFSSecurity
+    exampleefsmt2:
+      filesystemid: exampleefs
+      subnetid: "Internal2"
+      securitygroups:
+        - EFSSecurity
+    exampleefsmt3:
+      filesystemid: exampleefs
+      subnetid: "Internal3"
+      securitygroups:
+        - EFSSecurity

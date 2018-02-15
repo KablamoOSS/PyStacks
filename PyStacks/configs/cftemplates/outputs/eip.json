@@ -1,0 +1,10 @@
+{
+{% for eip in eip %}
+"{{eip}}": {
+    "Description": "{{eip}}EIP",
+    "Value": { "Ref" : "{{eip}}EIP" },
+    "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-EIP-{{eip}}" }}
+}
+{% if not loop.last %},{% endif %}
+{% endfor %}
+}

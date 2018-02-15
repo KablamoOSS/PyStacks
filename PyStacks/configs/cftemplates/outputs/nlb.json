@@ -1,0 +1,10 @@
+{
+    {% for nlb, settings in nlb.iteritems() %}
+    "{{nlb}}": {
+      "Description": "{{nlb}} Object",
+      "Value": { "Ref": "{{nlb}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-NLB-{{nlb}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

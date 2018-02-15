@@ -1,0 +1,10 @@
+{
+    {% for ebs, settings in ebs_volume.iteritems() %}
+    "{{ebs}}": {
+      "Description": "{{ebs}} Object",
+      "Value": { "Ref": "{{ebs}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ebs-{{ebs}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

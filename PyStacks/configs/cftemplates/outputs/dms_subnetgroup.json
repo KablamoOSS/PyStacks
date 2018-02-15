@@ -1,0 +1,9 @@
+{
+{% for dmssubnetgroup, settings in dms_subnetgroup.iteritems() %}
+    "{{dmssubnetgroup}}": {
+      "Description": "{{dmssubnetgroup}} DMS Subnet Group",
+      "Value": { "Ref": "{{dmssubnetgroup}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-dmsSubnetGroup-{{dmssubnetgroup}}" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

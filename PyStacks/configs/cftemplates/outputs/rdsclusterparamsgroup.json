@@ -1,0 +1,9 @@
+{
+{% for rdsclusterparamsgroup, settings in rdsclusterparamsgroup.iteritems() %}
+    "{{rdsclusterparamsgroup}}": {
+      "Description": "{{rdsclusterparamsgroup}} RDS ParamsGroup",
+      "Value": { "Ref": "{{rdsclusterparamsgroup}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-RDS-{{rdsclusterparamsgroup}}-ParamsGroup" }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

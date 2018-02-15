@@ -1,0 +1,10 @@
+{
+    {% for secgroup, settings in securitygroups.iteritems() %}
+    "{{secgroup}}": {
+      "Description": "{{secgroup[sg_description]}} Object",
+      "Value": { "Ref": "{{secgroup}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-SecGroup-{{secgroup}}" }}
+      }
+    {% if loop.index != loop.length %},{% endif %}
+    {% endfor %}
+}

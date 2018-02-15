@@ -1,0 +1,61 @@
+[
+  {
+    "Name": "example.com.au.",
+    "ResourceRecords": [
+      {
+        "Value": "8.8.8.8"
+      }
+    ],
+    "TTL": 86400,
+    "Type": "A"
+  },
+  {
+    "Name": "example.com.au.",
+    "ResourceRecords": [
+      {
+        "Value": "ns.rackspace.com."
+      },
+      {
+        "Value": "ns2.rackspace.com."
+      }
+    ],
+    "TTL": 86400,
+    "Type": "NS"
+  },
+  {
+    "Name": "example.com.au.",
+    "ResourceRecords": [
+      {
+        "Value": "10 cluster5.us.messagelabs.com."
+      },
+      {
+        "Value": "20 cluster5a.us.messagelabs.com."
+      }
+    ],
+    "TTL": 86400,
+    "Type": "MX"
+  },
+  {
+    "Name": "example.com.au.",
+    "ResourceRecords": [
+      {
+        "Value": "MS=ms78757645"
+      },
+      {
+        "Value": "O0R1I39671"
+      }
+    ],
+    "TTL": 86400,
+    "Type": "TXT"
+  },
+  {
+    "Name": "example.com.au.",
+    "ResourceRecords": [
+      {
+        "Value": "05 5060 sipserver.example.com."
+      }
+    ],
+    "TTL": 86400,
+    "Type": "SRV"
+  }
+]

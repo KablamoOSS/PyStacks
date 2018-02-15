@@ -1,0 +1,136 @@
+{# Not included in Spec ####
+
+ RamDiskid, PlacementGroupName, NetworkInterfaces, Kernelid, DisableApiTermination, Affinity, AdditionalInfo# SsmAssociations, 
+ Tenancy
+#}
+{
+{% for ec2, settings in ec2.iteritems() %}
+"{{ec2|replace("-", "")|replace(".", "")}}": {
+    {% if settings["metadata"] %}
+    "Metadata" : {
+      "AWS::CloudFormation::Init" : {
+        "configSets" : {
+        {% for sets, value in settings["metadata"]["configsets"].iteritems() %} 
+          "{{sets}}" : ["{{value}}"]{% if not loop.last %},{% endif %}
+        {% endfor %}
+        },
+        {% for config, series in settings["metadata"]["configs"].iteritems() %}
+        "{{config}}" : {
+          {% if series["packages"] %}
+          "packages" : {
+            :
+          },
+          {% endif %}
+          {% if series["groups"] %}
+          "groups" : {
+            :
+          },
+          {% endif %}
+          {% if series["users"] %}
+          "users" : {
+            :
+          },
+          {% endif %}
+          {% if series["sources"] %}
+          "sources" : {
+            :
+          },
+          {% endif %}
+          {% if series["files"] %}
+          "files" : {
+            :
+          },
+          {% endif %}
+          {% if series["commands"] %}
+          "commands" : {
+            {% for command, functions in series["commands"].iteritems() %}
+            "{{command}}": {
+              "command": {
+                "Fn::Join": [
+                  "",
+                  [
+                  {% for steps in functions["command"] %}
+                  "{{steps}}"{% if not loop.last %},{% endif %}
+                  {% endfor %}
+                  ]
+                ]
+              },
+              "waitAfterCompletion": "{{functions["waitaftercompletion"]}}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          },
+          {% endif %}
+          {% if series["services"] %}
+          "services" : {
+            :
+          }{% endif %}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      }
+    },
+    {% endif %}
+   "Type" : "AWS::EC2::Instance",
+   "Properties" : {
+      {% if settings["blockdevice"] %}
+      "BlockDeviceMappings" : [
+      {% for name, size in settings["blockdevice"].iteritems() %}
+        {
+        "DeviceName" : "{{name}}",
+        "Ebs" : { "VolumeSize" : "{{size}}", "VolumeType": "gp2"}
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ],
+      {% endif %}
+      {% if settings["ebsoptimized"] %}
+      "EbsOptimized" : "{{settings["ebsoptimized"]}}",
+      {% endif %}
+      {% if settings["instanceprofile"] %}
+      "IamInstanceProfile" : "{{settings["instanceprofile"]}}",
+      {% endif %}
+      "ImageId" : { "Fn::FindInMap" : [ "AMIRegionMap", { "Ref" : "AWS::Region" }, "64"]},
+      "InstanceInitiatedShutdownBehavior" : "stop",
+      "InstanceType" : "{{settings["instancetype"]}}",
+      {% if settings["keyname"] %}
+      "KeyName" : "{{settings["keyname"]}}",
+      {% endif %}
+      "Monitoring" : "true",
+      {% if settings["privateip"] %}
+      "PrivateIpAddress" : "{{settings["privateip"]}}",
+      {% endif %}
+      "SecurityGroupIds" : [{ "Fn::ImportValue" : {"Fn::Sub" : ["${SecurityStack}-SecGroup-{{settings["securitygroupid"]}}", {"SecurityStack":  {"Ref": "SecurityStack"}}] }}],
+      "SourceDestCheck" : "{{settings["sourcedestcheck"]}}",
+      "SubnetId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{settings["subnetid"]}}", {"VPCStack":  {"Ref": "VPCStack"}}] }},
+      "UserData" : { "Fn::Base64": { "Fn::Join": ["",[
+      {% for userdata in settings["userdata"] %}
+        "{{userdata}}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]]}},
+      "Tags" : [      
+      {% for k, v in settings["tags"].iteritems() %}
+      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]}
+   },
+  "{{ec2|replace("-", "")|replace(".", "")}}DNS": {
+    "Type" : "AWS::Route53::RecordSetGroup",
+    "Properties" : {
+      "Comment" : "{{ec2}} Records by default",
+      "HostedZoneId" : { "Fn::ImportValue" : {"Fn::Sub" : ["${DNSStack}-Route53-{{settings["zoneid"]}}-Zone", {"DNSStack":  {"Ref": "DNSStack"}}] }},
+      "RecordSets" : [{
+        "Name" : "{{ec2}}.{{settings["zonesuffix"]}}",
+        "Type" : "A",
+        "ResourceRecords" : [
+         {% if settings["privateip"] %}
+            "{{settings["privateip"]}}"
+         {% else %}
+            { "Fn::GetAtt" : [ "{{ec2}}", "PrivateIp" ] }
+         {% endif %}
+         ],
+        "TTL" : "60",
+        "Weight" : "10",
+        "SetIdentifier" : "{{ec2}}.{{settings["zonesuffix"]}}"
+        }]
+    }
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

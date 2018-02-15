@@ -1,0 +1,20 @@
+{
+{% for rdssubnet, settings in rdssubnet.iteritems() %}
+"{{rdssubnet}}": {
+   "Type" : "AWS::RDS::DBSubnetGroup",
+   "Properties" : {
+      "DBSubnetGroupDescription" : "{{settings["description"]}}",
+      "SubnetIds" : [
+{% for subnet in settings["subnets"] %} 
+	    { "Fn::ImportValue" : {"Fn::Sub" : ["${VPCStack}-Subnet-{{subnet}}", {"VPCStack":  {"Ref": "VPCStack"}}] }}{% if not loop.last %},{% endif %}
+{% endfor %}
+      ],
+      "Tags" : [      
+{% for k, v in settings["tags"].iteritems() %}
+	      {"Key": "{{ k }}", "Value": "{{v}}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+      ]
+   }
+}{% if not loop.last %},{% endif %}
+{% endfor %}
+} 

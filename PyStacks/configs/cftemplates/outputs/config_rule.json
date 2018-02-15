@@ -1,0 +1,24 @@
+{
+{% for config_rule, settings in config_rule.iteritems() %}
+    "{{config_rule}}": {
+        "Description": "{{config_rule}} Object",
+        "Value": { "Ref": "{{config_rule}}"},
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ConfigRule-{{config_rule}}" }}
+    },
+    "{{config_rule}}ARN": {
+        "Description": "{{config_rule}} ARN",
+        "Value": { "Fn::GetAtt" : [ "{{config_rule}}", "Arn" ] },
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ConfigRule-{{config_rule}}-ARN" }}
+    },
+    "{{config_rule}}ConfigRuleId": {
+        "Description": "{{config_rule}} ConfigRule ID",
+        "Value": { "Fn::GetAtt" : [ "{{config_rule}}", "ConfigRuleId" ] },
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ConfigRule-{{config_rule}}-ConfigRuleId" }}
+    },
+    "{{config_rule}}ComplianceType": {
+        "Description": "{{config_rule}} Compliance Type",
+        "Value": { "Fn::GetAtt" : [ "{{config_rule}}", "Compliance.Type" ] },
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-ConfigRule-{{config_rule}}-ComplianceType" }}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,118 @@
+{
+{% if iam_roles["Roles"] %}
+{% for role, settings in iam_roles["Roles"].iteritems() %}
+    "{{role}}": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+            {% if settings["ManagedPolicys"] %}
+            "ManagedPolicyArns": [
+                {% for policy in settings["ManagedPolicys"] %}
+                "arn:aws:iam::aws:policy/{{policy}}"{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ],
+            {% endif %}
+            "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Effect": "Allow",
+                        "Principal": {
+                        {% if settings["ReverseTrust"] %}
+                            "AWS": [
+                            {% for arn in settings["ReverseTrust"] %}
+                            "{{arn}}",
+                            {% endfor %}
+                            ]
+                        {% endif %}
+                        {% if settings["Type"] %}
+                            {% if settings["Type"] is sequence %}
+                            "Service": [
+                                {% for type in settings["Type"] %}
+                                "{{type}}.amazonaws.com"{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                            ]
+                            {% else %}
+                            "Service": "{{settings["Type"]}}.amazonaws.com"}
+                            {% endif %}
+                        {% endif %}
+                        },
+                        {% if settings["MFA_Required"] %}
+                        "Condition": {
+                            "Bool": {
+                                "aws:MultiFactorAuthPresent": "{{settings["MFA_Required"]|lower}}"
+                            }
+                        },
+                        {% endif %}
+                        "Action": [
+                            "sts:AssumeRole"
+                        ]
+                    }
+                ]
+            },
+            {% if settings["Path"] %}
+            "Path": "{{settings["Path"]}}",
+            {% endif %}
+            {% if settings["RoleName"] %}
+            "RoleName": "{{settings["RoleName"]}}",
+            {% endif %}
+        }
+        {% if settings["DependsOn"] %}
+        ,"DependsOn": "{{settings["DependsOn"]}}"
+        {% endif %}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+{% if iam_roles["InstanceProfiles"] %}
+{% if iam_roles["Roles"] %},{% endif %}
+{% for role, settings in iam_roles["InstanceProfiles"].iteritems() %}
+    "{{role}}": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+            "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Effect": "Allow",
+                        "Principal": {
+                            {% if settings["ReverseTrust"] %}
+                            "AWS": [
+                                {% for arn in settings["ReverseTrust"] %}
+                                "{{arn}}",
+                                {% endfor %}
+                            ],
+                            {% endif %}
+                            "Service": "{{settings["Type"]}}.amazonaws.com"
+                        },
+                        "Action": [
+                            "sts:AssumeRole"
+                        ]
+                    }
+                ]
+            },
+            {% if settings["ManagedPolicys"] %}
+            "ManagedPolicyArns": [
+                {% for policy in settings["ManagedPolicys"] %}
+                "arn:aws:iam::aws:policy/{{policy}}"{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ],
+            {% endif %}
+            "Path": {"Fn::Join" : [ "", ["/",{ "Ref" : "AccountName" }, "/IAM/InstanceRoles/"] ]},
+            {% if settings["RoleName"] %}
+            "RoleName": "{{settings["RoleName"]}}",
+            {% endif %}
+        }
+    },
+    "{{role}}InstanceProfile": {
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties": {
+            {% if settings["RoleName"] %}
+            "InstanceProfileName": "{{settings["RoleName"]}}",
+            {% endif %}
+            "Roles": [{ "Ref": "{{role}}"}]
+        },
+        "DependsOn": "{{role}}"
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+
+}

@@ -1,0 +1,10 @@
+{
+    {% for dms, settings in dms_instance.iteritems() %}
+    "{{dms}}": {
+      "Description": "{{dms}} DMS Instance",
+      "Value": { "Ref": "{{dms}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-dmsinstance-{{dms}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

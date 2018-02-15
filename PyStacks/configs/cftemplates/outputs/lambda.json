@@ -1,0 +1,10 @@
+{
+    {% for lambda, settings in lambda.iteritems() %}
+    "{{lambda}}": {
+      "Description": "{{lambda}} Object",
+      "Value": { "Ref": "{{lambda}}"},
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-Lambda-{{lambda}}" }}
+      }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+}

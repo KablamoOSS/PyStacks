@@ -1,0 +1,111 @@
+description: "ECS Cluster"
+region: "ap-southeast-2"
+stackname: "ExampleStacks-ECS-Cluster"
+parameters:
+  VPCStack: {Description: VPC Stack, Type: String, Default: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, Type: String, Default: ExampleStacks-SecurityGroups}
+  RolesStack: {Description: IAM Role Stack, Type: String, Default: ExampleStacks-IAM-Roles}
+mappings: {}
+resources:
+  ecs:
+    ExampleECSCluster:
+      clustername: ExampleECSCluster
+  asg:
+    ExampleECSClusterASG:
+      launch_configuration: ExampleECSClusterLC
+      subnets: [Internal1, Internal2, Internal3]
+      min_size: 3
+      max_size: 6
+      desired_capacity: 3
+      cooldown: 300
+      health_check_type: EC2
+      tags: {Name: ExampleECSCluster}
+      propagateatlaunch: true
+  asg_policy:
+    ScaleDownPolicy:
+      group_name: ExampleECSClusterASG
+      adjustment_type: ChangeInCapacity
+      scaling_adjustment: -1
+    ScaleUpPolicy:
+      group_name: ExampleECSClusterASG
+      adjustment_type: ChangeInCapacity
+      scaling_adjustment: 1
+  cloudwatch:
+    ECSAlarmCPUHigh:
+      actionsenabled: true
+      alarmactions: 
+      - ScaleUpPolicy
+      description: ECS Instance Scaling Alarm
+      comparisonoperator: GreaterThanThreshold
+      dimensions: {ClusterName: ExampleECSCluster}
+      evalationperiods: 5
+      metricname: CPUReservation
+      namespace: AWS/ECS
+      period: 60
+      statistic: Average
+      threshold: 80
+      unit: Percent
+    ECSAlarmCPULow:
+      actionsenabled: true
+      alarmactions: 
+      - ScaleDownPolicy
+      description: ECS Instance Scaling Alarm
+      comparisonoperator: LessThanThreshold
+      dimensions: {ClusterName: ExampleECSCluster}
+      evalationperiods: 5
+      metricname: CPUReservation
+      namespace: AWS/ECS
+      period: 60
+      statistic: Average
+      threshold: 40
+      unit: Percent
+    ECSAlarmMemHigh:
+      actionsenabled: true
+      alarmactions: 
+      - ScaleUpPolicy
+      description: ECS Instance Scaling Alarm
+      comparisonoperator: GreaterThanThreshold
+      dimensions: {ClusterName: ExampleECSCluster}
+      evalationperiods: 5
+      metricname: MemoryReservation
+      namespace: AWS/ECS
+      period: 60
+      statistic: Average
+      threshold: 80
+      unit: Percent
+    ECSAlarmMemLow:
+      actionsenabled: true
+      alarmactions: 
+      - ScaleDownPolicy
+      description: ECS Instance Scaling Alarm
+      comparisonoperator: LessThanThreshold
+      dimensions: {ClusterName: ExampleECSCluster}
+      evalationperiods: 5
+      metricname: MemoryReservation
+      namespace: AWS/ECS
+      period: 60
+      statistic: Average
+      threshold: 40
+      unit: Percent 
+  launch_configuration:
+    ExampleECSClusterLC:
+      security_groups: 
+        - ECSCluster
+      image_id: ami-cf393cac
+      instance_profile: ECSInstanceRole
+      instance_type: t2.large
+      key_name: Example-pem
+      user_data:
+        - '#!/bin/bash\n'
+        - echo ECS_CLUSTER='ExampleECSCluster' >> /etc/ecs/ecs.config \n 
+        - echo -e ECS_AVAILABLE_LOGGING_DRIVERS='[\"json-file\", \"syslog\", \"awslogs\",\"gelf\"]' >> /etc/ecs/ecs.config \n
+        - echo -e ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION=10m >> /etc/ecs/ecs.conf \n
+        - echo -e ECS_IMAGE_CLEANUP_INTERVAL=10m >> /etc/ecs/ecs.conf \n
+        - echo -e ECS_IMAGE_MINIMUM_CLEANUP_AGE=15m >> /etc/ecs/ecs.conf \n
+        - echo -e ECS_NUM_IMAGES_DELETE_PER_CYCLE=10 >> /etc/ecs/ecs.conf \n
+        - mkdir /tmp/ssm \n
+        - curl https://amazon-ssm-ap-southeast-2.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm -o /tmp/ssm/amazon-ssm-agent.rpm \n 
+        - sudo yum install -y /tmp/ssm/amazon-ssm-agent.rpm \n
+        - sudo status amazon-ssm-agent \n
+        - echo '0 * * * * docker rm -v $(docker ps -a -q -f status=exited)' >> /etc/crontab \n
+        - echo '0 * * * * docker rmi $(docker images -q)' >> /etc/crontab \n
