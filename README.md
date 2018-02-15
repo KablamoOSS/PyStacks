@@ -1,6 +1,8 @@
 PyStacks
 --------
 
+[![Build Status](https://travis-ci.org/KablamoOSS/PyStacks.svg?branch=master)](https://travis-ci.org/KablamoOSS/PyStacks)
+
 Python AWS stack creation.
 
 N.B. this is just for modifying this code and you will need to use the latest docker image if you want to run anything
