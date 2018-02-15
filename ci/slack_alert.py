@@ -7,7 +7,7 @@ import json
 
 SLACK_CHANNEL = ''
 SLACK_WEBHOOK_URL = ''
-REPO_URL = '' # EG https://github.com/github/github/
+REPO_URL = ''  # EG https://github.com/github/github/
 
 # ## Richly formatted
 

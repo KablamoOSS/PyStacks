@@ -35,12 +35,12 @@ class TestZonefile(unittest.TestCase):
         self.assertEqual(zone[0][0], 'example.com.')
         self.assertEqual(zone[0][1], '300')
         self.assertEqual(zone[0][2], 'A')
-        self.assertEqual(zone[0][3], '119.9.38.130')
+        self.assertEqual(zone[0][3], '8.8.8.8')
 
         self.assertEqual(zone[1][0], 'skypeweb.example.com.')
         self.assertEqual(zone[1][1], '300')
         self.assertEqual(zone[1][2], 'A')
-        self.assertEqual(zone[1][3], '58.162.89.183')
+        self.assertEqual(zone[1][3], '8.8.8.8')
 
         # NS records
         self.assertEqual(zone[2][0], 'example.com.')
@@ -70,12 +70,12 @@ class TestZonefile(unittest.TestCase):
         self.assertEqual(zone[6][0], 'example.com.')
         self.assertEqual(zone[6][1], '300')
         self.assertEqual(zone[6][2], 'TXT')
-        self.assertEqual(zone[6][3], '"MS=ms78757645"')
+        self.assertEqual(zone[6][3], '"MS=msexample"')
 
         self.assertEqual(zone[7][0], 'example.com.')
         self.assertEqual(zone[7][1], '300')
         self.assertEqual(zone[7][2], 'TXT')
-        self.assertEqual(zone[7][3], '"example"')
+        self.assertEqual(zone[7][3], '"EXAMPLE"')
 
         # SRV Records
         self.assertEqual(zone[8][0], 'example.com.')
@@ -204,7 +204,7 @@ class TestZonefile(unittest.TestCase):
         self.assertEqual(jsonrecords[4]['ResourceRecords'][0]['Value'],
                          '"MS=msexample"')
         self.assertEqual(jsonrecords[4]['ResourceRecords'][1]['Value'],
-                         '"example"')
+                         '"EXAMPLE"')
         self.assertEqual(jsonrecords[4]['TTL'], 300)
         self.assertEqual(jsonrecords[4]['Type'], 'TXT')
 

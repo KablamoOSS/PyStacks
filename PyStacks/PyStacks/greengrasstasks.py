@@ -697,10 +697,7 @@ def remove_group_with_config(session, config):
     gg_group = GGgroup(session, project_name)
 
     log.debug("Looking for 'things' with attribute: 'group': '{}'".format(gg_group.project_name))
-    group_things = [thing['thingName']
-    for thing in gg_group.iot.list_things()['things']
-        if thing['attributes'].get('group', 'has no group') == gg_group.project_name
-    ]
+    group_things = [thing['thingName'] for thing in gg_group.iot.list_things()['things'] if thing['attributes'].get('group', 'has no group') == gg_group.project_name]
 
     gg_group._destroy_devices(group_things)
     gg_group._remove_group()
