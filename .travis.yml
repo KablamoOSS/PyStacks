@@ -1,4 +1,4 @@
 language: python
 python:
   - "2.7"
-script: pip intall -r requirements_test.txt && pytest --pyargs PyStacks -s
+script: pip install -r requirements_test.txt && pytest --pyargs PyStacks -s
