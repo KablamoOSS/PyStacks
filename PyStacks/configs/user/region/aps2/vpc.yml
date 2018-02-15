@@ -3,7 +3,7 @@ region: "ap-southeast-2"
 stackname: Example-VPC
 parameters:
     CoreIpRange: {Description: Core, Type: String, Default: 10.0.0.0/8}
-    ServerIpRange: {Description: Mi9 Equinix,Type: String,Default: 192.168.96.0/20}
+    ServerIpRange: {Description: Server Range,Type: String,Default: 192.168.96.0/20}
     GlobalIpRange: {Description: Global IPRange, Type: String, Default: 0.0.0.0/0}
     DirectConnectIpRange: {Description: Direct Connect Peer IPRange, Type: String, Default: 169.254.247.0/24}
     VGW: {Description: VPC Gateway, Type: String, Default: vgw-nullnull}
