@@ -2,7 +2,7 @@ description: "ElastiCache Subnet Groups"
 stackname: "ExampleStacks-ElastiCache-SubnetGroups"
 region: "ap-southeast-2"
 parameters:
-  VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
+  VPCStack: {Description: VPC Stack, type: String, value: ExampleStacks-VPC}
 mappings: {}
 resources:
   elasticachesubnet:
