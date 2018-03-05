@@ -2,7 +2,7 @@ region: ap-southeast-2
 description: "IAM Policies"
 stackname: ExampleStacks-IAM-Policies
 parameters:
-    VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
+    VPCStack: {Description: VPC Stack, type: String, value: ExampleStacks-VPC}
 mappings: {}
 resources:
     iam_policies:

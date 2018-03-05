@@ -2,10 +2,10 @@ description: "Test Database Instance"
 region: "ap-southeast-2"
 stackname: ExampleStacks-RDS
 parameters:
-  VPCStack: {Deccription: VPC Stack, type: String, value: ExampleStacks-VPC}
-  SecurityStack: {Deccription: Security Group Stack, type: String, value: ExampleStacks-SecurityGroups}
-  RDSParasGroupStack: {Deccription: RDS Params Stack, type: String, value: ExampleStacks-RDS-ParamsGroup}
-  RDSSubnetStack: {Deccription: RDS Subnet Stack, type: String, value: ExampleStacks-RDS-SubnetGroup}
+  VPCStack: {Description: VPC Stack, type: String, value: ExampleStacks-VPC}
+  SecurityStack: {Description: Security Group Stack, type: String, value: ExampleStacks-SecurityGroups}
+  RDSParasGroupStack: {Description: RDS Params Stack, type: String, value: ExampleStacks-RDS-ParamsGroup}
+  RDSSubnetStack: {Description: RDS Subnet Stack, type: String, value: ExampleStacks-RDS-SubnetGroup}
 mappings:
     AMIRegionMap:
         us-east-1: { "32" : "ami-6411e20d", "64" : "ami-6411e20d"}
