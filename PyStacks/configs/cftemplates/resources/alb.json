@@ -102,7 +102,9 @@
                 {% endfor %}
             ],
             {% endif %}
+            {% if tgsettings["target_type"] %}
             "TargetType": "{{tgsettings["target_type"]}}",
+            {% endif %}
             {% if tgsettings["tags"] %}
             "Tags" : [      
             {% for k, v in tgsettings["tags"].iteritems() %}
