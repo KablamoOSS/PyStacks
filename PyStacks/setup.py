@@ -14,7 +14,7 @@ setup(
         'botocore>=1.8.26',
         'PyYAML==3.12',
         'invoke==0.14.0',
-        'Jinja2==2.8',
+        'Jinja2==2.11.3',
         'pynt==0.8.1',
         'demjson==2.2.3',
         'dnspython==1.15.0',
