@@ -2,7 +2,7 @@ boto3>=1.4.7
 botocore>=1.8.26
 PyYAML==3.12
 invoke==0.14.0
-Jinja2==2.8
+Jinja2==2.11.3
 pynt==0.8.1
 mock==1.0.1
 coverage==4.3.4
